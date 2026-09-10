@@ -1,0 +1,887 @@
+/* Header */
+
+.muscle-header {
+    padding:
+        70px 0 45px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25, 135, 84, 0.10),
+            transparent 55%
+        );
+}
+
+.muscle-description {
+    max-width:
+        700px;
+
+    margin:
+        18px auto 0;
+
+    font-size:
+        1.05rem;
+}
+
+
+/* Status */
+
+.map-status {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+    padding:
+        15px;
+
+    color:
+        var(--bs-secondary-color);
+}
+
+
+/* Section */
+
+.muscle-section {
+    padding:
+        20px 0 50px;
+}
+
+
+/* Anatomy Card */
+
+.anatomy-card {
+    height:
+        100%;
+
+    padding:
+        28px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        26px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--bs-body-bg),
+            var(--bs-tertiary-bg)
+        );
+
+    box-shadow:
+        0 18px 50px
+        rgba(0, 0, 0, 0.07);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.anatomy-card:hover {
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(25, 135, 84, 0.35);
+
+    box-shadow:
+        0 22px 55px
+        rgba(0, 0, 0, 0.10);
+}
+
+
+/* Title */
+
+.anatomy-title {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        20px;
+}
+
+.anatomy-title h2 {
+    font-weight:
+        700;
+}
+
+.view-label {
+    margin-bottom:
+        3px;
+
+    color:
+        var(--bs-success);
+
+    font-size:
+        0.8rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+}
+
+
+/* Icon */
+
+.view-icon {
+    width:
+        48px;
+
+    height:
+        48px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        14px;
+
+    color:
+        var(--bs-success);
+
+    background-color:
+        rgba(25, 135, 84, 0.12);
+
+    font-size:
+        24px;
+}
+
+
+/* Anatomy */
+
+.anatomy-map {
+    min-height:
+        580px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    position:
+        relative;
+}
+
+
+/* SVG */
+
+.anatomy-map svg {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        auto;
+
+    max-width:
+        370px;
+
+    max-height:
+        600px;
+}
+
+
+/* Muscle */
+
+.muscle-region {
+    cursor:
+        pointer;
+
+    outline:
+        none;
+}
+
+.muscle-region path,
+.muscle-region polygon,
+.muscle-region ellipse,
+.muscle-region rect {
+    fill:
+        #b97575 !important;
+
+    transition:
+        fill 0.2s ease,
+        opacity 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+/* Hover */
+
+.muscle-region:hover path,
+.muscle-region:hover polygon,
+.muscle-region:hover ellipse,
+.muscle-region:hover rect {
+
+    fill:
+        #e25555 !important;
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(226, 85, 85, 0.5)
+        );
+}
+
+
+/* Active */
+
+.muscle-region.active path,
+.muscle-region.active polygon,
+.muscle-region.active ellipse,
+.muscle-region.active rect {
+
+    fill:
+        #198754 !important;
+
+    filter:
+        drop-shadow(
+            0 0 7px
+            rgba(25, 135, 84, 0.55)
+        );
+}
+
+
+/* Guide */
+
+.guide-section {
+    padding:
+        0 0 70px;
+}
+
+.guide-card {
+    max-width:
+        900px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        16px;
+
+    margin:
+        0 auto;
+
+    padding:
+        20px 24px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        18px;
+
+    background-color:
+        var(--bs-tertiary-bg);
+}
+
+.guide-icon {
+    min-width:
+        48px;
+
+    height:
+        48px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        14px;
+
+    color:
+        var(--bs-success);
+
+    background-color:
+        rgba(25, 135, 84, 0.12);
+
+    font-size:
+        22px;
+}
+
+
+/* Legend */
+
+.legend {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        25px;
+
+    margin-top:
+        25px;
+}
+
+.legend-item {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.9rem;
+}
+
+.legend-circle {
+    width:
+        12px;
+
+    height:
+        12px;
+
+    display:
+        inline-block;
+
+    border-radius:
+        50%;
+}
+
+.muscle-color {
+    background-color:
+        #b97575;
+}
+
+.hover-color {
+    background-color:
+        #e25555;
+}
+
+.active-color {
+    background-color:
+        #198754;
+}
+
+
+/* Modal */
+
+.exercise-modal {
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        22px;
+
+    overflow:
+        hidden;
+}
+
+
+/* Exercise */
+
+.exercise-item {
+    height:
+        100%;
+
+    padding:
+        20px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        18px;
+
+    background-color:
+        var(--bs-tertiary-bg);
+
+    cursor:
+        pointer;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.exercise-item:hover {
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(25, 135, 84, 0.5);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.08);
+}
+
+.exercise-item:focus {
+    outline:
+        2px solid
+        var(--bs-success);
+
+    outline-offset:
+        3px;
+}
+
+
+/* Exercise Icon */
+
+.exercise-icon {
+    width:
+        45px;
+
+    height:
+        45px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        15px;
+
+    border-radius:
+        13px;
+
+    color:
+        var(--bs-success);
+
+    background-color:
+        rgba(25, 135, 84, 0.12);
+
+    font-size:
+        21px;
+}
+
+
+/* Difficulty */
+
+.exercise-difficulty {
+    display:
+        inline-block;
+
+    margin-top:
+        8px;
+
+    padding:
+        5px 11px;
+
+    border-radius:
+        20px;
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        700;
+}
+
+.difficulty-beginner {
+    color:
+        #198754;
+
+    background-color:
+        rgba(25, 135, 84, 0.12);
+}
+
+.difficulty-intermediate {
+    color:
+        #fd7e14;
+
+    background-color:
+        rgba(253, 126, 20, 0.13);
+}
+
+.difficulty-advanced {
+    color:
+        #dc3545;
+
+    background-color:
+        rgba(220, 53, 69, 0.12);
+}
+
+
+/* Detail */
+
+.exercise-detail-label {
+    margin-bottom:
+        5px;
+
+    color:
+        var(--bs-success);
+
+    font-size:
+        0.8rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+}
+
+
+/* Video */
+
+.exercise-video-container {
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        18px;
+
+    background-color:
+        #000;
+}
+
+.exercise-video-container iframe {
+    border:
+        0;
+}
+
+.video-unavailable {
+    min-height:
+        300px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        30px;
+
+    border:
+        1px dashed
+        var(--bs-border-color);
+
+    border-radius:
+        18px;
+
+    color:
+        var(--bs-secondary-color);
+
+    background-color:
+        var(--bs-tertiary-bg);
+
+    text-align:
+        center;
+}
+
+.video-unavailable i {
+    font-size:
+        36px;
+}
+
+
+/* Information */
+
+.exercise-info {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        12px;
+}
+
+.exercise-info-item {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        4px;
+
+    padding:
+        12px 14px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        12px;
+
+    background-color:
+        var(--bs-tertiary-bg);
+}
+
+.exercise-info-item span {
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.8rem;
+}
+
+.exercise-info-item i {
+    margin-right:
+        5px;
+
+    color:
+        var(--bs-success);
+}
+
+
+/* Detail Section */
+
+.exercise-detail-section {
+    margin-top:
+        30px;
+
+    padding-top:
+        25px;
+
+    border-top:
+        1px solid
+        var(--bs-border-color);
+}
+
+
+/* Secondary */
+
+.secondary-muscles {
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        8px;
+
+    margin-top:
+        12px;
+}
+
+.secondary-muscle {
+    padding:
+        6px 12px;
+
+    border-radius:
+        20px;
+
+    color:
+        var(--bs-success);
+
+    background-color:
+        rgba(25, 135, 84, 0.12);
+
+    font-size:
+        0.85rem;
+
+    font-weight:
+        600;
+}
+
+
+/* Instructions */
+
+.exercise-instructions {
+    margin-top:
+        15px;
+
+    padding-left:
+        24px;
+}
+
+.exercise-instructions li {
+    margin-bottom:
+        12px;
+
+    padding-left:
+        5px;
+
+    color:
+        var(--bs-secondary-color);
+
+    line-height:
+        1.6;
+}
+
+
+/* Error */
+
+.map-error {
+    padding:
+        25px;
+
+    border:
+        1px solid
+        rgba(220, 53, 69, 0.3);
+
+    border-radius:
+        16px;
+
+    color:
+        var(--bs-danger);
+
+    background-color:
+        rgba(220, 53, 69, 0.08);
+
+    text-align:
+        center;
+}
+
+
+/* Dark */
+
+[data-bs-theme="dark"] .muscle-header {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25, 135, 84, 0.16),
+            rgba(13, 110, 253, 0.04),
+            transparent 65%
+        );
+}
+
+[data-bs-theme="dark"] .anatomy-card {
+    box-shadow:
+        0 18px 50px
+        rgba(0, 0, 0, 0.28);
+}
+
+[data-bs-theme="dark"] .exercise-item:hover {
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.30);
+}
+
+
+/* Tablet */
+
+@media (max-width: 991.98px) {
+
+    .muscle-header {
+        padding:
+            55px 0 35px;
+    }
+
+    .anatomy-map {
+        min-height:
+            520px;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 575.98px) {
+
+    .muscle-header {
+        padding:
+            45px 0 30px;
+    }
+
+    .anatomy-card {
+        padding:
+            20px;
+    }
+
+    .anatomy-map {
+        min-height:
+            450px;
+    }
+
+    .anatomy-map svg {
+        max-height:
+            470px;
+    }
+
+    .guide-card {
+        align-items:
+            flex-start;
+
+        padding:
+            17px;
+    }
+
+    .legend {
+        gap:
+            15px;
+    }
+
+    .video-unavailable {
+        min-height:
+            220px;
+    }
+
+}

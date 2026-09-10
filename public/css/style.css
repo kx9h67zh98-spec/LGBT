@@ -1,0 +1,409 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* Navbar */
+
+.navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom:
+        1px solid
+        var(--bs-border-color);
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.navbar-brand {
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    transition:
+        color 0.2s ease;
+}
+
+.nav-link:hover {
+    color:
+        var(--bs-success);
+}
+
+
+/* Hero */
+
+.hero-section {
+    min-height: 90vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 90px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25, 135, 84, 0.10),
+            transparent 45%
+        );
+
+    transition:
+        background 0.3s ease;
+}
+
+
+/* Greeting */
+
+#greeting {
+    font-weight: 600;
+
+    transition:
+        color 0.3s ease;
+}
+
+.greeting-morning {
+    color: #d97706;
+}
+
+.greeting-afternoon {
+    color: #20c997;
+}
+
+.greeting-night {
+    color: #a78bfa;
+}
+
+
+/* Health Card */
+
+.health-card {
+    background-color:
+        var(--bs-body-bg);
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.08);
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.health-card:hover {
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 25px 60px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+/* Metric Card */
+
+.metric-card {
+    height: 100%;
+
+    background-color:
+        var(--bs-tertiary-bg);
+
+    border:
+        1px solid
+        transparent;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background-color 0.3s ease;
+}
+
+.metric-card:hover {
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(25, 135, 84, 0.4);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.10);
+}
+
+
+/* Features */
+
+#features {
+    scroll-margin-top: 80px;
+}
+
+.feature-card {
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    background-color:
+        var(--bs-body-bg);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background-color 0.3s ease;
+}
+
+.feature-card:hover {
+    transform:
+        translateY(-8px);
+
+    border-color:
+        var(--bs-success);
+
+    box-shadow:
+        0 18px 40px
+        rgba(0, 0, 0, 0.10);
+}
+
+
+/* Feature Icon */
+
+.feature-icon {
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    font-size: 28px;
+
+    color:
+        var(--bs-success);
+
+    background-color:
+        rgba(25, 135, 84, 0.12);
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform:
+        scale(1.08);
+
+    background-color:
+        var(--bs-success);
+
+    color:
+        white;
+}
+
+
+/* Feature Link */
+
+.feature-card a {
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.feature-card a:hover {
+    opacity: 0.75;
+}
+
+
+/* Buttons */
+
+.btn {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.btn:hover {
+    transform:
+        translateY(-2px);
+}
+
+.btn-success:hover {
+    box-shadow:
+        0 8px 20px
+        rgba(25, 135, 84, 0.25);
+}
+
+
+/* Background */
+
+.bg-body-tertiary {
+    transition:
+        background-color 0.3s ease;
+}
+
+
+/* Footer */
+
+footer {
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+footer a {
+    transition:
+        opacity 0.2s ease;
+}
+
+footer a:hover {
+    opacity: 0.8;
+}
+
+
+/* Scroll */
+
+#home,
+#calculator,
+#exercises,
+#running,
+#workout {
+    scroll-margin-top: 90px;
+}
+
+
+/* Dark Mode */
+
+[data-bs-theme="dark"] .hero-section {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25, 135, 84, 0.16),
+            rgba(13, 110, 253, 0.05),
+            transparent 60%
+        );
+}
+
+[data-bs-theme="dark"] .health-card {
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.35);
+}
+
+[data-bs-theme="dark"] .health-card:hover {
+    box-shadow:
+        0 25px 60px
+        rgba(0, 0, 0, 0.45);
+}
+
+[data-bs-theme="dark"] .metric-card {
+    border-color:
+        rgba(255, 255, 255, 0.04);
+}
+
+[data-bs-theme="dark"] .metric-card:hover {
+    border-color:
+        rgba(25, 135, 84, 0.6);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="dark"] .feature-card {
+    box-shadow: none;
+}
+
+[data-bs-theme="dark"] .feature-card:hover {
+    box-shadow:
+        0 18px 40px
+        rgba(0, 0, 0, 0.35);
+}
+
+
+/* Tablet */
+
+@media (max-width: 991.98px) {
+
+    .hero-section {
+        min-height: auto;
+
+        padding:
+            70px 0;
+    }
+
+    .navbar-nav {
+        padding-top:
+            18px;
+
+        padding-bottom:
+            12px;
+    }
+
+    .navbar-nav .nav-item {
+        width:
+            100%;
+    }
+
+    .navbar-nav .btn {
+        width:
+            100%;
+
+        margin-top:
+            8px;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 575.98px) {
+
+    .hero-section {
+        padding:
+            55px 0;
+    }
+
+    .hero-section .display-3 {
+        font-size:
+            2.6rem;
+    }
+
+    .health-card {
+        padding:
+            20px !important;
+    }
+
+    .metric-card {
+        padding:
+            16px !important;
+    }
+
+    .feature-card {
+        padding:
+            22px !important;
+    }
+
+}
