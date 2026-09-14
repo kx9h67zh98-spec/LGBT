@@ -1,0 +1,1380 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        Health & Nutrition - FitHealth
+    </title>
+
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/health-nutrition.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+
+        <div class="container">
+
+            <a
+                class="navbar-brand fw-bold text-success"
+                href="/"
+            >
+                FitHealth
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarMenu"
+            >
+
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="/"
+                        >
+                            Home
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            href="/health-nutrition.html"
+                        >
+                            Health
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="/muscle-map.html"
+                        >
+                            Exercises
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="#"
+                        >
+                            Running
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="#"
+                        >
+                            Workout
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Header -->
+
+    <section class="health-header">
+
+        <div class="container text-center">
+
+            <p class="text-success fw-bold text-uppercase mb-2">
+                Health & Nutrition
+            </p>
+
+
+            <h1 class="display-5 fw-bold">
+                Understand your body and nutrition
+            </h1>
+
+
+            <p class="text-body-secondary health-description">
+
+                Calculate your daily energy needs,
+                set nutrition targets and track
+                your meals throughout the day.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Main -->
+
+    <section class="pb-5">
+
+        <div class="container">
+
+
+            <!-- Tabs -->
+
+            <div class="health-tabs">
+
+                <button
+                    type="button"
+                    class="health-tab active"
+                    data-tab="health"
+                >
+
+                    <i class="bi bi-heart-pulse-fill"></i>
+
+                    Health
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="health-tab"
+                    data-tab="nutrition"
+                >
+
+                    <i class="bi bi-egg-fried"></i>
+
+                    Nutrition
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Health -->
+
+            <div
+                id="healthTab"
+                class="tab-content-section"
+            >
+
+                <div class="row g-4">
+
+
+                    <!-- Health Profile -->
+
+                    <div class="col-lg-6">
+
+                        <div class="health-panel">
+
+                            <div class="panel-title">
+
+                                <div>
+
+                                    <p class="text-success fw-bold mb-1">
+                                        Your Information
+                                    </p>
+
+                                    <h2 class="fw-bold mb-0">
+                                        Health Profile
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="panel-icon">
+
+                                    <i class="bi bi-person-fill"></i>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <form id="healthForm">
+
+
+                                <!-- Age -->
+
+                                <div class="mb-3">
+
+                                    <label
+                                        for="age"
+                                        class="form-label"
+                                    >
+                                        Age
+                                    </label>
+
+
+                                    <div class="input-group">
+
+                                        <input
+                                            type="number"
+                                            id="age"
+                                            class="form-control"
+                                            min="14"
+                                            max="100"
+                                            required
+                                        >
+
+                                        <span class="input-group-text">
+                                            years
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Gender -->
+
+                                <div class="mb-3">
+
+                                    <label
+                                        for="gender"
+                                        class="form-label"
+                                    >
+                                        Gender
+                                    </label>
+
+
+                                    <select
+                                        id="gender"
+                                        class="form-select"
+                                    >
+
+                                        <option value="male">
+                                            Male
+                                        </option>
+
+                                        <option value="female">
+                                            Female
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+
+                                <div class="row g-3">
+
+
+                                    <!-- Height -->
+
+                                    <div class="col-md-6">
+
+                                        <label
+                                            for="height"
+                                            class="form-label"
+                                        >
+                                            Height
+                                        </label>
+
+
+                                        <div class="input-group">
+
+                                            <input
+                                                type="number"
+                                                id="height"
+                                                class="form-control"
+                                                min="100"
+                                                max="250"
+                                                step="0.1"
+                                                required
+                                            >
+
+                                            <span class="input-group-text">
+                                                cm
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <!-- Weight -->
+
+                                    <div class="col-md-6">
+
+                                        <label
+                                            for="weight"
+                                            class="form-label"
+                                        >
+                                            Weight
+                                        </label>
+
+
+                                        <div class="input-group">
+
+                                            <input
+                                                type="number"
+                                                id="weight"
+                                                class="form-control"
+                                                min="30"
+                                                max="300"
+                                                step="0.1"
+                                                required
+                                            >
+
+                                            <span class="input-group-text">
+                                                kg
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Activity -->
+
+                                <div class="mt-3 mb-3">
+
+                                    <label
+                                        for="activity"
+                                        class="form-label"
+                                    >
+                                        Activity Level
+                                    </label>
+
+
+                                    <select
+                                        id="activity"
+                                        class="form-select"
+                                    >
+
+                                        <option value="1.2">
+                                            Sedentary - Little or no exercise
+                                        </option>
+
+                                        <option value="1.375">
+                                            Lightly Active - Exercise 1–3 days/week
+                                        </option>
+
+                                        <option
+                                            value="1.55"
+                                            selected
+                                        >
+                                            Moderately Active - Exercise 3–5 days/week
+                                        </option>
+
+                                        <option value="1.725">
+                                            Very Active - Exercise 6–7 days/week
+                                        </option>
+
+                                        <option value="1.9">
+                                            Extra Active - Very intense activity
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+
+                                <!-- Goal -->
+
+                                <div class="mb-4">
+
+                                    <label
+                                        for="goal"
+                                        class="form-label"
+                                    >
+                                        Fitness Goal
+                                    </label>
+
+
+                                    <select
+                                        id="goal"
+                                        class="form-select"
+                                    >
+
+                                        <option value="lose">
+                                            Fat Loss
+                                        </option>
+
+                                        <option
+                                            value="maintain"
+                                            selected
+                                        >
+                                            Maintain Weight
+                                        </option>
+
+                                        <option value="gain">
+                                            Muscle Gain
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-success btn-lg w-100"
+                                >
+
+                                    <i class="bi bi-calculator-fill me-2"></i>
+
+                                    Calculate
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Results -->
+
+                    <div class="col-lg-6">
+
+                        <div class="health-panel">
+
+                            <div class="panel-title">
+
+                                <div>
+
+                                    <p class="text-success fw-bold mb-1">
+                                        Your Results
+                                    </p>
+
+                                    <h2 class="fw-bold mb-0">
+                                        Daily Health Summary
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="panel-icon">
+
+                                    <i class="bi bi-clipboard2-pulse-fill"></i>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div
+                                id="healthEmpty"
+                                class="empty-state"
+                            >
+
+                                <i class="bi bi-calculator"></i>
+
+                                <h5>
+                                    No results yet
+                                </h5>
+
+                                <p>
+                                    Enter your information
+                                    and press Calculate.
+                                </p>
+
+                            </div>
+
+
+
+                            <div
+                                id="healthResults"
+                                class="d-none"
+                            >
+
+                                <div class="result-grid">
+
+
+                                    <div class="result-card">
+
+                                        <small>
+                                            BMI
+                                        </small>
+
+                                        <h3 id="bmiResult">
+                                            0
+                                        </h3>
+
+                                        <span
+                                            id="bmiStatus"
+                                            class="result-status"
+                                        >
+                                        </span>
+
+                                    </div>
+
+
+
+                                    <div class="result-card">
+
+                                        <small>
+                                            BMR
+                                        </small>
+
+                                        <h3 id="bmrResult">
+                                            0
+                                        </h3>
+
+                                        <span>
+                                            kcal / day
+                                        </span>
+
+                                    </div>
+
+
+
+                                    <div class="result-card">
+
+                                        <small>
+                                            Estimated TDEE
+                                        </small>
+
+                                        <h3 id="tdeeResult">
+                                            0
+                                        </h3>
+
+                                        <span>
+                                            kcal / day
+                                        </span>
+
+                                    </div>
+
+
+
+                                    <div class="result-card result-main">
+
+                                        <small>
+                                            Calorie Target
+                                        </small>
+
+                                        <h3 id="calorieResult">
+                                            0
+                                        </h3>
+
+                                        <span>
+                                            kcal / day
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Macros -->
+
+                                <div class="macro-section">
+
+                                    <h5 class="fw-bold mb-3">
+                                        Daily Macro Target
+                                    </h5>
+
+
+                                    <div class="macro-grid">
+
+
+                                        <div class="macro-card">
+
+                                            <div class="macro-icon protein">
+
+                                                <i class="bi bi-lightning-fill"></i>
+
+                                            </div>
+
+                                            <div>
+
+                                                <small>
+                                                    Protein
+                                                </small>
+
+                                                <strong id="proteinResult">
+                                                    0 g
+                                                </strong>
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="macro-card">
+
+                                            <div class="macro-icon carbs">
+
+                                                <i class="bi bi-basket2-fill"></i>
+
+                                            </div>
+
+                                            <div>
+
+                                                <small>
+                                                    Carbohydrates
+                                                </small>
+
+                                                <strong id="carbsResult">
+                                                    0 g
+                                                </strong>
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="macro-card">
+
+                                            <div class="macro-icon fat">
+
+                                                <i class="bi bi-droplet-fill"></i>
+
+                                            </div>
+
+                                            <div>
+
+                                                <small>
+                                                    Fat
+                                                </small>
+
+                                                <strong id="fatResult">
+                                                    0 g
+                                                </strong>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Nutrition -->
+
+            <div
+                id="nutritionTab"
+                class="tab-content-section d-none"
+            >
+
+                <div class="row g-4">
+
+
+                    <!-- Add Food -->
+
+                    <div class="col-lg-6">
+
+                        <div class="health-panel">
+
+                            <div class="panel-title">
+
+                                <div>
+
+                                    <p class="text-success fw-bold mb-1">
+                                        Food Tracker
+                                    </p>
+
+                                    <h2 class="fw-bold mb-0">
+                                        Add Food
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="panel-icon">
+
+                                    <i class="bi bi-egg-fried"></i>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <form id="nutritionForm">
+
+
+                                <!-- Date -->
+
+                                <div class="mb-3">
+
+                                    <label
+                                        for="mealDate"
+                                        class="form-label"
+                                    >
+                                        Date
+                                    </label>
+
+
+                                    <input
+                                        type="date"
+                                        id="mealDate"
+                                        class="form-control"
+                                        required
+                                    >
+
+                                </div>
+
+
+
+                                <!-- Meal -->
+
+                                <div class="mb-3">
+
+                                    <label
+                                        for="mealType"
+                                        class="form-label"
+                                    >
+                                        Meal
+                                    </label>
+
+
+                                    <select
+                                        id="mealType"
+                                        class="form-select"
+                                    >
+
+                                        <option value="breakfast">
+                                            Breakfast
+                                        </option>
+
+                                        <option value="lunch">
+                                            Lunch
+                                        </option>
+
+                                        <option value="afternoon">
+                                            Afternoon Snack
+                                        </option>
+
+                                        <option value="dinner">
+                                            Dinner
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+
+                                <!-- Food -->
+
+                                <div class="mb-3">
+
+                                    <label
+                                        for="food"
+                                        class="form-label"
+                                    >
+                                        Food / Supplement
+                                    </label>
+
+
+                                    <select
+                                        id="food"
+                                        class="form-select"
+                                    >
+                                    </select>
+
+                                </div>
+
+
+
+                                <!-- Amount -->
+
+                                <div class="mb-3">
+
+                                    <label
+                                        for="foodAmount"
+                                        class="form-label"
+                                        id="amountLabel"
+                                    >
+                                        Amount
+                                    </label>
+
+
+                                    <div class="input-group">
+
+                                        <input
+                                            type="number"
+                                            id="foodAmount"
+                                            class="form-control"
+                                            value="100"
+                                            min="0.1"
+                                            step="0.1"
+                                            required
+                                        >
+
+                                        <span
+                                            class="input-group-text"
+                                            id="amountUnit"
+                                        >
+                                            g
+                                        </span>
+
+                                    </div>
+
+
+                                    <small
+                                        id="servingInformation"
+                                        class="text-body-secondary d-none"
+                                    >
+                                    </small>
+
+                                </div>
+
+
+
+                                <!-- Cooking -->
+
+                                <div
+                                    id="cookingSection"
+                                    class="mb-3"
+                                >
+
+                                    <label
+                                        for="cookingMethod"
+                                        class="form-label"
+                                    >
+                                        Cooking Method
+                                    </label>
+
+
+                                    <select
+                                        id="cookingMethod"
+                                        class="form-select"
+                                    >
+
+                                        <option value="raw">
+                                            Raw
+                                        </option>
+
+                                        <option value="boiled">
+                                            Boiled
+                                        </option>
+
+                                        <option value="steamed">
+                                            Steamed
+                                        </option>
+
+                                        <option value="grilled">
+                                            Grilled
+                                        </option>
+
+                                        <option value="baked">
+                                            Baked
+                                        </option>
+
+                                        <option value="airFried">
+                                            Air Fried
+                                        </option>
+
+                                        <option value="panFried">
+                                            Pan Fried
+                                        </option>
+
+                                        <option value="stirFried">
+                                            Stir Fried
+                                        </option>
+
+                                        <option value="deepFried">
+                                            Deep Fried
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+
+                                <!-- Oil -->
+
+                                <div
+                                    id="oilSection"
+                                    class="mb-4"
+                                >
+
+                                    <label
+                                        for="oilAmount"
+                                        class="form-label"
+                                    >
+                                        Estimated Oil Added
+                                    </label>
+
+
+                                    <div class="input-group">
+
+                                        <input
+                                            type="number"
+                                            id="oilAmount"
+                                            class="form-control"
+                                            min="0"
+                                            step="0.1"
+                                            value="0"
+                                        >
+
+                                        <span class="input-group-text">
+                                            g
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Supplement Preparation -->
+
+                                <div
+                                    id="supplementSection"
+                                    class="mb-4 d-none"
+                                >
+
+                                    <label
+                                        for="supplementPreparation"
+                                        class="form-label"
+                                    >
+                                        Preparation
+                                    </label>
+
+
+                                    <select
+                                        id="supplementPreparation"
+                                        class="form-select"
+                                    >
+
+                                        <option value="water">
+                                            Water
+                                        </option>
+
+                                        <option value="other">
+                                            Mixed with another food
+                                        </option>
+
+                                    </select>
+
+
+                                    <small class="text-body-secondary">
+
+                                        If you mix whey with milk,
+                                        banana or other ingredients,
+                                        add those foods separately
+                                        so their calories are included.
+
+                                    </small>
+
+                                </div>
+
+
+
+                                <!-- Preview -->
+
+                                <div class="nutrition-preview">
+
+
+                                    <div>
+
+                                        <small>
+                                            Calories
+                                        </small>
+
+                                        <strong id="previewCalories">
+                                            0 kcal
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <small>
+                                            Protein
+                                        </small>
+
+                                        <strong id="previewProtein">
+                                            0 g
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <small>
+                                            Carbs
+                                        </small>
+
+                                        <strong id="previewCarbs">
+                                            0 g
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <small>
+                                            Fat
+                                        </small>
+
+                                        <strong id="previewFat">
+                                            0 g
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-success btn-lg w-100 mt-4"
+                                >
+
+                                    <i class="bi bi-calendar-plus-fill me-2"></i>
+
+                                    Add to Calendar
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Daily Summary -->
+
+                    <div class="col-lg-6">
+
+                        <div class="health-panel">
+
+                            <div class="panel-title">
+
+                                <div>
+
+                                    <p class="text-success fw-bold mb-1">
+                                        Daily Nutrition
+                                    </p>
+
+                                    <h2 class="fw-bold mb-0">
+                                        Today's Summary
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="panel-icon">
+
+                                    <i class="bi bi-pie-chart-fill"></i>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="daily-summary-grid">
+
+
+                                <!-- Calories -->
+
+                                <div class="daily-summary-card">
+
+                                    <div class="daily-summary-icon calories-icon">
+
+                                        <i class="bi bi-fire"></i>
+
+                                    </div>
+
+
+                                    <div class="daily-summary-content">
+
+                                        <small>
+                                            Calories
+                                        </small>
+
+                                        <div>
+
+                                            <strong id="dailyConsumed">
+                                                0
+                                            </strong>
+
+                                            <span>/</span>
+
+                                            <span id="dailyTarget">
+                                                --
+                                            </span>
+
+                                            <span>
+                                                kcal
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Protein -->
+
+                                <div class="daily-summary-card">
+
+                                    <div class="daily-summary-icon protein-icon">
+
+                                        <i class="bi bi-lightning-fill"></i>
+
+                                    </div>
+
+
+                                    <div class="daily-summary-content">
+
+                                        <small>
+                                            Protein
+                                        </small>
+
+                                        <div>
+
+                                            <strong id="dailyProtein">
+                                                0
+                                            </strong>
+
+                                            <span>/</span>
+
+                                            <span id="dailyProteinTarget">
+                                                --
+                                            </span>
+
+                                            <span>
+                                                g
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Carbs -->
+
+                                <div class="daily-summary-card">
+
+                                    <div class="daily-summary-icon carbs-icon">
+
+                                        <i class="bi bi-basket2-fill"></i>
+
+                                    </div>
+
+
+                                    <div class="daily-summary-content">
+
+                                        <small>
+                                            Carbohydrates
+                                        </small>
+
+                                        <div>
+
+                                            <strong id="dailyCarbs">
+                                                0
+                                            </strong>
+
+                                            <span>/</span>
+
+                                            <span id="dailyCarbsTarget">
+                                                --
+                                            </span>
+
+                                            <span>
+                                                g
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Fat -->
+
+                                <div class="daily-summary-card">
+
+                                    <div class="daily-summary-icon fat-icon">
+
+                                        <i class="bi bi-droplet-fill"></i>
+
+                                    </div>
+
+
+                                    <div class="daily-summary-content">
+
+                                        <small>
+                                            Fat
+                                        </small>
+
+                                        <div>
+
+                                            <strong id="dailyFat">
+                                                0
+                                            </strong>
+
+                                            <span>/</span>
+
+                                            <span id="dailyFatTarget">
+                                                --
+                                            </span>
+
+                                            <span>
+                                                g
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- Meals -->
+
+                            <div
+                                id="mealList"
+                                class="meal-list"
+                            >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Bootstrap -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+
+    <!-- Main -->
+
+    <script src="/js/main.js"></script>
+
+
+    <!-- Health Nutrition -->
+
+    <script src="/js/health-nutrition.js"></script>
+
+
+</body>
+
+</html>
