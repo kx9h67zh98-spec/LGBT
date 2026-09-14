@@ -11,7 +11,9 @@
         content="width=device-width, initial-scale=1"
     >
 
-    <title>Muscle Map - FitHealth</title>
+    <title>
+        Muscle Map - FitHealth
+    </title>
 
 
     <!-- Bootstrap -->
@@ -164,6 +166,45 @@
                 videos and training information.
 
             </p>
+
+
+
+            <!-- Gender -->
+
+            <div
+                class="gender-switch"
+                role="group"
+                aria-label="Choose anatomy"
+            >
+
+                <button
+                    type="button"
+                    class="btn btn-success gender-btn active"
+                    data-gender="male"
+                    aria-pressed="true"
+                >
+
+                    <i class="bi bi-gender-male me-2"></i>
+
+                    Male
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-outline-success gender-btn"
+                    data-gender="female"
+                    aria-pressed="false"
+                >
+
+                    <i class="bi bi-gender-female me-2"></i>
+
+                    Female
+
+                </button>
+
+            </div>
 
         </div>
 
@@ -320,8 +361,9 @@
 
                     <p class="mb-0 text-body-secondary">
 
-                        Hover over a muscle to highlight it.
-                        Click the muscle to view recommended exercises.
+                        Choose Male or Female,
+                        hover over a muscle to highlight it,
+                        then click to view recommended exercises.
 
                     </p>
 
@@ -329,6 +371,9 @@
 
             </div>
 
+
+
+            <!-- Legend -->
 
             <div class="legend">
 
@@ -366,7 +411,7 @@
 
 
 
-    <!-- Modal -->
+    <!-- Exercise Modal -->
 
     <div
         class="modal fade"
@@ -380,7 +425,7 @@
             <div class="modal-content exercise-modal">
 
 
-                <!-- Header -->
+                <!-- Modal Header -->
 
                 <div class="modal-header">
 
@@ -413,12 +458,12 @@
 
 
 
-                <!-- Body -->
+                <!-- Modal Body -->
 
                 <div class="modal-body">
 
 
-                    <!-- List -->
+                    <!-- Exercise List -->
 
                     <div id="exerciseListView">
 
@@ -440,7 +485,7 @@
 
 
 
-                    <!-- Detail -->
+                    <!-- Exercise Detail -->
 
                     <div
                         id="exerciseDetailView"
@@ -547,7 +592,6 @@
                                 </h3>
 
 
-
                                 <div class="exercise-info">
 
 
@@ -627,7 +671,7 @@
 
 
 
-                        <!-- Secondary -->
+                        <!-- Secondary Muscles -->
 
                         <div class="exercise-detail-section">
 
@@ -665,7 +709,6 @@
 
 
                     </div>
-
 
                 </div>
 

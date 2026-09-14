@@ -8,26 +8,32 @@ const exercises = {
     chest: [
 
         {
-            name: "Push Up",
+            name:
+                "Push Up",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Chest",
+            primaryMuscle:
+                "Chest",
 
             secondaryMuscles: [
                 "Triceps",
                 "Anterior Deltoids"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "https://www.youtube.com/watch?v=IODxDxX7oi4",
+            videoUrl:
+                "",
 
             instructions: [
                 "Place your hands slightly wider than shoulder width.",
-                "Keep your body in a straight line from head to heels.",
+                "Keep your body in a straight line.",
                 "Lower your chest toward the floor.",
                 "Push through your palms to return to the starting position."
             ]
@@ -35,165 +41,166 @@ const exercises = {
 
 
         {
-            name: "Machine Chest Press",
+            name:
+                "Machine Chest Press",
 
-            equipment: "Chest Press Machine",
+            equipment:
+                "Chest Press Machine",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Chest",
+            primaryMuscle:
+                "Chest",
 
             secondaryMuscles: [
                 "Triceps",
                 "Anterior Deltoids"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Adjust the seat so the handles are around chest level.",
                 "Keep your back against the pad.",
                 "Press the handles forward.",
-                "Slowly return to the starting position."
+                "Return slowly to the starting position."
             ]
         },
 
 
         {
-            name: "Barbell Bench Press",
+            name:
+                "Barbell Bench Press",
 
-            equipment: "Barbell + Flat Bench",
+            equipment:
+                "Barbell + Flat Bench",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Chest",
+            primaryMuscle:
+                "Chest",
 
             secondaryMuscles: [
                 "Triceps",
                 "Anterior Deltoids"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Lie flat on the bench with your feet firmly on the floor.",
                 "Grip the bar slightly wider than shoulder width.",
-                "Unrack the bar and position it above your chest.",
-                "Lower the bar under control toward the middle of your chest.",
+                "Lower the bar toward the middle of your chest.",
                 "Press the bar upward until your arms are extended."
             ]
         },
 
 
         {
-            name: "Dumbbell Bench Press",
+            name:
+                "Incline Dumbbell Press",
 
-            equipment: "Dumbbells + Flat Bench",
+            equipment:
+                "Dumbbells + Adjustable Bench",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Chest",
-
-            secondaryMuscles: [
-                "Triceps",
-                "Anterior Deltoids"
-            ],
-
-            type: "Compound",
-
-            videoUrl: "",
-
-            instructions: [
-                "Lie on a flat bench holding a dumbbell in each hand.",
-                "Position the dumbbells beside your chest.",
-                "Press both dumbbells upward.",
-                "Lower them slowly until you feel a comfortable stretch."
-            ]
-        },
-
-
-        {
-            name: "Incline Dumbbell Press",
-
-            equipment: "Dumbbells + Adjustable Bench",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Upper Chest",
+            primaryMuscle:
+                "Upper Chest",
 
             secondaryMuscles: [
                 "Triceps",
                 "Anterior Deltoids"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Set the bench to an incline position.",
-                "Hold a dumbbell in each hand.",
+                "Hold one dumbbell in each hand.",
                 "Position the dumbbells beside your upper chest.",
                 "Press the dumbbells upward.",
-                "Lower them under control."
+                "Lower them slowly."
             ]
         },
 
 
         {
-            name: "Cable Crossover",
+            name:
+                "Cable Crossover",
 
-            equipment: "Cable Machine",
+            equipment:
+                "Cable Machine",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Chest",
+            primaryMuscle:
+                "Chest",
 
             secondaryMuscles: [
                 "Anterior Deltoids"
             ],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Stand between two cable pulleys.",
                 "Hold one handle in each hand.",
                 "Keep a slight bend in your elbows.",
                 "Bring your hands together in front of your chest.",
-                "Slowly return to the starting position."
+                "Return slowly."
             ]
         },
 
 
         {
-            name: "Chest Dip",
+            name:
+                "Chest Dip",
 
-            equipment: "Dip Station",
+            equipment:
+                "Dip Station",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Chest",
+            primaryMuscle:
+                "Chest",
 
             secondaryMuscles: [
                 "Triceps",
                 "Anterior Deltoids"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Grip the parallel bars.",
                 "Lean your torso slightly forward.",
-                "Lower your body by bending your elbows.",
-                "Stop at a comfortable depth.",
+                "Lower your body under control.",
                 "Push yourself back to the starting position."
             ]
         }
@@ -207,130 +214,128 @@ const exercises = {
     shoulders: [
 
         {
-            name: "Dumbbell Shoulder Press",
+            name:
+                "Machine Shoulder Press",
 
-            equipment: "Dumbbells + Bench",
+            equipment:
+                "Shoulder Press Machine",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Shoulders",
+            primaryMuscle:
+                "Shoulders",
 
             secondaryMuscles: [
                 "Triceps"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
-
-            instructions: [
-                "Sit upright with a dumbbell in each hand.",
-                "Hold the dumbbells near shoulder level.",
-                "Press them overhead.",
-                "Lower them slowly back to shoulder level."
-            ]
-        },
-
-
-        {
-            name: "Dumbbell Lateral Raise",
-
-            equipment: "Dumbbells",
-
-            difficulty: "Beginner",
-
-            primaryMuscle: "Lateral Deltoids",
-
-            secondaryMuscles: [],
-
-            type: "Isolation",
-
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Stand upright holding dumbbells by your sides.",
-                "Keep a slight bend in your elbows.",
-                "Raise your arms out to the sides.",
-                "Stop around shoulder height.",
-                "Lower slowly."
-            ]
-        },
-
-
-        {
-            name: "Cable Lateral Raise",
-
-            equipment: "Cable Machine",
-
-            difficulty: "Beginner",
-
-            primaryMuscle: "Lateral Deltoids",
-
-            secondaryMuscles: [],
-
-            type: "Isolation",
-
-            videoUrl: "",
-
-            instructions: [
-                "Stand beside a low cable pulley.",
-                "Hold the handle with the opposite hand.",
-                "Raise your arm out to the side.",
-                "Lower the cable slowly."
-            ]
-        },
-
-
-        {
-            name: "Reverse Pec Deck",
-
-            equipment: "Pec Deck Machine",
-
-            difficulty: "Beginner",
-
-            primaryMuscle: "Rear Deltoids",
-
-            secondaryMuscles: [
-                "Upper Back"
-            ],
-
-            type: "Isolation",
-
-            videoUrl: "",
-
-            instructions: [
-                "Sit facing the machine.",
-                "Grip the handles.",
-                "Move your arms backward.",
-                "Squeeze your rear shoulders.",
+                "Adjust the seat.",
+                "Grip the handles near shoulder height.",
+                "Press upward.",
                 "Return slowly."
             ]
         },
 
 
         {
-            name: "Face Pull",
+            name:
+                "Dumbbell Lateral Raise",
 
-            equipment: "Cable Machine + Rope",
+            equipment:
+                "Dumbbells",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Rear Deltoids",
+            primaryMuscle:
+                "Lateral Deltoids",
+
+            secondaryMuscles:
+                [],
+
+            type:
+                "Isolation",
+
+            videoUrl:
+                "",
+
+            instructions: [
+                "Stand with dumbbells by your sides.",
+                "Keep a slight bend in your elbows.",
+                "Raise your arms out to the sides.",
+                "Lower slowly."
+            ]
+        },
+
+
+        {
+            name:
+                "Dumbbell Shoulder Press",
+
+            equipment:
+                "Dumbbells + Bench",
+
+            difficulty:
+                "Intermediate",
+
+            primaryMuscle:
+                "Shoulders",
+
+            secondaryMuscles: [
+                "Triceps"
+            ],
+
+            type:
+                "Compound",
+
+            videoUrl:
+                "",
+
+            instructions: [
+                "Sit upright on a bench.",
+                "Hold the dumbbells near shoulder height.",
+                "Press the dumbbells overhead.",
+                "Lower them slowly."
+            ]
+        },
+
+
+        {
+            name:
+                "Face Pull",
+
+            equipment:
+                "Cable Machine + Rope",
+
+            difficulty:
+                "Beginner",
+
+            primaryMuscle:
+                "Rear Deltoids",
 
             secondaryMuscles: [
                 "Trapezius",
-                "Rotator Cuff"
+                "Upper Back"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Set the cable around face height.",
-                "Grip the rope with both hands.",
+                "Set the cable near face height.",
+                "Grip the rope.",
                 "Pull the rope toward your face.",
-                "Separate your hands as you pull.",
                 "Return under control."
             ]
         }
@@ -344,134 +349,131 @@ const exercises = {
     biceps: [
 
         {
-            name: "Dumbbell Biceps Curl",
+            name:
+                "Dumbbell Biceps Curl",
 
-            equipment: "Dumbbells",
+            equipment:
+                "Dumbbells",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Biceps",
+            primaryMuscle:
+                "Biceps",
 
             secondaryMuscles: [
                 "Forearms"
             ],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Stand with a dumbbell in each hand.",
-                "Keep your elbows close to your torso.",
+                "Hold a dumbbell in each hand.",
+                "Keep your elbows close to your body.",
                 "Curl the dumbbells upward.",
-                "Squeeze the biceps.",
                 "Lower slowly."
             ]
         },
 
 
         {
-            name: "Hammer Curl",
+            name:
+                "Hammer Curl",
 
-            equipment: "Dumbbells",
+            equipment:
+                "Dumbbells",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Biceps",
+            primaryMuscle:
+                "Biceps",
 
             secondaryMuscles: [
                 "Brachialis",
                 "Forearms"
             ],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Hold the dumbbells with a neutral grip.",
-                "Keep your elbows close to your sides.",
-                "Curl the dumbbells upward.",
+                "Curl the weights upward.",
+                "Keep your elbows close to your body.",
                 "Lower slowly."
             ]
         },
 
 
         {
-            name: "Barbell Biceps Curl",
+            name:
+                "Barbell Biceps Curl",
 
-            equipment: "Barbell",
+            equipment:
+                "Barbell",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Biceps",
+            primaryMuscle:
+                "Biceps",
 
             secondaryMuscles: [
                 "Forearms"
             ],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Hold the barbell with an underhand grip.",
-                "Keep your elbows close to your torso.",
+                "Hold the bar with an underhand grip.",
+                "Keep the elbows close to your torso.",
                 "Curl the bar upward.",
-                "Lower the bar slowly."
+                "Lower under control."
             ]
         },
 
 
         {
-            name: "Incline Dumbbell Curl",
+            name:
+                "Chin Up",
 
-            equipment: "Dumbbells + Incline Bench",
+            equipment:
+                "Pull-Up Bar",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Biceps",
-
-            secondaryMuscles: [
-                "Forearms"
-            ],
-
-            type: "Isolation",
-
-            videoUrl: "",
-
-            instructions: [
-                "Sit on an incline bench.",
-                "Let your arms hang naturally.",
-                "Curl the dumbbells upward.",
-                "Lower fully under control."
-            ]
-        },
-
-
-        {
-            name: "Chin Up",
-
-            equipment: "Pull-Up Bar",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Biceps",
+            primaryMuscle:
+                "Biceps",
 
             secondaryMuscles: [
                 "Lats",
                 "Upper Back"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Grip the bar with palms facing you.",
-                "Start with your arms extended.",
-                "Pull your chest toward the bar.",
-                "Lower yourself under control."
+                "Grip the bar with your palms facing you.",
+                "Pull your body upward.",
+                "Bring your chest toward the bar.",
+                "Lower under control."
             ]
         }
 
@@ -484,129 +486,127 @@ const exercises = {
     triceps: [
 
         {
-            name: "Rope Triceps Pushdown",
+            name:
+                "Rope Triceps Pushdown",
 
-            equipment: "Cable Machine + Rope",
+            equipment:
+                "Cable Machine + Rope",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Triceps",
+            primaryMuscle:
+                "Triceps",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Grip the rope attachment.",
-                "Keep your elbows close to your body.",
-                "Extend your arms downward.",
-                "Separate the rope slightly at the bottom.",
+                "Grip the rope.",
+                "Keep your elbows close to your torso.",
+                "Extend your elbows downward.",
                 "Return slowly."
             ]
         },
 
 
         {
-            name: "Overhead Cable Triceps Extension",
+            name:
+                "Overhead Cable Triceps Extension",
 
-            equipment: "Cable Machine + Rope",
+            equipment:
+                "Cable Machine + Rope",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Triceps",
+            primaryMuscle:
+                "Triceps",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Face away from the cable machine.",
                 "Hold the rope behind your head.",
                 "Keep your elbows pointing forward.",
                 "Extend your arms.",
-                "Return slowly."
+                "Return under control."
             ]
         },
 
 
         {
-            name: "Skull Crusher",
+            name:
+                "Skull Crusher",
 
-            equipment: "EZ Bar + Bench",
+            equipment:
+                "EZ Bar + Bench",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Triceps",
+            primaryMuscle:
+                "Triceps",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Lie on a bench holding an EZ bar above you.",
-                "Keep your upper arms relatively still.",
+                "Lie on a bench.",
+                "Hold the EZ bar above you.",
                 "Bend your elbows to lower the bar.",
-                "Extend your elbows to return."
+                "Extend the elbows to return."
             ]
         },
 
 
         {
-            name: "Close-Grip Bench Press",
+            name:
+                "Close-Grip Bench Press",
 
-            equipment: "Barbell + Bench",
+            equipment:
+                "Barbell + Bench",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Triceps",
+            primaryMuscle:
+                "Triceps",
 
             secondaryMuscles: [
                 "Chest",
                 "Anterior Deltoids"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Lie on a flat bench.",
-                "Grip the bar around shoulder width.",
+                "Use a shoulder-width grip.",
                 "Lower the bar under control.",
-                "Press upward while keeping your elbows controlled."
-            ]
-        },
-
-
-        {
-            name: "Diamond Push Up",
-
-            equipment: "Bodyweight",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Triceps",
-
-            secondaryMuscles: [
-                "Chest",
-                "Shoulders"
-            ],
-
-            type: "Compound",
-
-            videoUrl: "",
-
-            instructions: [
-                "Place your hands close together under your chest.",
-                "Keep your body straight.",
-                "Lower yourself toward your hands.",
-                "Push back upward."
+                "Press upward."
             ]
         }
 
@@ -619,23 +619,30 @@ const exercises = {
     forearms: [
 
         {
-            name: "Wrist Curl",
+            name:
+                "Wrist Curl",
 
-            equipment: "Dumbbells",
+            equipment:
+                "Dumbbells",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Forearms",
+            primaryMuscle:
+                "Forearms",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Rest your forearms on a bench.",
-                "Hold dumbbells with palms facing upward.",
+                "Hold dumbbells with palms upward.",
                 "Curl your wrists upward.",
                 "Lower slowly."
             ]
@@ -643,23 +650,30 @@ const exercises = {
 
 
         {
-            name: "Reverse Wrist Curl",
+            name:
+                "Reverse Wrist Curl",
 
-            equipment: "Dumbbells",
+            equipment:
+                "Dumbbells",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Forearms",
+            primaryMuscle:
+                "Forearms",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Rest your forearms on a bench.",
-                "Hold dumbbells with palms facing downward.",
+                "Hold dumbbells with palms downward.",
                 "Raise your wrists.",
                 "Lower slowly."
             ]
@@ -667,55 +681,34 @@ const exercises = {
 
 
         {
-            name: "Farmer's Carry",
+            name:
+                "Farmer's Carry",
 
-            equipment: "Dumbbells",
+            equipment:
+                "Dumbbells",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Forearms",
+            primaryMuscle:
+                "Forearms",
 
             secondaryMuscles: [
                 "Trapezius",
                 "Core"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Hold heavy dumbbells by your sides.",
-                "Stand tall.",
-                "Walk forward while maintaining good posture.",
-                "Keep a strong grip."
-            ]
-        },
-
-
-        {
-            name: "Dead Hang",
-
-            equipment: "Pull-Up Bar",
-
-            difficulty: "Beginner",
-
-            primaryMuscle: "Forearms",
-
-            secondaryMuscles: [
-                "Shoulders",
-                "Lats"
-            ],
-
-            type: "Isometric",
-
-            videoUrl: "",
-
-            instructions: [
-                "Grip the pull-up bar.",
-                "Allow your body to hang.",
-                "Keep a firm grip.",
-                "Maintain controlled shoulder position."
+                "Stand upright.",
+                "Walk forward with controlled posture.",
+                "Maintain a strong grip."
             ]
         }
 
@@ -728,19 +721,26 @@ const exercises = {
     abs: [
 
         {
-            name: "Crunch",
+            name:
+                "Crunch",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Abdominals",
+            primaryMuscle:
+                "Abdominals",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Lie on your back with your knees bent.",
@@ -752,105 +752,66 @@ const exercises = {
 
 
         {
-            name: "Plank",
+            name:
+                "Plank",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Core",
+            primaryMuscle:
+                "Abdominals",
 
             secondaryMuscles: [
                 "Shoulders",
                 "Glutes"
             ],
 
-            type: "Isometric",
+            type:
+                "Isometric",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Place your forearms on the floor.",
                 "Extend your legs behind you.",
-                "Keep your body in a straight line.",
-                "Brace your core and hold."
+                "Keep your body straight.",
+                "Brace your core."
             ]
         },
 
 
         {
-            name: "Cable Crunch",
+            name:
+                "Hanging Leg Raise",
 
-            equipment: "Cable Machine + Rope",
+            equipment:
+                "Pull-Up Bar",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Advanced",
 
-            primaryMuscle: "Abdominals",
-
-            secondaryMuscles: [],
-
-            type: "Isolation",
-
-            videoUrl: "",
-
-            instructions: [
-                "Kneel in front of a high cable.",
-                "Hold the rope near your head.",
-                "Contract your abs to flex your torso.",
-                "Return slowly."
-            ]
-        },
-
-
-        {
-            name: "Hanging Leg Raise",
-
-            equipment: "Pull-Up Bar",
-
-            difficulty: "Advanced",
-
-            primaryMuscle: "Abdominals",
+            primaryMuscle:
+                "Abdominals",
 
             secondaryMuscles: [
                 "Hip Flexors"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Hang from a pull-up bar.",
-                "Keep your body controlled.",
+                "Brace your core.",
                 "Raise your legs upward.",
                 "Lower without swinging."
-            ]
-        },
-
-
-        {
-            name: "Ab Wheel Rollout",
-
-            equipment: "Ab Wheel",
-
-            difficulty: "Advanced",
-
-            primaryMuscle: "Abdominals",
-
-            secondaryMuscles: [
-                "Lats",
-                "Shoulders"
-            ],
-
-            type: "Compound",
-
-            videoUrl: "",
-
-            instructions: [
-                "Start kneeling with the ab wheel in front of you.",
-                "Brace your core.",
-                "Roll forward while maintaining control.",
-                "Pull yourself back to the starting position."
             ]
         }
 
@@ -863,80 +824,97 @@ const exercises = {
     obliques: [
 
         {
-            name: "Side Plank",
+            name:
+                "Side Plank",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Obliques",
+            primaryMuscle:
+                "Obliques",
 
             secondaryMuscles: [
                 "Glutes"
             ],
 
-            type: "Isometric",
+            type:
+                "Isometric",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Lie on your side.",
                 "Support yourself on one forearm.",
                 "Lift your hips.",
-                "Keep your body straight and hold."
+                "Keep your body straight."
             ]
         },
 
 
         {
-            name: "Russian Twist",
+            name:
+                "Cable Wood Chop",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Cable Machine",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Obliques",
+            primaryMuscle:
+                "Obliques",
 
             secondaryMuscles: [
                 "Abdominals"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Sit with your knees bent.",
-                "Lean your torso slightly backward.",
-                "Rotate your torso from side to side.",
-                "Keep your core engaged."
+                "Stand beside a cable machine.",
+                "Grip the handle with both hands.",
+                "Rotate across your body.",
+                "Return under control."
             ]
         },
 
 
         {
-            name: "Cable Wood Chop",
+            name:
+                "Russian Twist",
 
-            equipment: "Cable Machine",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Obliques",
+            primaryMuscle:
+                "Obliques",
 
             secondaryMuscles: [
-                "Abdominals",
-                "Shoulders"
+                "Abdominals"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Stand beside a cable machine.",
-                "Grip the handle with both hands.",
-                "Rotate your torso diagonally across your body.",
-                "Return under control."
+                "Sit with your knees bent.",
+                "Lean backward slightly.",
+                "Rotate your torso from side to side.",
+                "Keep your core engaged."
             ]
         }
 
@@ -949,49 +927,62 @@ const exercises = {
     quadriceps: [
 
         {
-            name: "Bodyweight Squat",
+            name:
+                "Bodyweight Squat",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Quadriceps",
+            primaryMuscle:
+                "Quadriceps",
 
             secondaryMuscles: [
                 "Glutes",
                 "Hamstrings"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Stand with your feet around shoulder width.",
-                "Brace your core.",
-                "Bend your knees and hips to squat down.",
+                "Bend your knees and hips.",
+                "Lower your body under control.",
                 "Push through your feet to stand."
             ]
         },
 
 
         {
-            name: "Leg Extension",
+            name:
+                "Leg Extension",
 
-            equipment: "Leg Extension Machine",
+            equipment:
+                "Leg Extension Machine",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Quadriceps",
+            primaryMuscle:
+                "Quadriceps",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Adjust the machine to fit your legs.",
+                "Adjust the machine.",
                 "Sit with your back against the pad.",
                 "Extend your knees.",
                 "Lower slowly."
@@ -1000,40 +991,50 @@ const exercises = {
 
 
         {
-            name: "Leg Press",
+            name:
+                "Leg Press",
 
-            equipment: "Leg Press Machine",
+            equipment:
+                "Leg Press Machine",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Quadriceps",
+            primaryMuscle:
+                "Quadriceps",
 
             secondaryMuscles: [
                 "Glutes",
                 "Hamstrings"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Place your feet on the platform.",
-                "Release the safety handles.",
                 "Lower the platform under control.",
-                "Press through your feet to extend your legs."
+                "Push through your feet.",
+                "Avoid locking your knees aggressively."
             ]
         },
 
 
         {
-            name: "Barbell Back Squat",
+            name:
+                "Barbell Back Squat",
 
-            equipment: "Barbell + Squat Rack",
+            equipment:
+                "Barbell + Squat Rack",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Quadriceps",
+            primaryMuscle:
+                "Quadriceps",
 
             secondaryMuscles: [
                 "Glutes",
@@ -1041,43 +1042,17 @@ const exercises = {
                 "Core"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Position the bar securely across your upper back.",
-                "Stand with your feet around shoulder width.",
+                "Position the bar securely.",
                 "Brace your core.",
-                "Squat down under control.",
+                "Squat downward under control.",
                 "Drive upward through your feet."
-            ]
-        },
-
-
-        {
-            name: "Bulgarian Split Squat",
-
-            equipment: "Dumbbells + Bench",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Quadriceps",
-
-            secondaryMuscles: [
-                "Glutes",
-                "Hamstrings"
-            ],
-
-            type: "Compound",
-
-            videoUrl: "",
-
-            instructions: [
-                "Place one foot behind you on a bench.",
-                "Keep your front foot firmly planted.",
-                "Lower your body by bending your front knee.",
-                "Push through your front foot to rise."
             ]
         }
 
@@ -1090,22 +1065,29 @@ const exercises = {
     tibialis: [
 
         {
-            name: "Standing Tibialis Raise",
+            name:
+                "Standing Tibialis Raise",
 
-            equipment: "Bodyweight + Wall",
+            equipment:
+                "Bodyweight + Wall",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Tibialis Anterior",
+            primaryMuscle:
+                "Tibialis Anterior",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Lean your back against a wall.",
+                "Lean against a wall.",
                 "Keep your heels on the floor.",
                 "Raise your toes upward.",
                 "Lower slowly."
@@ -1114,22 +1096,29 @@ const exercises = {
 
 
         {
-            name: "Resistance Band Dorsiflexion",
+            name:
+                "Resistance Band Dorsiflexion",
 
-            equipment: "Resistance Band",
+            equipment:
+                "Resistance Band",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Tibialis Anterior",
+            primaryMuscle:
+                "Tibialis Anterior",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Attach a resistance band in front of your foot.",
+                "Attach a resistance band.",
                 "Loop it around your forefoot.",
                 "Pull your toes toward your shin.",
                 "Return slowly."
@@ -1145,73 +1134,63 @@ const exercises = {
     calves: [
 
         {
-            name: "Standing Calf Raise",
+            name:
+                "Standing Calf Raise",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Calves",
+            primaryMuscle:
+                "Calves",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Stand upright.",
-                "Raise your heels from the floor.",
-                "Pause at the top.",
+                "Raise your heels.",
+                "Pause briefly at the top.",
                 "Lower slowly."
             ]
         },
 
 
         {
-            name: "Seated Calf Raise",
+            name:
+                "Seated Calf Raise",
 
-            equipment: "Seated Calf Raise Machine",
+            equipment:
+                "Seated Calf Raise Machine",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Calves",
+            primaryMuscle:
+                "Calves",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Sit in the machine.",
                 "Place the balls of your feet on the platform.",
                 "Raise your heels.",
                 "Lower under control."
-            ]
-        },
-
-
-        {
-            name: "Leg Press Calf Raise",
-
-            equipment: "Leg Press Machine",
-
-            difficulty: "Beginner",
-
-            primaryMuscle: "Calves",
-
-            secondaryMuscles: [],
-
-            type: "Isolation",
-
-            videoUrl: "",
-
-            instructions: [
-                "Place the balls of your feet on the leg press platform.",
-                "Keep your knees mostly extended.",
-                "Push the platform by extending your ankles.",
-                "Lower your heels slowly."
             ]
         }
 
@@ -1224,79 +1203,96 @@ const exercises = {
     traps: [
 
         {
-            name: "Dumbbell Shrug",
+            name:
+                "Dumbbell Shrug",
 
-            equipment: "Dumbbells",
+            equipment:
+                "Dumbbells",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Trapezius",
+            primaryMuscle:
+                "Trapezius",
 
             secondaryMuscles: [
                 "Forearms"
             ],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Hold dumbbells by your sides.",
-                "Keep your arms relaxed.",
                 "Raise your shoulders upward.",
+                "Pause briefly.",
                 "Lower slowly."
             ]
         },
 
 
         {
-            name: "Barbell Shrug",
+            name:
+                "Barbell Shrug",
 
-            equipment: "Barbell",
+            equipment:
+                "Barbell",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Trapezius",
+            primaryMuscle:
+                "Trapezius",
 
             secondaryMuscles: [
                 "Forearms"
             ],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Hold a barbell in front of your body.",
+                "Hold the barbell in front of you.",
                 "Keep your arms straight.",
                 "Elevate your shoulders.",
-                "Lower under control."
+                "Lower slowly."
             ]
         },
 
 
         {
-            name: "Face Pull",
+            name:
+                "Face Pull",
 
-            equipment: "Cable Machine + Rope",
+            equipment:
+                "Cable Machine + Rope",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Upper Back",
+            primaryMuscle:
+                "Trapezius",
 
             secondaryMuscles: [
                 "Rear Deltoids",
-                "Trapezius"
+                "Upper Back"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Set the cable near face height.",
-                "Grip the rope.",
-                "Pull it toward your face.",
+                "Pull the rope toward your face.",
                 "Squeeze your upper back.",
                 "Return slowly."
             ]
@@ -1311,22 +1307,28 @@ const exercises = {
     lats: [
 
         {
-            name: "Lat Pulldown",
+            name:
+                "Lat Pulldown",
 
-            equipment: "Lat Pulldown Machine",
+            equipment:
+                "Lat Pulldown Machine",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Latissimus Dorsi",
+            primaryMuscle:
+                "Latissimus Dorsi",
 
             secondaryMuscles: [
                 "Biceps",
                 "Upper Back"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Grip the bar wider than shoulder width.",
@@ -1338,107 +1340,67 @@ const exercises = {
 
 
         {
-            name: "Straight-Arm Pulldown",
+            name:
+                "Pull Up",
 
-            equipment: "Cable Machine",
+            equipment:
+                "Pull-Up Bar",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Latissimus Dorsi",
-
-            secondaryMuscles: [],
-
-            type: "Isolation",
-
-            videoUrl: "",
-
-            instructions: [
-                "Stand facing a high cable pulley.",
-                "Hold the bar with mostly straight arms.",
-                "Pull the bar toward your thighs.",
-                "Return under control."
-            ]
-        },
-
-
-        {
-            name: "Pull Up",
-
-            equipment: "Pull-Up Bar",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Latissimus Dorsi",
+            primaryMuscle:
+                "Latissimus Dorsi",
 
             secondaryMuscles: [
                 "Biceps",
                 "Upper Back"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Grip the bar with palms facing away.",
-                "Hang with your arms extended.",
-                "Pull your chest toward the bar.",
+                "Pull your body upward.",
+                "Bring your chest toward the bar.",
                 "Lower under control."
             ]
         },
 
 
         {
-            name: "Barbell Bent-Over Row",
+            name:
+                "Single-Arm Dumbbell Row",
 
-            equipment: "Barbell",
+            equipment:
+                "Dumbbell + Bench",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Lats",
-
-            secondaryMuscles: [
-                "Upper Back",
-                "Biceps",
-                "Rear Deltoids"
-            ],
-
-            type: "Compound",
-
-            videoUrl: "",
-
-            instructions: [
-                "Hold the barbell and hinge at your hips.",
-                "Keep your spine controlled.",
-                "Pull the bar toward your torso.",
-                "Lower slowly."
-            ]
-        },
-
-
-        {
-            name: "Single-Arm Dumbbell Row",
-
-            equipment: "Dumbbell + Bench",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Lats",
+            primaryMuscle:
+                "Latissimus Dorsi",
 
             secondaryMuscles: [
                 "Biceps",
                 "Upper Back"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Support yourself on a bench.",
-                "Hold the dumbbell with your free hand.",
+                "Hold a dumbbell in your free hand.",
                 "Pull it toward your hip.",
-                "Lower under control."
+                "Lower slowly."
             ]
         }
 
@@ -1451,67 +1413,83 @@ const exercises = {
     lowerBack: [
 
         {
-            name: "Bird Dog",
+            name:
+                "Bird Dog",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Lower Back",
+            primaryMuscle:
+                "Lower Back",
 
             secondaryMuscles: [
                 "Core",
                 "Glutes"
             ],
 
-            type: "Stability",
+            type:
+                "Stability",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Start on your hands and knees.",
                 "Extend one arm and the opposite leg.",
                 "Keep your torso stable.",
-                "Return and repeat on the other side."
+                "Return and switch sides."
             ]
         },
 
 
         {
-            name: "Back Extension",
+            name:
+                "Back Extension",
 
-            equipment: "Roman Chair",
+            equipment:
+                "Roman Chair",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Lower Back",
+            primaryMuscle:
+                "Lower Back",
 
             secondaryMuscles: [
                 "Glutes",
                 "Hamstrings"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Position yourself securely on the Roman chair.",
+                "Position yourself on the Roman chair.",
                 "Lower your torso under control.",
-                "Extend your hips to raise your torso.",
-                "Avoid excessive lower-back extension."
+                "Extend your hips.",
+                "Return to a neutral position."
             ]
         },
 
 
         {
-            name: "Barbell Deadlift",
+            name:
+                "Barbell Deadlift",
 
-            equipment: "Barbell",
+            equipment:
+                "Barbell",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Posterior Chain",
+            primaryMuscle:
+                "Posterior Chain",
 
             secondaryMuscles: [
                 "Glutes",
@@ -1520,15 +1498,17 @@ const exercises = {
                 "Trapezius"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Stand close to the barbell.",
-                "Hinge at the hips and grip the bar.",
+                "Stand close to the bar.",
+                "Hinge at your hips.",
                 "Brace your core.",
-                "Drive through the floor to stand.",
+                "Stand by driving through the floor.",
                 "Lower the bar under control."
             ]
         }
@@ -1542,25 +1522,30 @@ const exercises = {
     glutes: [
 
         {
-            name: "Glute Bridge",
+            name:
+                "Glute Bridge",
 
-            equipment: "Bodyweight",
+            equipment:
+                "Bodyweight",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Glutes",
+            primaryMuscle:
+                "Glutes",
 
             secondaryMuscles: [
                 "Hamstrings"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Lie on your back with knees bent.",
-                "Keep your feet flat on the floor.",
                 "Drive your hips upward.",
                 "Squeeze your glutes.",
                 "Lower slowly."
@@ -1569,80 +1554,65 @@ const exercises = {
 
 
         {
-            name: "Cable Glute Kickback",
+            name:
+                "Cable Glute Kickback",
 
-            equipment: "Cable Machine",
+            equipment:
+                "Cable Machine",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Glutes",
+            primaryMuscle:
+                "Glutes",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Attach an ankle strap to a low cable.",
-                "Brace your body.",
+                "Attach an ankle strap.",
+                "Brace your torso.",
                 "Extend your leg backward.",
-                "Squeeze your glutes.",
-                "Return slowly."
+                "Return under control."
             ]
         },
 
 
         {
-            name: "Barbell Hip Thrust",
+            name:
+                "Barbell Hip Thrust",
 
-            equipment: "Barbell + Bench",
+            equipment:
+                "Barbell + Bench",
 
-            difficulty: "Intermediate",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Glutes",
+            primaryMuscle:
+                "Glutes",
 
             secondaryMuscles: [
                 "Hamstrings"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Position your upper back against a bench.",
                 "Place the barbell across your hips.",
                 "Drive your hips upward.",
-                "Squeeze your glutes at the top.",
-                "Lower under control."
-            ]
-        },
-
-
-        {
-            name: "Bulgarian Split Squat",
-
-            equipment: "Dumbbells + Bench",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Glutes",
-
-            secondaryMuscles: [
-                "Quadriceps",
-                "Hamstrings"
-            ],
-
-            type: "Compound",
-
-            videoUrl: "",
-
-            instructions: [
-                "Place your rear foot on a bench.",
-                "Keep your front foot stable.",
-                "Lower your body.",
-                "Drive upward through your front foot."
+                "Squeeze your glutes.",
+                "Lower slowly."
             ]
         }
 
@@ -1655,138 +1625,242 @@ const exercises = {
     hamstrings: [
 
         {
-            name: "Seated Leg Curl",
+            name:
+                "Seated Leg Curl",
 
-            equipment: "Seated Leg Curl Machine",
+            equipment:
+                "Seated Leg Curl Machine",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Beginner",
 
-            primaryMuscle: "Hamstrings",
+            primaryMuscle:
+                "Hamstrings",
 
-            secondaryMuscles: [],
+            secondaryMuscles:
+                [],
 
-            type: "Isolation",
+            type:
+                "Isolation",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
-                "Adjust the machine to fit your legs.",
-                "Sit with your back against the pad.",
+                "Adjust the machine.",
                 "Curl your lower legs downward.",
+                "Squeeze your hamstrings.",
                 "Return slowly."
             ]
         },
 
 
         {
-            name: "Lying Leg Curl",
+            name:
+                "Romanian Deadlift",
 
-            equipment: "Lying Leg Curl Machine",
+            equipment:
+                "Barbell",
 
-            difficulty: "Beginner",
+            difficulty:
+                "Intermediate",
 
-            primaryMuscle: "Hamstrings",
-
-            secondaryMuscles: [],
-
-            type: "Isolation",
-
-            videoUrl: "",
-
-            instructions: [
-                "Lie face down on the machine.",
-                "Place the pad behind your lower legs.",
-                "Curl your heels toward your glutes.",
-                "Lower slowly."
-            ]
-        },
-
-
-        {
-            name: "Romanian Deadlift",
-
-            equipment: "Barbell",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Hamstrings",
+            primaryMuscle:
+                "Hamstrings",
 
             secondaryMuscles: [
                 "Glutes",
                 "Lower Back"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Hold the bar in front of your thighs.",
+                "Push your hips backward.",
                 "Keep a slight bend in your knees.",
-                "Push your hips backward.",
-                "Lower the bar while maintaining control.",
-                "Drive your hips forward to stand."
-            ]
-        },
-
-
-        {
-            name: "Dumbbell Romanian Deadlift",
-
-            equipment: "Dumbbells",
-
-            difficulty: "Intermediate",
-
-            primaryMuscle: "Hamstrings",
-
-            secondaryMuscles: [
-                "Glutes",
-                "Lower Back"
-            ],
-
-            type: "Compound",
-
-            videoUrl: "",
-
-            instructions: [
-                "Hold dumbbells in front of your thighs.",
-                "Push your hips backward.",
-                "Keep the dumbbells close to your legs.",
-                "Feel a stretch in your hamstrings.",
                 "Drive your hips forward to return."
             ]
         },
 
 
         {
-            name: "Nordic Hamstring Curl",
+            name:
+                "Nordic Hamstring Curl",
 
-            equipment: "Bodyweight + Ankle Support",
+            equipment:
+                "Bodyweight + Ankle Support",
 
-            difficulty: "Advanced",
+            difficulty:
+                "Advanced",
 
-            primaryMuscle: "Hamstrings",
+            primaryMuscle:
+                "Hamstrings",
 
             secondaryMuscles: [
                 "Glutes"
             ],
 
-            type: "Compound",
+            type:
+                "Compound",
 
-            videoUrl: "",
+            videoUrl:
+                "",
 
             instructions: [
                 "Secure your ankles.",
-                "Start kneeling with your torso upright.",
-                "Slowly lower your body forward.",
-                "Use your hamstrings to resist the descent.",
-                "Use assistance if necessary to return."
+                "Start upright on your knees.",
+                "Lower your body forward slowly.",
+                "Resist the descent with your hamstrings."
+            ]
+        }
+
+    ],
+
+
+
+    /* Adductors */
+
+    adductors: [
+
+        {
+            name:
+                "Hip Adduction",
+
+            equipment:
+                "Hip Adduction Machine",
+
+            difficulty:
+                "Beginner",
+
+            primaryMuscle:
+                "Adductors",
+
+            secondaryMuscles:
+                [],
+
+            type:
+                "Isolation",
+
+            videoUrl:
+                "",
+
+            instructions: [
+                "Sit in the hip adduction machine.",
+                "Position your legs against the pads.",
+                "Bring your legs toward each other.",
+                "Return slowly."
+            ]
+        },
+
+
+        {
+            name:
+                "Sumo Squat",
+
+            equipment:
+                "Bodyweight or Dumbbell",
+
+            difficulty:
+                "Beginner",
+
+            primaryMuscle:
+                "Adductors",
+
+            secondaryMuscles: [
+                "Quadriceps",
+                "Glutes"
+            ],
+
+            type:
+                "Compound",
+
+            videoUrl:
+                "",
+
+            instructions: [
+                "Stand with a wide stance.",
+                "Point your toes slightly outward.",
+                "Lower into a squat.",
+                "Push through your feet to stand."
+            ]
+        },
+
+
+        {
+            name:
+                "Copenhagen Plank",
+
+            equipment:
+                "Bench",
+
+            difficulty:
+                "Advanced",
+
+            primaryMuscle:
+                "Adductors",
+
+            secondaryMuscles: [
+                "Core"
+            ],
+
+            type:
+                "Isometric",
+
+            videoUrl:
+                "",
+
+            instructions: [
+                "Lie on your side beside a bench.",
+                "Place your upper leg on the bench.",
+                "Lift your hips.",
+                "Maintain a straight body position."
             ]
         }
 
     ]
 
 };
+
+
+
+/* Anatomy Files */
+
+const anatomyFiles = {
+
+    male: {
+
+        front:
+            "/images/muscles/anatomy-front.svg",
+
+        back:
+            "/images/muscles/anatomy-back.svg"
+
+    },
+
+
+    female: {
+
+        front:
+            "/images/muscles/female-front.svg",
+
+        back:
+            "/images/muscles/female-back.svg"
+
+    }
+
+};
+
+
+
+/* Current Gender */
+
+let currentGender =
+    "male";
 
 
 
@@ -1812,7 +1886,13 @@ const muscleGroups = {
 
     triceps: [
         "long-head-triceps",
+
+        /* Male */
         "lateral-head-triceps",
+
+        /* Female SVG alias */
+        "later-head-triceps",
+
         "medial-head-triceps"
     ],
 
@@ -1846,7 +1926,13 @@ const muscleGroups = {
     ],
 
     traps: [
+
+        /* Male */
         "upper-trapezius",
+
+        /* Female SVG alias */
+        "upper-trapzeius",
+
         "traps-middle",
         "lower-trapezius"
     ],
@@ -1867,6 +1953,11 @@ const muscleGroups = {
     hamstrings: [
         "lateral-hamstrings",
         "medial-hamstrings"
+    ],
+
+    adductors: [
+        "inner-thigh",
+        "groin"
     ]
 
 };
@@ -1920,7 +2011,10 @@ const muscleNames = {
         "Glutes",
 
     hamstrings:
-        "Hamstrings"
+        "Hamstrings",
+
+    adductors:
+        "Adductors / Inner Thigh"
 
 };
 
@@ -1928,45 +2022,68 @@ const muscleNames = {
 
 /* Elements */
 
-let exerciseModal = null;
+let exerciseModal =
+    null;
 
-let modalElement = null;
+let modalElement =
+    null;
 
-let muscleTitle = null;
+let muscleTitle =
+    null;
 
-let exerciseList = null;
+let exerciseList =
+    null;
 
-let mapStatus = null;
+let mapStatus =
+    null;
 
-let exerciseListView = null;
+let exerciseListView =
+    null;
 
-let exerciseDetailView = null;
+let exerciseDetailView =
+    null;
 
-let backToExerciseList = null;
+let backToExerciseList =
+    null;
 
-let exerciseDetailName = null;
+let exerciseDetailName =
+    null;
 
-let exerciseDetailEquipment = null;
+let exerciseDetailEquipment =
+    null;
 
-let exerciseDetailDifficulty = null;
+let exerciseDetailDifficulty =
+    null;
 
-let exerciseDetailPrimary = null;
+let exerciseDetailPrimary =
+    null;
 
-let exerciseDetailType = null;
+let exerciseDetailType =
+    null;
 
-let secondaryMuscles = null;
+let secondaryMuscles =
+    null;
 
-let exerciseInstructions = null;
+let exerciseInstructions =
+    null;
 
-let exerciseVideo = null;
+let exerciseVideo =
+    null;
 
-let exerciseVideoContainer = null;
+let exerciseVideoContainer =
+    null;
 
-let videoUnavailable = null;
+let videoUnavailable =
+    null;
 
-let watchOnYouTube = null;
+let watchOnYouTube =
+    null;
 
-let currentMuscleName = null;
+let genderButtons =
+    [];
+
+let currentMuscleName =
+    null;
 
 
 
@@ -1982,6 +2099,10 @@ document.addEventListener(
 
         setupBackButton();
 
+        setupGenderSwitch();
+
+        updateGenderButtons();
+
         await loadMuscleMaps();
 
     }
@@ -1989,7 +2110,7 @@ document.addEventListener(
 
 
 
-/* Elements */
+/* Get Elements */
 
 function getElements() {
 
@@ -1998,89 +2119,112 @@ function getElements() {
             "exerciseModal"
         );
 
+
     muscleTitle =
         document.getElementById(
             "muscleTitle"
         );
+
 
     exerciseList =
         document.getElementById(
             "exerciseList"
         );
 
+
     mapStatus =
         document.getElementById(
             "mapStatus"
         );
+
 
     exerciseListView =
         document.getElementById(
             "exerciseListView"
         );
 
+
     exerciseDetailView =
         document.getElementById(
             "exerciseDetailView"
         );
+
 
     backToExerciseList =
         document.getElementById(
             "backToExerciseList"
         );
 
+
     exerciseDetailName =
         document.getElementById(
             "exerciseDetailName"
         );
+
 
     exerciseDetailEquipment =
         document.getElementById(
             "exerciseDetailEquipment"
         );
 
+
     exerciseDetailDifficulty =
         document.getElementById(
             "exerciseDetailDifficulty"
         );
+
 
     exerciseDetailPrimary =
         document.getElementById(
             "exerciseDetailPrimary"
         );
 
+
     exerciseDetailType =
         document.getElementById(
             "exerciseDetailType"
         );
+
 
     secondaryMuscles =
         document.getElementById(
             "secondaryMuscles"
         );
 
+
     exerciseInstructions =
         document.getElementById(
             "exerciseInstructions"
         );
+
 
     exerciseVideo =
         document.getElementById(
             "exerciseVideo"
         );
 
+
     exerciseVideoContainer =
         document.getElementById(
             "exerciseVideoContainer"
         );
+
 
     videoUnavailable =
         document.getElementById(
             "videoUnavailable"
         );
 
+
     watchOnYouTube =
         document.getElementById(
             "watchOnYouTube"
+        );
+
+
+    genderButtons =
+        document.querySelectorAll(
+            ".gender-btn"
         );
 
 }
@@ -2123,7 +2267,7 @@ function setupModal() {
 
 
 
-/* Back */
+/* Back Button */
 
 function setupBackButton() {
 
@@ -2147,31 +2291,182 @@ function setupBackButton() {
 
 
 
+/* Gender Switch */
+
+function setupGenderSwitch() {
+
+    genderButtons.forEach(
+
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                async function () {
+
+                    const gender =
+                        button.dataset.gender;
+
+
+                    if (
+                        gender ===
+                        currentGender
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    currentGender =
+                        gender;
+
+
+                    updateGenderButtons();
+
+
+                    await loadMuscleMaps();
+
+                }
+            );
+
+        }
+
+    );
+
+}
+
+
+
+/* Gender Buttons */
+
+function updateGenderButtons() {
+
+    genderButtons.forEach(
+
+        function (button) {
+
+            const active =
+                button.dataset.gender
+                ===
+                currentGender;
+
+
+            button.classList.toggle(
+                "btn-success",
+                active
+            );
+
+
+            button.classList.toggle(
+                "btn-outline-success",
+                !active
+            );
+
+
+            button.classList.toggle(
+                "active",
+                active
+            );
+
+
+            button.setAttribute(
+                "aria-pressed",
+                active
+            );
+
+        }
+
+    );
+
+}
+
+
+
+/* Loading State */
+
+function setGenderButtonsDisabled(
+    disabled
+) {
+
+    genderButtons.forEach(
+
+        function (button) {
+
+            button.disabled =
+                disabled;
+
+        }
+
+    );
+
+}
+
+
+
 /* Load Maps */
 
 async function loadMuscleMaps() {
 
     console.log(
-        "Starting Muscle Map..."
+        `Loading ${currentGender} anatomy...`
     );
+
+
+    setGenderButtonsDisabled(
+        true
+    );
+
+
+    clearSelection();
+
+
+    stopVideo();
+
+
+    if (mapStatus) {
+
+        mapStatus.style.display =
+            "flex";
+
+
+        mapStatus.innerHTML = `
+            <div
+                class="spinner-border spinner-border-sm text-success"
+                role="status"
+            >
+            </div>
+
+            <span>
+                Loading ${currentGender} anatomy...
+            </span>
+        `;
+
+    }
+
+
+    const files =
+        anatomyFiles[
+            currentGender
+        ];
 
 
     const frontResult =
         await loadSvg(
-            "/images/muscles/anatomy-front.svg",
+            files.front,
             "frontMuscleMap"
         );
 
 
     const backResult =
         await loadSvg(
-            "/images/muscles/anatomy-back.svg",
+            files.back,
             "backMuscleMap"
         );
 
 
     if (
-        !frontResult &&
+        !frontResult
+        &&
         !backResult
     ) {
 
@@ -2180,12 +2475,22 @@ async function loadMuscleMaps() {
             mapStatus.innerHTML = `
                 <div class="map-error">
 
-                    Unable to load anatomy SVG files.
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+                    Unable to load
+                    ${currentGender}
+                    anatomy SVG files.
 
                 </div>
             `;
 
         }
+
+
+        setGenderButtonsDisabled(
+            false
+        );
+
 
         return;
 
@@ -2203,8 +2508,13 @@ async function loadMuscleMaps() {
     }
 
 
+    setGenderButtonsDisabled(
+        false
+    );
+
+
     console.log(
-        "Muscle Map ready"
+        `${currentGender} Muscle Map ready`
     );
 
 }
@@ -2237,6 +2547,11 @@ async function loadSvg(
 
     try {
 
+        console.log(
+            `Loading SVG: ${path}`
+        );
+
+
         const response =
             await fetch(
                 path
@@ -2263,7 +2578,7 @@ async function loadSvg(
         ) {
 
             throw new Error(
-                "Invalid SVG"
+                "File is not a valid SVG"
             );
 
         }
@@ -2303,6 +2618,11 @@ async function loadSvg(
         );
 
 
+        console.log(
+            `Loaded successfully: ${path}`
+        );
+
+
         return true;
 
     }
@@ -2310,7 +2630,7 @@ async function loadSvg(
     catch (error) {
 
         console.error(
-            `Cannot load ${path}:`,
+            `Failed to load ${path}:`,
             error
         );
 
@@ -2318,11 +2638,19 @@ async function loadSvg(
         container.innerHTML = `
             <div class="map-error">
 
-                Unable to load anatomy.
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+                <strong>
+                    Unable to load anatomy
+                </strong>
 
                 <br>
 
                 ${path}
+
+                <br>
+
+                ${error.message}
 
             </div>
         `;
@@ -2336,9 +2664,14 @@ async function loadSvg(
 
 
 
-/* Setup */
+/* Setup Muscles */
 
 function setupMuscles() {
+
+    console.log(
+        "Setting up muscle regions..."
+    );
+
 
     Object.entries(
         muscleGroups
@@ -2382,11 +2715,16 @@ function setupMuscles() {
 
     );
 
+
+    console.log(
+        "Muscle regions ready"
+    );
+
 }
 
 
 
-/* Interactive */
+/* Make Interactive */
 
 function makeRegionInteractive(
     region,
@@ -2417,6 +2755,8 @@ function makeRegionInteractive(
     region.setAttribute(
         "aria-label",
         muscleNames[muscleName]
+        ||
+        muscleName
     );
 
 
@@ -2458,7 +2798,7 @@ function makeRegionInteractive(
 
 
 
-/* Select */
+/* Select Muscle */
 
 function selectMuscle(
     muscleName
@@ -2498,7 +2838,7 @@ function selectMuscle(
 
 
 
-/* Clear */
+/* Clear Selection */
 
 function clearSelection() {
 
@@ -2524,15 +2864,29 @@ function clearSelection() {
 
 
 
-/* Exercises */
+/* Show Exercises */
 
 function showExercises(
     muscleName
 ) {
 
+    if (
+        !exerciseList
+        ||
+        !muscleTitle
+        ||
+        !exerciseModal
+    ) {
+
+        return;
+
+    }
+
+
     const muscleExercises =
         exercises[muscleName]
-        || [];
+        ||
+        [];
 
 
     currentMuscleName =
@@ -2559,9 +2913,10 @@ function showExercises(
         exerciseList.innerHTML = `
             <div class="col-12">
 
-                <div class="alert alert-warning">
+                <div class="alert alert-warning mb-0">
 
-                    No exercises available.
+                    No exercises are currently
+                    available for this muscle group.
 
                 </div>
 
@@ -2570,6 +2925,7 @@ function showExercises(
 
 
         exerciseModal.show();
+
 
         return;
 
@@ -2602,7 +2958,7 @@ function showExercises(
 
 
 
-/* Card */
+/* Create Exercise Card */
 
 function createExerciseCard(
     exercise,
@@ -2630,6 +2986,7 @@ function createExerciseCard(
             class="exercise-item"
             tabindex="0"
             role="button"
+            aria-label="View ${exercise.name}"
         >
 
             <div class="exercise-icon">
@@ -2728,12 +3085,23 @@ function createExerciseCard(
 
 
 
-/* Detail */
+/* Exercise Detail */
 
 function showExerciseDetail(
     exercise,
     muscleName
 ) {
+
+    if (
+        !exerciseListView
+        ||
+        !exerciseDetailView
+    ) {
+
+        return;
+
+    }
+
 
     exerciseListView.classList.add(
         "d-none"
@@ -2797,7 +3165,7 @@ function showExerciseDetail(
 
 
 
-/* List */
+/* Exercise List View */
 
 function showExerciseListView() {
 
@@ -2827,6 +3195,8 @@ function showExerciseListView() {
 
     if (
         currentMuscleName
+        &&
+        muscleTitle
     ) {
 
         muscleTitle.textContent =
@@ -2842,11 +3212,18 @@ function showExerciseListView() {
 
 
 
-/* Secondary */
+/* Secondary Muscles */
 
 function showSecondaryMuscles(
     muscles
 ) {
+
+    if (!secondaryMuscles) {
+
+        return;
+
+    }
+
 
     secondaryMuscles.innerHTML =
         "";
@@ -2865,6 +3242,7 @@ function showSecondaryMuscles(
 
             </span>
         `;
+
 
         return;
 
@@ -2907,6 +3285,13 @@ function showInstructions(
     instructions
 ) {
 
+    if (!exerciseInstructions) {
+
+        return;
+
+    }
+
+
     exerciseInstructions.innerHTML =
         "";
 
@@ -2924,6 +3309,7 @@ function showInstructions(
 
             </li>
         `;
+
 
         return;
 
@@ -2956,7 +3342,7 @@ function showInstructions(
 
 
 
-/* Video */
+/* Show Video */
 
 function showExerciseVideo(
     videoUrl
@@ -2973,19 +3359,31 @@ function showExerciseVideo(
         stopVideo();
 
 
-        exerciseVideoContainer.classList.add(
-            "d-none"
-        );
+        if (exerciseVideoContainer) {
+
+            exerciseVideoContainer.classList.add(
+                "d-none"
+            );
+
+        }
 
 
-        videoUnavailable.classList.remove(
-            "d-none"
-        );
+        if (videoUnavailable) {
+
+            videoUnavailable.classList.remove(
+                "d-none"
+            );
+
+        }
 
 
-        watchOnYouTube.classList.add(
-            "d-none"
-        );
+        if (watchOnYouTube) {
+
+            watchOnYouTube.classList.add(
+                "d-none"
+            );
+
+        }
 
 
         return;
@@ -2993,33 +3391,49 @@ function showExerciseVideo(
     }
 
 
-    videoUnavailable.classList.add(
-        "d-none"
-    );
+    if (videoUnavailable) {
+
+        videoUnavailable.classList.add(
+            "d-none"
+        );
+
+    }
 
 
-    exerciseVideoContainer.classList.remove(
-        "d-none"
-    );
+    if (exerciseVideoContainer) {
+
+        exerciseVideoContainer.classList.remove(
+            "d-none"
+        );
+
+    }
 
 
-    exerciseVideo.src =
-        embedUrl;
+    if (exerciseVideo) {
+
+        exerciseVideo.src =
+            embedUrl;
+
+    }
 
 
-    watchOnYouTube.href =
-        videoUrl;
+    if (watchOnYouTube) {
+
+        watchOnYouTube.href =
+            videoUrl;
 
 
-    watchOnYouTube.classList.remove(
-        "d-none"
-    );
+        watchOnYouTube.classList.remove(
+            "d-none"
+        );
+
+    }
 
 }
 
 
 
-/* YouTube */
+/* YouTube URL */
 
 function getYouTubeEmbedUrl(
     videoUrl
@@ -3044,6 +3458,8 @@ function getYouTubeEmbedUrl(
             "";
 
 
+        /* youtu.be */
+
         if (
             url.hostname.includes(
                 "youtu.be"
@@ -3052,19 +3468,22 @@ function getYouTubeEmbedUrl(
 
             videoId =
                 url.pathname
-                    .replace(
-                        "/",
-                        ""
-                    );
+                    .split("/")
+                    .filter(Boolean)[0];
 
         }
 
+
+        /* youtube.com */
 
         else if (
             url.hostname.includes(
                 "youtube.com"
             )
         ) {
+
+
+            /* Watch */
 
             if (
                 url.pathname ===
@@ -3079,6 +3498,8 @@ function getYouTubeEmbedUrl(
             }
 
 
+            /* Shorts */
+
             else if (
                 url.pathname.startsWith(
                     "/shorts/"
@@ -3086,12 +3507,14 @@ function getYouTubeEmbedUrl(
             ) {
 
                 videoId =
-                    url.pathname.split(
-                        "/"
-                    )[2];
+                    url.pathname
+                        .split("/")
+                        .filter(Boolean)[1];
 
             }
 
+
+            /* Embed */
 
             else if (
                 url.pathname.startsWith(
@@ -3100,9 +3523,9 @@ function getYouTubeEmbedUrl(
             ) {
 
                 videoId =
-                    url.pathname.split(
-                        "/"
-                    )[2];
+                    url.pathname
+                        .split("/")
+                        .filter(Boolean)[1];
 
             }
 
@@ -3153,7 +3576,7 @@ function stopVideo() {
 
 
 
-/* Reset */
+/* Reset Modal */
 
 function resetExerciseView() {
 
@@ -3201,7 +3624,8 @@ function getDifficultyClass(
 ) {
 
     if (
-        difficulty === "Beginner"
+        difficulty ===
+        "Beginner"
     ) {
 
         return (
@@ -3212,7 +3636,8 @@ function getDifficultyClass(
 
 
     if (
-        difficulty === "Intermediate"
+        difficulty ===
+        "Intermediate"
     ) {
 
         return (

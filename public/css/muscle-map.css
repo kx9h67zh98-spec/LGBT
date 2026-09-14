@@ -24,6 +24,61 @@
 }
 
 
+/* Gender */
+
+.gender-switch {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        12px;
+
+    margin-top:
+        28px;
+}
+
+.gender-btn {
+    min-width:
+        125px;
+
+    padding:
+        10px 20px;
+
+    border-radius:
+        30px;
+
+    font-weight:
+        600;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.gender-btn:hover {
+    transform:
+        translateY(-2px);
+}
+
+.gender-btn.active {
+    box-shadow:
+        0 8px 20px
+        rgba(25, 135, 84, 0.20);
+}
+
+
 /* Status */
 
 .map-status {
@@ -38,6 +93,9 @@
 
     gap:
         10px;
+
+    min-height:
+        55px;
 
     padding:
         15px;
@@ -101,7 +159,7 @@
 }
 
 
-/* Title */
+/* Anatomy Title */
 
 .anatomy-title {
     display:
@@ -118,6 +176,9 @@
 }
 
 .anatomy-title h2 {
+    margin:
+        0;
+
     font-weight:
         700;
 }
@@ -143,7 +204,7 @@
 }
 
 
-/* Icon */
+/* View Icon */
 
 .view-icon {
     width:
@@ -194,9 +255,6 @@
         relative;
 }
 
-
-/* SVG */
-
 .anatomy-map svg {
     display:
         block;
@@ -228,7 +286,8 @@
 .muscle-region path,
 .muscle-region polygon,
 .muscle-region ellipse,
-.muscle-region rect {
+.muscle-region rect,
+.muscle-region circle {
     fill:
         #b97575 !important;
 
@@ -239,13 +298,18 @@
 }
 
 
-/* Hover */
+/* Muscle Hover */
 
 .muscle-region:hover path,
 .muscle-region:hover polygon,
 .muscle-region:hover ellipse,
-.muscle-region:hover rect {
-
+.muscle-region:hover rect,
+.muscle-region:hover circle,
+.muscle-region:focus path,
+.muscle-region:focus polygon,
+.muscle-region:focus ellipse,
+.muscle-region:focus rect,
+.muscle-region:focus circle {
     fill:
         #e25555 !important;
 
@@ -257,13 +321,13 @@
 }
 
 
-/* Active */
+/* Muscle Active */
 
 .muscle-region.active path,
 .muscle-region.active polygon,
 .muscle-region.active ellipse,
-.muscle-region.active rect {
-
+.muscle-region.active rect,
+.muscle-region.active circle {
     fill:
         #198754 !important;
 
@@ -645,7 +709,7 @@
 }
 
 
-/* Information */
+/* Exercise Information */
 
 .exercise-info {
     display:
@@ -714,7 +778,7 @@
 }
 
 
-/* Secondary */
+/* Secondary Muscles */
 
 .secondary-muscles {
     display:
@@ -818,6 +882,12 @@
         rgba(0, 0, 0, 0.28);
 }
 
+[data-bs-theme="dark"] .anatomy-card:hover {
+    box-shadow:
+        0 22px 60px
+        rgba(0, 0, 0, 0.38);
+}
+
 [data-bs-theme="dark"] .exercise-item:hover {
     box-shadow:
         0 12px 30px
@@ -849,6 +919,19 @@
     .muscle-header {
         padding:
             45px 0 30px;
+    }
+
+    .gender-switch {
+        gap:
+            8px;
+    }
+
+    .gender-btn {
+        min-width:
+            105px;
+
+        padding:
+            9px 15px;
     }
 
     .anatomy-card {
