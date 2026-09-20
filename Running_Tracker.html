@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running Tracker - Live GPS</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Leaflet CSS & JS for Interactive Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              green: '#10b981',
+              greenDark: '#059669',
+              greenLight: '#e6f4ea',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body, html {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Smooth Slide Modal Animation */
+    .modal-sheet {
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.25s ease;
+    }
+    .modal-closed {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    @media (min-width: 640px) {
+      .modal-closed {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      .modal-open {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    .modal-open {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+
+    /* Custom Leaflet Map Styling */
+    .leaflet-control-attribution {
+      display: none !important;
+    }
+    
+    /* GPS User Marker Pulse Effect */
+    @keyframes gps-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+      70% { box-shadow: 0 0 0 16px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .user-location-marker {
+      width: 22px;
+      height: 22px;
+      background-color: #10b981;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      animation: gps-pulse 2s infinite;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-800 relative w-full h-full">
+
+  <!-- Full Web Application Canvas Container -->
+  <div class="w-full h-full relative flex flex-col overflow-hidden">
+    
+    <!-- Leaflet Map Canvas -->
+    <div id="map" class="w-full h-full absolute inset-0 z-0"></div>
+
+    <!-- Top Header Bar Overlay -->
+    <div class="absolute top-4 left-0 right-0 px-4 md:px-8 z-20 flex items-center justify-between pointer-events-none">
+      
+      <!-- Left Header Actions -->
+      <div class="flex items-center gap-3 pointer-events-auto">
+        <!-- Back Arrow Button -->
+        <button onclick="handleBackAction()" class="w-11 h-11 rounded-full bg-white/90 hover:bg-white backdrop-blur-md shadow-lg flex items-center justify-center text-slate-900 active:scale-95 transition-all shrink-0 border border-slate-200/50">
+          <i class="fa-solid fa-chevron-left text-lg"></i>
+        </button>
+
+        <!-- "View trends" Floating Pill -->
+        <div class="bg-white/90 hover:bg-white backdrop-blur-md rounded-full py-2 px-4 shadow-lg border border-slate-200/50 flex items-center gap-3 cursor-pointer active:scale-98 transition-all">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-300 via-emerald-500 to-green-600 flex items-center justify-center shrink-0 shadow-xs">
+            <i class="fa-solid fa-lock text-white text-xs"></i>
+          </div>
+          <div class="flex flex-col overflow-hidden">
+            <span class="text-xs md:text-sm font-extrabold text-slate-900 leading-tight truncate">View trends</span>
+            <span class="text-[10px] md:text-xs text-slate-500 leading-tight truncate">Tap to add weekly heatmap</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Header Status Indicator -->
+      <div class="hidden sm:flex items-center gap-2 bg-slate-900/80 backdrop-blur-md text-white text-xs px-3.5 py-2 rounded-full border border-slate-700/50 shadow-lg pointer-events-auto">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="font-semibold tracking-wide">Live GPS Active</span>
+      </div>
+    </div>
+
+    <!-- Right Floating Action Map Controls -->
+    <div class="absolute right-4 md:right-8 top-24 z-20 flex flex-col gap-3">
+      <!-- Layers Button with Badge -->
+      <button onclick="toggleMapLayer()" title="Change Map Style" class="w-11 h-11 rounded-full bg-white/95 hover:bg-white shadow-xl flex items-center justify-center text-slate-800 active:scale-90 transition-all border border-slate-100 relative">
+        <i class="fa-solid fa-layer-group text-lg"></i>
+        <span class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-md">6</span>
+      </button>
+      <!-- 3D Toggle Button -->
+      <button title="Toggle 3D View" class="w-11 h-11 rounded-full bg-white/95 hover:bg-white shadow-xl flex items-center justify-center text-slate-900 font-black text-xs active:scale-90 transition-all border border-slate-100">
+        3D
+      </button>
+      <!-- GPS Recenter Button -->
+      <button onclick="recenterMap()" title="Recenter Location" class="w-11 h-11 rounded-full bg-white/95 hover:bg-white shadow-xl flex items-center justify-center text-slate-800 active:scale-90 transition-all border border-slate-100">
+        <i class="fa-solid fa-crosshairs text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Bottom Dashboard & Tracking Controls Overlay -->
+    <div class="absolute bottom-4 md:bottom-8 left-0 right-0 z-20 px-4 md:px-8 flex flex-col items-center pointer-events-none">
+      
+      <!-- Responsive Center Container -->
+      <div class="w-full max-w-lg md:max-w-xl flex flex-col items-center pointer-events-auto space-y-3">
+        
+        <!-- Live GPS Stats Dashboard Card -->
+        <div class="w-full bg-white/95 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-slate-200/80 transition-all">
+          <!-- GPS Signal Banner -->
+          <div class="bg-emerald-50 px-4 py-2 flex items-center justify-between text-emerald-800 text-xs font-bold border-b border-emerald-100">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>GPS signal acquired</span>
+            </div>
+            <i onclick="recenterMap()" class="fa-solid fa-up-right-and-down-left-from-center text-xs text-slate-600 hover:text-slate-900 cursor-pointer"></i>
+          </div>
+
+          <!-- Real-Time Metrics Display -->
+          <div class="grid grid-cols-3 p-4 md:p-5 gap-2 text-center bg-white">
+            <div class="flex flex-col items-center">
+              <span id="timerDisplay" class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">00:00</span>
+              <span class="text-xs text-slate-400 font-semibold mt-1">Time</span>
+            </div>
+            <div class="flex flex-col items-center border-x border-slate-100">
+              <span id="distanceDisplay" class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">0.00</span>
+              <span class="text-xs text-slate-400 font-semibold mt-1">Distance (km)</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <span id="speedDisplay" class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">0.0</span>
+              <span class="text-[11px] md:text-xs text-slate-400 font-semibold mt-1 leading-tight">Avg speed (km/h)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Actions Bar -->
+        <div class="w-full bg-white/95 backdrop-blur-md rounded-3xl md:rounded-full p-4 md:px-8 py-3 flex items-center justify-around shadow-2xl border border-slate-200/80 relative">
+          
+          <!-- Selected Sport Selector Button -->
+          <button onclick="openSportModal()" class="flex flex-col items-center gap-1.5 min-w-[70px] group active:scale-95 transition-transform">
+            <div class="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-100 transition-colors shadow-xs">
+              <i id="selectedSportIcon" class="fa-solid fa-shoe-prints text-xl md:text-2xl"></i>
+              <div class="absolute top-0 right-0 w-4 h-4 md:w-5 md:h-5 bg-emerald-600 rounded-full flex items-center justify-center text-white text-[9px] md:text-[10px] border-2 border-white">
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </div>
+            <span id="selectedSportLabel" class="text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">Walking</span>
+          </button>
+
+          <!-- Main Start/Pause Action Button -->
+          <button id="btnStart" onclick="toggleTracking()" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-xl shadow-emerald-600/30 active:scale-90 transition-all">
+            <i id="playPauseIcon" class="fa-solid fa-play text-2xl md:text-3xl ml-1"></i>
+          </button>
+
+          <!-- Add Route Button -->
+          <button class="flex flex-col items-center gap-1.5 min-w-[70px] group active:scale-95 transition-transform">
+            <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-800 group-hover:bg-slate-200 transition-colors shadow-xs">
+              <i class="fa-solid fa-route text-xl md:text-2xl"></i>
+            </div>
+            <span class="text-xs font-bold text-slate-800">Add route</span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SPORT SELECTOR MODAL -->
+  <div id="sportModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex flex-col justify-end sm:justify-center items-center transition-opacity duration-300 opacity-0 pointer-events-none p-0 sm:p-4">
+    
+    <div id="modalContent" class="w-full sm:max-w-md bg-white rounded-t-[32px] sm:rounded-[32px] max-h-[85vh] sm:max-h-[80vh] flex flex-col overflow-hidden modal-sheet modal-closed shadow-2xl border border-slate-100">
+      
+      <!-- Modal Top Grab Handle & Header -->
+      <div class="p-4 pb-3 relative flex flex-col items-center border-b border-slate-100 shrink-0">
+        <div class="w-10 h-1 bg-slate-300 rounded-full mb-3 sm:hidden"></div>
+        <div class="w-full flex items-center justify-between px-2">
+          <h3 class="text-lg font-black text-slate-900 tracking-tight">Select a Sport</h3>
+          <button onclick="closeSportModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:bg-slate-200 active:scale-90 transition-all">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Scrollable Modal Body -->
+      <div class="p-4 md:p-6 overflow-y-auto no-scrollbar flex-1 space-y-6">
+        
+        <!-- Search Bar -->
+        <div class="relative w-full">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input type="text" id="sportSearchInput" onkeyup="filterSports()" placeholder="Search sports..." class="w-full bg-slate-100 rounded-full py-2.5 pl-10 pr-4 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all">
+        </div>
+
+        <!-- Section 1: Main Sports -->
+        <div id="sectionMainSports">
+          <h4 class="text-sm font-extrabold text-slate-900 mb-3">Your Main Sports</h4>
+          <div class="flex items-center gap-4 overflow-x-auto pb-2 no-scrollbar">
+            
+            <!-- Quick Item: Running -->
+            <div onclick="selectSport('Running', 'fa-person-running')" class="flex flex-col items-center gap-2 cursor-pointer shrink-0 group">
+              <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-800 text-2xl group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">
+                <i class="fa-solid fa-person-running"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-800">Running</span>
+            </div>
+
+            <!-- Quick Item: Cycling -->
+            <div onclick="selectSport('Cycling', 'fa-bicycle')" class="flex flex-col items-center gap-2 cursor-pointer shrink-0 group">
+              <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-800 text-2xl group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">
+                <i class="fa-solid fa-bicycle"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-800">Cycling</span>
+            </div>
+
+            <!-- Quick Item: Walking (Selected by default) -->
+            <div id="quickWalkItem" onclick="selectSport('Walking', 'fa-shoe-prints')" class="flex flex-col items-center gap-2 cursor-pointer shrink-0">
+              <div class="relative w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 text-2xl">
+                <i class="fa-solid fa-shoe-prints"></i>
+                <div class="absolute top-0 right-0 w-4 h-4 bg-emerald-600 rounded-full flex items-center justify-center text-white text-[9px]">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-emerald-600">Walking</span>
+            </div>
+
+            <!-- Quick Item: Hiking -->
+            <div onclick="selectSport('Hiking', 'fa-person-hiking')" class="flex flex-col items-center gap-2 cursor-pointer shrink-0 group">
+              <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-800 text-2xl group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">
+                <i class="fa-solid fa-person-hiking"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-800">Hiking</span>
+            </div>
+
+            <!-- Quick Item: Yoga -->
+            <div onclick="selectSport('Yoga', 'fa-spa')" class="flex flex-col items-center gap-2 cursor-pointer shrink-0 group">
+              <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-800 text-2xl group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">
+                <i class="fa-solid fa-spa"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-800">Yoga</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Section 2: Foot Sports List -->
+        <div>
+          <h4 class="text-sm font-extrabold text-slate-900 mb-2">Foot Sports</h4>
+          <div class="divide-y divide-slate-100" id="footSportsList">
+            
+            <div onclick="selectSport('Running', 'fa-person-running')" class="sport-item py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 px-2 rounded-xl transition-colors">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-person-running text-slate-800 text-xl w-7 text-center"></i>
+                <span class="text-sm font-semibold text-slate-800 sport-name">Running</span>
+              </div>
+            </div>
+
+            <div onclick="selectSport('Trail Running', 'fa-mound')" class="sport-item py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 px-2 rounded-xl transition-colors">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-mound text-slate-800 text-xl w-7 text-center"></i>
+                <span class="text-sm font-semibold text-slate-800 sport-name">Trail Running</span>
+              </div>
+            </div>
+
+            <div onclick="selectSport('Walking', 'fa-shoe-prints')" class="sport-item py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 px-2 rounded-xl transition-colors">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-shoe-prints text-emerald-600 text-xl w-7 text-center"></i>
+                <span class="text-sm font-extrabold text-emerald-600 sport-name">Walking</span>
+              </div>
+              <i class="fa-solid fa-check text-emerald-600 text-base check-icon"></i>
+            </div>
+
+            <div onclick="selectSport('Hiking', 'fa-person-hiking')" class="sport-item py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 px-2 rounded-xl transition-colors">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-person-hiking text-slate-800 text-xl w-7 text-center"></i>
+                <span class="text-sm font-semibold text-slate-800 sport-name">Hiking</span>
+              </div>
+            </div>
+
+            <div onclick="selectSport('Wheelchair', 'fa-wheelchair')" class="sport-item py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 px-2 rounded-xl transition-colors">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-wheelchair text-slate-800 text-xl w-7 text-center"></i>
+                <span class="text-sm font-semibold text-slate-800 sport-name">Wheelchair</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Section 3: Cycling Sports List -->
+        <div>
+          <h4 class="text-sm font-extrabold text-slate-900 mb-2">Cycling Sports</h4>
+          <div class="divide-y divide-slate-100" id="cyclingSportsList">
+            
+            <div onclick="selectSport('Cycling', 'fa-bicycle')" class="sport-item py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 px-2 rounded-xl transition-colors">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-bicycle text-slate-800 text-xl w-7 text-center"></i>
+                <span class="text-sm font-semibold text-slate-800 sport-name">Cycling</span>
+              </div>
+            </div>
+
+            <div onclick="selectSport('Mountain Biking', 'fa-person-biking')" class="sport-item py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 px-2 rounded-xl transition-colors">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-person-biking text-slate-800 text-xl w-7 text-center"></i>
+                <span class="text-sm font-semibold text-slate-800 sport-name">Mountain Biking</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- APPLICATION LOGIC SCRIPT -->
+  <script>
+    let currentSport = 'Walking';
+
+    // Map & GPS State Variables
+    let map = null;
+    let mapTileLayer = null;
+    let isTracking = false;
+    let timerInterval = null;
+    let secondsElapsed = 0;
+    let currentDistance = 0.0;
+    let routePolyline = null;
+    let userMarker = null;
+    let currentTileIndex = 0;
+
+    // Route points centered around Vietnam National University area
+    const mockRoutePoints = [
+      [10.8755, 106.8005],
+      [10.8762, 106.8012],
+      [10.8770, 106.8020],
+      [10.8782, 106.8028],
+      [10.8790, 106.8020],
+      [10.8795, 106.8008],
+      [10.8788, 106.7995],
+      [10.8775, 106.7990],
+      [10.8760, 106.7998],
+      [10.8755, 106.8005]
+    ];
+    let routeIndex = 0;
+
+    // Tile Providers for map layers
+    const tileProviders = [
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+      'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+    ];
+
+    // Initialize Leaflet Map on window load
+    window.onload = function() {
+      initMap();
+    };
+
+    // Resize map automatically when browser window size or orientation changes
+    window.addEventListener('resize', function() {
+      if (map) {
+        map.invalidateSize();
+      }
+    });
+
+    function initMap() {
+      const startPos = mockRoutePoints[0];
+      map = L.map('map', {
+        zoomControl: false,
+        attributionControl: false
+      }).setView(startPos, 16);
+
+      mapTileLayer = L.tileLayer(tileProviders[0], {
+        maxZoom: 19
+      }).addTo(map);
+
+      // Polyline route path (green themed)
+      routePolyline = L.polyline([startPos], {
+        color: '#10b981',
+        weight: 6,
+        opacity: 0.85,
+        lineCap: 'round',
+        lineJoin: 'round'
+      }).addTo(map);
+
+      // Custom GPS Pulse Marker
+      const customIcon = L.divIcon({
+        className: 'custom-gps-icon',
+        html: '<div class="user-location-marker"></div>',
+        iconSize: [22, 22],
+        iconAnchor: [11, 11]
+      });
+
+      userMarker = L.marker(startPos, { icon: customIcon }).addTo(map);
+    }
+
+    function recenterMap() {
+      if (map && mockRoutePoints.length > 0) {
+        const currentPos = mockRoutePoints[routeIndex % mockRoutePoints.length];
+        map.flyTo(currentPos, 16, { animate: true, duration: 0.8 });
+      }
+    }
+
+    function toggleMapLayer() {
+      if (!map || !mapTileLayer) return;
+      currentTileIndex = (currentTileIndex + 1) % tileProviders.length;
+      map.removeLayer(mapTileLayer);
+      mapTileLayer = L.tileLayer(tileProviders[currentTileIndex], { maxZoom: 19 }).addTo(map);
+    }
+
+    // Live Tracking & Timer Logic
+    function toggleTracking() {
+      const playBtn = document.getElementById('btnStart');
+      const playIcon = document.getElementById('playPauseIcon');
+
+      if (!isTracking) {
+        // Start Tracking
+        isTracking = true;
+        playBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700', 'shadow-emerald-600/30');
+        playBtn.classList.add('bg-slate-900', 'hover:bg-slate-800');
+        playIcon.className = 'fa-solid fa-pause text-2xl md:text-3xl';
+
+        timerInterval = setInterval(() => {
+          secondsElapsed++;
+          
+          // Time formatting MM:SS
+          const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+          const secs = String(secondsElapsed % 60).padStart(2, '0');
+          document.getElementById('timerDisplay').innerText = `${mins}:${secs}`;
+
+          // Distance logic based on selected sport
+          const speedMultiplier = currentSport.toLowerCase().includes('cycl') || currentSport.toLowerCase().includes('bik') ? 0.008 : 0.003;
+          currentDistance += speedMultiplier;
+          document.getElementById('distanceDisplay').innerText = currentDistance.toFixed(2);
+          
+          // Simulated Average Speed
+          const baseSpeed = currentSport.toLowerCase().includes('cycl') || currentSport.toLowerCase().includes('bik') ? 18.5 : 4.5;
+          const simulatedSpeed = (baseSpeed + Math.sin(secondsElapsed) * 0.5).toFixed(1);
+          document.getElementById('speedDisplay').innerText = simulatedSpeed;
+
+          // Animate user marker along route
+          if (secondsElapsed % 2 === 0) {
+            routeIndex = (routeIndex + 1) % mockRoutePoints.length;
+            const newPos = mockRoutePoints[routeIndex];
+            
+            userMarker.setLatLng(newPos);
+            routePolyline.addLatLng(newPos);
+            map.panTo(newPos, { animate: true });
+          }
+
+        }, 1000);
+
+      } else {
+        // Pause Tracking
+        isTracking = false;
+        playBtn.classList.remove('bg-slate-900', 'hover:bg-slate-800');
+        playBtn.classList.add('bg-emerald-600', 'hover:bg-emerald-700', 'shadow-emerald-600/30');
+        playIcon.className = 'fa-solid fa-play text-2xl md:text-3xl ml-1';
+        clearInterval(timerInterval);
+      }
+    }
+
+    // Modal Sheet Handlers
+    function openSportModal() {
+      const modal = document.getElementById('sportModal');
+      const content = document.getElementById('modalContent');
+      
+      modal.classList.remove('pointer-events-none');
+      modal.classList.remove('opacity-0');
+      modal.classList.add('opacity-100');
+      
+      content.classList.remove('modal-closed');
+      content.classList.add('modal-open');
+    }
+
+    function closeSportModal() {
+      const modal = document.getElementById('sportModal');
+      const content = document.getElementById('modalContent');
+
+      content.classList.remove('modal-open');
+      content.classList.add('modal-closed');
+
+      setTimeout(() => {
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0');
+        modal.classList.add('pointer-events-none');
+      }, 300);
+    }
+
+    function selectSport(name, iconClass) {
+      currentSport = name;
+      document.getElementById('selectedSportLabel').innerText = name;
+      document.getElementById('selectedSportIcon').className = `fa-solid ${iconClass} text-xl md:text-2xl`;
+
+      // Update UI active states in Modal
+      updateActiveSportInModal(name);
+      closeSportModal();
+    }
+
+    function updateActiveSportInModal(activeName) {
+      const sportItems = document.querySelectorAll('.sport-item');
+      sportItems.forEach(item => {
+        const nameEl = item.querySelector('.sport-name');
+        const iconEl = item.querySelector('i');
+        const checkEl = item.querySelector('.check-icon');
+
+        if (nameEl && nameEl.innerText === activeName) {
+          nameEl.className = 'text-sm font-extrabold text-emerald-600 sport-name';
+          iconEl.classList.remove('text-slate-800');
+          iconEl.classList.add('text-emerald-600');
+          if (!checkEl) {
+            const check = document.createElement('i');
+            check.className = 'fa-solid fa-check text-emerald-600 text-base check-icon';
+            item.appendChild(check);
+          }
+        } else {
+          if (nameEl) nameEl.className = 'text-sm font-semibold text-slate-800 sport-name';
+          if (iconEl) {
+            iconEl.classList.remove('text-emerald-600');
+            iconEl.classList.add('text-slate-800');
+          }
+          if (checkEl) checkEl.remove();
+        }
+      });
+    }
+
+    // Filter Sports by Search Query
+    function filterSports() {
+      const query = document.getElementById('sportSearchInput').value.toLowerCase();
+      const items = document.querySelectorAll('.sport-item');
+
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        if (text.includes(query)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function handleBackAction() {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        alert('Back button clicked');
+      }
+    }
+  </script>
+</body>
+</html>
