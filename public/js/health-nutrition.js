@@ -6,308 +6,230 @@ const foods = [
         id: 1,
         name: "Chicken Breast",
         category: "Protein",
-
-        nutritionType:
-            "per100g",
-
+        nutritionType: "per100g",
         calories: 165,
         protein: 31,
         carbs: 0,
         fat: 3.6,
-
-        cookingRequired:
-            true
+        cookingRequired: true
     },
 
     {
         id: 2,
         name: "Chicken Thigh",
         category: "Protein",
-
-        nutritionType:
-            "per100g",
-
+        nutritionType: "per100g",
         calories: 209,
         protein: 26,
         carbs: 0,
         fat: 11,
-
-        cookingRequired:
-            true
+        cookingRequired: true
     },
 
     {
         id: 3,
         name: "Beef",
         category: "Protein",
-
-        nutritionType:
-            "per100g",
-
+        nutritionType: "per100g",
         calories: 250,
         protein: 26,
         carbs: 0,
         fat: 15,
-
-        cookingRequired:
-            true
+        cookingRequired: true
     },
 
     {
         id: 4,
         name: "Salmon",
         category: "Protein",
-
-        nutritionType:
-            "per100g",
-
+        nutritionType: "per100g",
         calories: 208,
         protein: 20,
         carbs: 0,
         fat: 13,
-
-        cookingRequired:
-            true
+        cookingRequired: true
     },
 
     {
         id: 5,
         name: "Egg",
         category: "Protein",
-
-        nutritionType:
-            "per100g",
-
+        nutritionType: "per100g",
         calories: 155,
         protein: 13,
         carbs: 1.1,
         fat: 11,
-
-        cookingRequired:
-            true
+        cookingRequired: true
     },
 
     {
         id: 6,
         name: "White Rice",
         category: "Carbohydrates",
-
-        nutritionType:
-            "per100g",
-
+        nutritionType: "per100g",
         calories: 130,
         protein: 2.7,
         carbs: 28,
         fat: 0.3,
-
-        cookingRequired:
-            false
+        cookingRequired: false
     },
 
     {
         id: 7,
-        name: "Sweet Potato",
+        name: "Brown Rice",
         category: "Carbohydrates",
-
-        nutritionType:
-            "per100g",
-
-        calories: 86,
-        protein: 1.6,
-        carbs: 20,
-        fat: 0.1,
-
-        cookingRequired:
-            true
+        nutritionType: "per100g",
+        calories: 123,
+        protein: 2.7,
+        carbs: 25.6,
+        fat: 1,
+        cookingRequired: false
     },
 
     {
         id: 8,
-        name: "Oats",
+        name: "Sweet Potato",
         category: "Carbohydrates",
-
-        nutritionType:
-            "per100g",
-
-        calories: 389,
-        protein: 16.9,
-        carbs: 66.3,
-        fat: 6.9,
-
-        cookingRequired:
-            false
+        nutritionType: "per100g",
+        calories: 86,
+        protein: 1.6,
+        carbs: 20,
+        fat: 0.1,
+        cookingRequired: true
     },
 
     {
         id: 9,
-        name: "Banana",
-        category: "Fruit",
-
-        nutritionType:
-            "per100g",
-
-        calories: 89,
-        protein: 1.1,
-        carbs: 22.8,
-        fat: 0.3,
-
-        cookingRequired:
-            false
+        name: "Oats",
+        category: "Carbohydrates",
+        nutritionType: "per100g",
+        calories: 389,
+        protein: 16.9,
+        carbs: 66.3,
+        fat: 6.9,
+        cookingRequired: false
     },
 
     {
         id: 10,
-        name: "Apple",
-        category: "Fruit",
-
-        nutritionType:
-            "per100g",
-
-        calories: 52,
-        protein: 0.3,
-        carbs: 13.8,
-        fat: 0.2,
-
-        cookingRequired:
-            false
+        name: "Pasta",
+        category: "Carbohydrates",
+        nutritionType: "per100g",
+        calories: 131,
+        protein: 5,
+        carbs: 25,
+        fat: 1.1,
+        cookingRequired: false
     },
 
     {
         id: 11,
-        name: "Avocado",
+        name: "Banana",
         category: "Fruit",
-
-        nutritionType:
-            "per100g",
-
-        calories: 160,
-        protein: 2,
-        carbs: 8.5,
-        fat: 14.7,
-
-        cookingRequired:
-            false
+        nutritionType: "per100g",
+        calories: 89,
+        protein: 1.1,
+        carbs: 22.8,
+        fat: 0.3,
+        cookingRequired: false
     },
 
     {
         id: 12,
-        name: "Broccoli",
-        category: "Vegetable",
-
-        nutritionType:
-            "per100g",
-
-        calories: 35,
-        protein: 2.4,
-        carbs: 7.2,
-        fat: 0.4,
-
-        cookingRequired:
-            true
+        name: "Apple",
+        category: "Fruit",
+        nutritionType: "per100g",
+        calories: 52,
+        protein: 0.3,
+        carbs: 13.8,
+        fat: 0.2,
+        cookingRequired: false
     },
 
     {
         id: 13,
-        name: "Greek Yogurt",
-        category: "Dairy",
-
-        nutritionType:
-            "per100g",
-
-        calories: 59,
-        protein: 10,
-        carbs: 3.6,
-        fat: 0.4,
-
-        cookingRequired:
-            false
+        name: "Avocado",
+        category: "Fruit",
+        nutritionType: "per100g",
+        calories: 160,
+        protein: 2,
+        carbs: 8.5,
+        fat: 14.7,
+        cookingRequired: false
     },
 
     {
         id: 14,
+        name: "Broccoli",
+        category: "Vegetable",
+        nutritionType: "per100g",
+        calories: 35,
+        protein: 2.4,
+        carbs: 7.2,
+        fat: 0.4,
+        cookingRequired: true
+    },
+
+    {
+        id: 15,
+        name: "Greek Yogurt",
+        category: "Dairy",
+        nutritionType: "per100g",
+        calories: 59,
+        protein: 10,
+        carbs: 3.6,
+        fat: 0.4,
+        cookingRequired: false
+    },
+
+    {
+        id: 16,
         name: "Milk",
         category: "Dairy",
-
-        nutritionType:
-            "per100g",
-
+        nutritionType: "per100g",
         calories: 61,
         protein: 3.2,
         carbs: 4.8,
         fat: 3.3,
-
-        cookingRequired:
-            false
+        cookingRequired: false
     },
 
-
-    /* NutraBio Whey */
-
     {
-        id: 15,
-
-        name:
-            "NutraBio Whey Protein",
-
-        category:
-            "Supplements",
-
-        nutritionType:
-            "serving",
-
-        servingUnit:
-            "scoop",
-
-        servingSize:
-            32,
-
-        calories:
-            120,
-
-        protein:
-            25,
-
-        carbs:
-            2,
-
-        fat:
-            1,
-
-        cookingRequired:
-            false,
-
-        supplement:
-            true
+        id: 17,
+        name: "NutraBio Whey Protein",
+        category: "Supplements",
+        nutritionType: "serving",
+        servingUnit: "scoop",
+        servingSize: 32,
+        calories: 120,
+        protein: 25,
+        carbs: 2,
+        fat: 1,
+        cookingRequired: false,
+        supplement: true
     }
 
 ];
 
 
-
 /* Cooking */
 
 const cookingMethods = {
-
     raw: 0,
-
     boiled: 0,
-
     steamed: 0,
-
     grilled: 0,
-
     baked: 0,
-
     airFried: 2,
-
     panFried: 5,
-
     stirFried: 6,
-
     deepFried: 12
-
 };
 
+
+/* State */
+
+let editingMealId = null;
 
 
 /* Elements */
@@ -317,114 +239,95 @@ const tabButtons =
         ".health-tab"
     );
 
-
 const healthTab =
     document.getElementById(
         "healthTab"
     );
-
 
 const nutritionTab =
     document.getElementById(
         "nutritionTab"
     );
 
-
 const healthForm =
     document.getElementById(
         "healthForm"
     );
-
-
-const healthEmpty =
-    document.getElementById(
-        "healthEmpty"
-    );
-
-
-const healthResults =
-    document.getElementById(
-        "healthResults"
-    );
-
 
 const nutritionForm =
     document.getElementById(
         "nutritionForm"
     );
 
+const healthEmpty =
+    document.getElementById(
+        "healthEmpty"
+    );
+
+const healthResults =
+    document.getElementById(
+        "healthResults"
+    );
 
 const foodSelect =
     document.getElementById(
         "food"
     );
 
-
 const foodAmount =
     document.getElementById(
         "foodAmount"
     );
-
 
 const amountUnit =
     document.getElementById(
         "amountUnit"
     );
 
-
-const amountLabel =
-    document.getElementById(
-        "amountLabel"
-    );
-
-
 const servingInformation =
     document.getElementById(
         "servingInformation"
     );
-
 
 const cookingSection =
     document.getElementById(
         "cookingSection"
     );
 
-
 const oilSection =
     document.getElementById(
         "oilSection"
     );
-
 
 const supplementSection =
     document.getElementById(
         "supplementSection"
     );
 
-
 const cookingMethod =
     document.getElementById(
         "cookingMethod"
     );
-
 
 const oilAmount =
     document.getElementById(
         "oilAmount"
     );
 
-
 const mealDate =
     document.getElementById(
         "mealDate"
     );
-
 
 const mealType =
     document.getElementById(
         "mealType"
     );
 
+const cancelEditButton =
+    document.getElementById(
+        "cancelEditButton"
+    );
 
 
 /* Start */
@@ -449,7 +352,6 @@ document.addEventListener(
 );
 
 
-
 /* Tabs */
 
 function setupTabs() {
@@ -463,26 +365,19 @@ function setupTabs() {
                 function () {
 
                     tabButtons.forEach(
-
                         function (item) {
-
                             item.classList.remove(
                                 "active"
                             );
-
                         }
-
                     );
-
 
                     button.classList.add(
                         "active"
                     );
 
-
                     if (
-                        button.dataset.tab
-                        ===
+                        button.dataset.tab ===
                         "health"
                     ) {
 
@@ -490,24 +385,19 @@ function setupTabs() {
                             "d-none"
                         );
 
-
                         nutritionTab.classList.add(
                             "d-none"
                         );
 
-                    }
-
-                    else {
+                    } else {
 
                         healthTab.classList.add(
                             "d-none"
                         );
 
-
                         nutritionTab.classList.remove(
                             "d-none"
                         );
-
 
                         displayMeals();
 
@@ -523,6 +413,46 @@ function setupTabs() {
 }
 
 
+/* Messages */
+
+function showMessage(
+    elementId,
+    message,
+    type
+) {
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    element.className =
+        `alert alert-${type}`;
+
+
+    element.textContent =
+        message;
+
+
+    element.classList.remove(
+        "d-none"
+    );
+
+
+    setTimeout(
+        function () {
+
+            element.classList.add(
+                "d-none"
+            );
+
+        },
+        3000
+    );
+
+}
+
 
 /* Health */
 
@@ -533,6 +463,17 @@ healthForm.addEventListener(
         event.preventDefault();
 
 
+        if (
+            !healthForm.checkValidity()
+        ) {
+
+            healthForm.reportValidity();
+
+            return;
+
+        }
+
+
         const age =
             Number(
                 document.getElementById(
@@ -540,12 +481,10 @@ healthForm.addEventListener(
                 ).value
             );
 
-
         const gender =
             document.getElementById(
                 "gender"
             ).value;
-
 
         const height =
             Number(
@@ -554,7 +493,6 @@ healthForm.addEventListener(
                 ).value
             );
 
-
         const weight =
             Number(
                 document.getElementById(
@@ -562,14 +500,12 @@ healthForm.addEventListener(
                 ).value
             );
 
-
-        const activity =
+        const activityLevel =
             Number(
                 document.getElementById(
-                    "activity"
+                    "activityLevel"
                 ).value
             );
-
 
         const goal =
             document.getElementById(
@@ -583,7 +519,6 @@ healthForm.addEventListener(
                 height
             );
 
-
         const bmr =
             calculateBMR(
                 gender,
@@ -592,77 +527,47 @@ healthForm.addEventListener(
                 age
             );
 
-
         const tdee =
-            bmr
-            *
-            activity;
+            bmr *
+            activityLevel;
 
-
-        const calories =
+        const targetCalories =
             calculateTargetCalories(
                 tdee,
                 goal
             );
 
-
         const macros =
             calculateMacros(
-                calories,
+                targetCalories,
                 weight
             );
 
 
         const profile = {
-
-            age:
-                age,
-
-            gender:
-                gender,
-
-            height:
-                height,
-
-            weight:
-                weight,
-
-            activity:
-                activity,
-
-            goal:
-                goal,
-
-            bmi:
-                bmi,
-
-            bmr:
-                bmr,
-
-            tdee:
-                tdee,
-
-            calories:
-                calories,
-
-            protein:
+            age,
+            gender,
+            height,
+            weight,
+            activityLevel,
+            goal,
+            bmi,
+            bmr,
+            tdee,
+            targetCalories,
+            proteinTarget:
                 macros.protein,
-
-            carbs:
+            carbsTarget:
                 macros.carbs,
-
-            fat:
+            fatTarget:
                 macros.fat
-
         };
 
 
-        localStorage.setItem(
-            "fithealthHealthProfile",
-            JSON.stringify(
+        FitHealthData
+            .saveHealthProfile(
                 profile
-            )
-        );
+            );
 
 
         displayHealthResults(
@@ -670,11 +575,17 @@ healthForm.addEventListener(
         );
 
 
-        updateDailyTargets();
+        displayMeals();
+
+
+        showMessage(
+            "healthMessage",
+            "Health profile saved successfully.",
+            "success"
+        );
 
     }
 );
-
 
 
 /* BMI */
@@ -685,23 +596,15 @@ function calculateBMI(
 ) {
 
     const meters =
-        height
-        /
-        100;
+        height / 100;
 
 
     return (
-        weight
-        /
-        (
-            meters
-            *
-            meters
-        )
+        weight /
+        (meters * meters)
     );
 
 }
-
 
 
 /* BMR */
@@ -726,19 +629,14 @@ function calculateBMR(
         "male"
     ) {
 
-        return (
-            base + 5
-        );
+        return base + 5;
 
     }
 
 
-    return (
-        base - 161
-    );
+    return base - 161;
 
 }
-
 
 
 /* Target */
@@ -753,8 +651,9 @@ function calculateTargetCalories(
         "lose"
     ) {
 
-        return (
-            tdee - 500
+        return Math.max(
+            tdee - 500,
+            1200
         );
 
     }
@@ -765,9 +664,7 @@ function calculateTargetCalories(
         "gain"
     ) {
 
-        return (
-            tdee + 300
-        );
+        return tdee + 300;
 
     }
 
@@ -775,7 +672,6 @@ function calculateTargetCalories(
     return tdee;
 
 }
-
 
 
 /* Macros */
@@ -786,28 +682,16 @@ function calculateMacros(
 ) {
 
     const protein =
-        weight
-        *
-        2;
-
+        weight * 2;
 
     const proteinCalories =
-        protein
-        *
-        4;
-
+        protein * 4;
 
     const fatCalories =
-        calories
-        *
-        0.25;
-
+        calories * 0.25;
 
     const fat =
-        fatCalories
-        /
-        9;
-
+        fatCalories / 9;
 
     const remaining =
         Math.max(
@@ -819,34 +703,22 @@ function calculateMacros(
             0
         );
 
-
     const carbs =
-        remaining
-        /
-        4;
+        remaining / 4;
 
 
     return {
-
         protein:
-            Math.round(
-                protein
-            ),
+            Math.round(protein),
 
         carbs:
-            Math.round(
-                carbs
-            ),
+            Math.round(carbs),
 
         fat:
-            Math.round(
-                fat
-            )
-
+            Math.round(fat)
     };
 
 }
-
 
 
 /* BMI Status */
@@ -855,21 +727,27 @@ function getBMIStatus(
     bmi
 ) {
 
-    if (bmi < 18.5) {
+    if (
+        bmi < 18.5
+    ) {
 
         return "Underweight";
 
     }
 
 
-    if (bmi < 25) {
+    if (
+        bmi < 25
+    ) {
 
         return "Normal";
 
     }
 
 
-    if (bmi < 30) {
+    if (
+        bmi < 30
+    ) {
 
         return "Overweight";
 
@@ -879,7 +757,6 @@ function getBMIStatus(
     return "Obesity";
 
 }
-
 
 
 /* Health Result */
@@ -892,7 +769,6 @@ function displayHealthResults(
         "d-none"
     );
 
-
     healthResults.classList.remove(
         "d-none"
     );
@@ -901,9 +777,7 @@ function displayHealthResults(
     document.getElementById(
         "bmiResult"
     ).textContent =
-        profile.bmi.toFixed(
-            1
-        );
+        profile.bmi.toFixed(1);
 
 
     document.getElementById(
@@ -934,113 +808,83 @@ function displayHealthResults(
         "calorieResult"
     ).textContent =
         Math.round(
-            profile.calories
+            profile.targetCalories
         );
 
 
     document.getElementById(
         "proteinResult"
     ).textContent =
-        `${profile.protein} g`;
+        `${profile.proteinTarget} g`;
 
 
     document.getElementById(
         "carbsResult"
     ).textContent =
-        `${profile.carbs} g`;
+        `${profile.carbsTarget} g`;
 
 
     document.getElementById(
         "fatResult"
     ).textContent =
-        `${profile.fat} g`;
+        `${profile.fatTarget} g`;
 
 }
 
 
-
-/* Load Health */
+/* Load Profile */
 
 function loadHealthProfile() {
 
-    const stored =
-        localStorage.getItem(
-            "fithealthHealthProfile"
-        );
+    const profile =
+        FitHealthData
+            .getHealthProfile();
 
 
-    if (!stored) {
-
-        updateDailyTargets();
-
+    if (!profile) {
         return;
-
     }
 
 
-    try {
+    document.getElementById(
+        "age"
+    ).value =
+        profile.age;
 
-        const profile =
-            JSON.parse(
-                stored
-            );
+    document.getElementById(
+        "gender"
+    ).value =
+        profile.gender;
 
+    document.getElementById(
+        "height"
+    ).value =
+        profile.height;
 
-        document.getElementById(
-            "age"
-        ).value =
-            profile.age;
+    document.getElementById(
+        "weight"
+    ).value =
+        profile.weight;
 
+    document.getElementById(
+        "activityLevel"
+    ).value =
+        profile.activityLevel;
 
-        document.getElementById(
-            "gender"
-        ).value =
-            profile.gender;
-
-
-        document.getElementById(
-            "height"
-        ).value =
-            profile.height;
-
-
-        document.getElementById(
-            "weight"
-        ).value =
-            profile.weight;
-
-
-        document.getElementById(
-            "activity"
-        ).value =
-            profile.activity;
+    document.getElementById(
+        "goal"
+    ).value =
+        profile.goal;
 
 
-        document.getElementById(
-            "goal"
-        ).value =
-            profile.goal;
-
-
-        displayHealthResults(
-            profile
-        );
-
-    }
-
-    catch (error) {
-
-        console.error(
-            error
-        );
-
-    }
+    displayHealthResults(
+        profile
+    );
 
 }
 
 
-
-/* Populate Foods */
+/* Foods */
 
 function populateFoods() {
 
@@ -1053,9 +897,7 @@ function populateFoods() {
             ...new Set(
                 foods.map(
                     function (food) {
-
                         return food.category;
-
                     }
                 )
             )
@@ -1071,27 +913,20 @@ function populateFoods() {
                     "optgroup"
                 );
 
-
             group.label =
                 category;
 
 
             foods
                 .filter(
-
                     function (food) {
-
                         return (
-                            food.category
-                            ===
+                            food.category ===
                             category
                         );
-
                     }
-
                 )
                 .forEach(
-
                     function (food) {
 
                         const option =
@@ -1099,21 +934,17 @@ function populateFoods() {
                                 "option"
                             );
 
-
                         option.value =
                             food.id;
 
-
                         option.textContent =
                             food.name;
-
 
                         group.appendChild(
                             option
                         );
 
                     }
-
                 );
 
 
@@ -1128,9 +959,6 @@ function populateFoods() {
 }
 
 
-
-/* Selected Food */
-
 function getSelectedFood() {
 
     const id =
@@ -1140,24 +968,15 @@ function getSelectedFood() {
 
 
     return foods.find(
-
         function (food) {
-
-            return (
-                food.id
-                ===
-                id
-            );
-
+            return food.id === id;
         }
-
     );
 
 }
 
 
-
-/* Food Interface */
+/* Food UI */
 
 function updateFoodInterface() {
 
@@ -1166,89 +985,66 @@ function updateFoodInterface() {
 
 
     if (!food) {
-
         return;
-
     }
 
 
-    /* Supplement */
-
     if (
-        food.nutritionType
-        ===
+        food.nutritionType ===
         "serving"
     ) {
-
-        amountLabel.textContent =
-            "Amount";
-
-
-        amountUnit.textContent =
-            food.servingUnit;
-
 
         foodAmount.value =
             1;
 
         foodAmount.min =
-            "0.5";
-
+            0.5;
 
         foodAmount.step =
-            "0.5";
+            0.5;
 
+        amountUnit.textContent =
+            food.servingUnit;
 
         servingInformation.textContent =
             `1 ${food.servingUnit} = ${food.servingSize} g`;
-
 
         servingInformation.classList.remove(
             "d-none"
         );
 
-
         cookingSection.classList.add(
             "d-none"
         );
-
 
         oilSection.classList.add(
             "d-none"
         );
 
-
         supplementSection.classList.remove(
             "d-none"
         );
 
-    }
+        oilAmount.value =
+            0;
 
-
-    /* Normal Food */
-
-    else {
-
-        amountLabel.textContent =
-            "Amount";
-
-
-        amountUnit.textContent =
-            "g";
-
+    } else {
 
         foodAmount.value =
             100;
 
+        foodAmount.min =
+            1;
 
         foodAmount.step =
-            "1";
+            1;
 
+        amountUnit.textContent =
+            "g";
 
         servingInformation.classList.add(
             "d-none"
         );
-
 
         supplementSection.classList.add(
             "d-none"
@@ -1263,24 +1059,19 @@ function updateFoodInterface() {
                 "d-none"
             );
 
-
             oilSection.classList.remove(
                 "d-none"
             );
 
-        }
-
-        else {
+        } else {
 
             cookingSection.classList.add(
                 "d-none"
             );
 
-
             oilSection.classList.add(
                 "d-none"
             );
-
 
             oilAmount.value =
                 0;
@@ -1297,17 +1088,13 @@ function updateFoodInterface() {
 }
 
 
-
-/* Food Change */
+/* Events */
 
 foodSelect.addEventListener(
     "change",
     updateFoodInterface
 );
 
-
-
-/* Amount */
 
 foodAmount.addEventListener(
     "input",
@@ -1321,9 +1108,6 @@ foodAmount.addEventListener(
 );
 
 
-
-/* Cooking */
-
 cookingMethod.addEventListener(
     "change",
     function () {
@@ -1336,27 +1120,29 @@ cookingMethod.addEventListener(
 );
 
 
-
-/* Oil */
-
 oilAmount.addEventListener(
     "input",
     updateNutritionPreview
 );
 
 
-
 /* Date */
 
 function setupDate() {
 
+    mealDate.value =
+        getTodayString();
+
+}
+
+
+function getTodayString() {
+
     const today =
         new Date();
 
-
     const year =
         today.getFullYear();
-
 
     const month =
         String(
@@ -1365,7 +1151,6 @@ function setupDate() {
             2,
             "0"
         );
-
 
     const day =
         String(
@@ -1376,11 +1161,9 @@ function setupDate() {
         );
 
 
-    mealDate.value =
-        `${year}-${month}-${day}`;
+    return `${year}-${month}-${day}`;
 
 }
-
 
 
 mealDate.addEventListener(
@@ -1389,8 +1172,7 @@ mealDate.addEventListener(
 );
 
 
-
-/* Oil Estimate */
+/* Oil */
 
 function updateEstimatedOil() {
 
@@ -1401,8 +1183,7 @@ function updateEstimatedOil() {
     if (
         !food
         ||
-        food.nutritionType
-        ===
+        food.nutritionType ===
         "serving"
         ||
         !food.cookingRequired
@@ -1410,7 +1191,6 @@ function updateEstimatedOil() {
 
         oilAmount.value =
             0;
-
 
         return;
 
@@ -1423,13 +1203,9 @@ function updateEstimatedOil() {
         );
 
 
-    const method =
-        cookingMethod.value;
-
-
-    const per100 =
+    const oilPer100 =
         cookingMethods[
-            method
+            cookingMethod.value
         ]
         ||
         0;
@@ -1437,24 +1213,20 @@ function updateEstimatedOil() {
 
     const oil =
         (
-            amount
-            /
+            amount /
             100
         )
         *
-        per100;
+        oilPer100;
 
 
     oilAmount.value =
-        oil.toFixed(
-            1
-        );
+        oil.toFixed(1);
 
 }
 
 
-
-/* Calculate Nutrition */
+/* Calculate Food */
 
 function calculateFoodNutrition() {
 
@@ -1463,9 +1235,7 @@ function calculateFoodNutrition() {
 
 
     if (!food) {
-
         return null;
-
     }
 
 
@@ -1484,59 +1254,41 @@ function calculateFoodNutrition() {
     }
 
 
-    /* Serving */
-
     if (
-        food.nutritionType
-        ===
+        food.nutritionType ===
         "serving"
     ) {
 
         return {
-
-            food:
-                food,
-
-            amount:
-                amount,
-
-            displayAmount:
-                `${amount} ${food.servingUnit}`,
+            food,
+            amount,
+            unit:
+                food.servingUnit,
 
             calories:
-                food.calories
-                *
+                food.calories *
                 amount,
 
             protein:
-                food.protein
-                *
+                food.protein *
                 amount,
 
             carbs:
-                food.carbs
-                *
+                food.carbs *
                 amount,
 
             fat:
-                food.fat
-                *
+                food.fat *
                 amount,
 
-            oil:
-                0
-
+            oil: 0
         };
 
     }
 
 
-    /* Per 100 g */
-
     const ratio =
-        amount
-        /
-        100;
+        amount / 100;
 
 
     const oil =
@@ -1552,55 +1304,40 @@ function calculateFoodNutrition() {
 
 
     return {
-
-        food:
-            food,
-
-        amount:
-            amount,
-
-        displayAmount:
-            `${amount} g`,
+        food,
+        amount,
+        unit: "g",
 
         calories:
             (
-                food.calories
-                *
+                food.calories *
                 ratio
             )
             +
             (
-                oil
-                *
-                9
+                oil * 9
             ),
 
         protein:
-            food.protein
-            *
+            food.protein *
             ratio,
 
         carbs:
-            food.carbs
-            *
+            food.carbs *
             ratio,
 
         fat:
             (
-                food.fat
-                *
+                food.fat *
                 ratio
             )
             +
             oil,
 
-        oil:
-            oil
-
+        oil
     };
 
 }
-
 
 
 /* Preview */
@@ -1613,47 +1350,62 @@ function updateNutritionPreview() {
 
     if (!result) {
 
+        setNutritionPreview(
+            0,
+            0,
+            0,
+            0
+        );
+
         return;
 
     }
 
 
+    setNutritionPreview(
+        result.calories,
+        result.protein,
+        result.carbs,
+        result.fat
+    );
+
+}
+
+
+function setNutritionPreview(
+    calories,
+    protein,
+    carbs,
+    fat
+) {
+
     document.getElementById(
         "previewCalories"
     ).textContent =
-        `${Math.round(
-            result.calories
-        )} kcal`;
+        `${Math.round(calories)} kcal`;
 
 
     document.getElementById(
         "previewProtein"
     ).textContent =
-        `${result.protein.toFixed(
-            1
-        )} g`;
+        `${Number(protein).toFixed(1)} g`;
 
 
     document.getElementById(
         "previewCarbs"
     ).textContent =
-        `${result.carbs.toFixed(
-            1
-        )} g`;
+        `${Number(carbs).toFixed(1)} g`;
 
 
     document.getElementById(
         "previewFat"
     ).textContent =
-        `${result.fat.toFixed(
-            1
-        )} g`;
+        `${Number(fat).toFixed(1)} g`;
 
 }
 
 
-
-/* Add Nutrition */
+/* Meal Submit */
 
 nutritionForm.addEventListener(
     "submit",
@@ -1662,14 +1414,23 @@ nutritionForm.addEventListener(
         event.preventDefault();
 
 
+        if (
+            !nutritionForm.checkValidity()
+        ) {
+
+            nutritionForm.reportValidity();
+
+            return;
+
+        }
+
+
         const result =
             calculateFoodNutrition();
 
 
         if (!result) {
-
             return;
-
         }
 
 
@@ -1680,12 +1441,14 @@ nutritionForm.addEventListener(
         const entry = {
 
             id:
+                editingMealId
+                ||
                 Date.now(),
 
             date:
                 mealDate.value,
 
-            meal:
+            mealType:
                 mealType.value,
 
             foodId:
@@ -1697,11 +1460,8 @@ nutritionForm.addEventListener(
             amount:
                 result.amount,
 
-            displayAmount:
-                result.displayAmount,
-
-            nutritionType:
-                food.nutritionType,
+            unit:
+                result.unit,
 
             cookingMethod:
                 food.cookingRequired
@@ -1719,11 +1479,9 @@ nutritionForm.addEventListener(
                     :
                     null,
 
-            oil:
+            oilAmount:
                 Number(
-                    result.oil.toFixed(
-                        1
-                    )
+                    result.oil.toFixed(1)
                 ),
 
             calories:
@@ -1733,44 +1491,56 @@ nutritionForm.addEventListener(
 
             protein:
                 Number(
-                    result.protein.toFixed(
-                        1
-                    )
+                    result.protein.toFixed(1)
                 ),
 
             carbs:
                 Number(
-                    result.carbs.toFixed(
-                        1
-                    )
+                    result.carbs.toFixed(1)
                 ),
 
             fat:
                 Number(
-                    result.fat.toFixed(
-                        1
-                    )
+                    result.fat.toFixed(1)
                 )
 
         };
 
 
-        const entries =
-            getMealEntries();
+        if (
+            editingMealId
+        ) {
+
+            FitHealthData
+                .updateMealEntry(
+                    entry
+                );
 
 
-        entries.push(
-            entry
-        );
+            showMessage(
+                "nutritionMessage",
+                "Meal updated successfully.",
+                "success"
+            );
+
+        } else {
+
+            FitHealthData
+                .addMealEntry(
+                    entry
+                );
 
 
-        localStorage.setItem(
-            "fithealthMealEntries",
-            JSON.stringify(
-                entries
-            )
-        );
+            showMessage(
+                "nutritionMessage",
+                "Meal added successfully.",
+                "success"
+            );
 
+        }
+
+
+        finishMealEdit();
 
         displayMeals();
 
@@ -1778,45 +1548,179 @@ nutritionForm.addEventListener(
 );
 
 
+/* Edit Meal */
 
-/* Get Meals */
+function startMealEdit(
+    entry
+) {
 
-function getMealEntries() {
+    editingMealId =
+        entry.id;
 
-    const stored =
-        localStorage.getItem(
-            "fithealthMealEntries"
+
+    mealDate.value =
+        entry.date;
+
+    mealType.value =
+        entry.mealType;
+
+    foodSelect.value =
+        String(
+            entry.foodId
         );
 
 
-    if (!stored) {
+    updateFoodInterface();
 
-        return [];
+
+    foodAmount.value =
+        entry.amount;
+
+
+    if (
+        entry.cookingMethod
+    ) {
+
+        cookingMethod.value =
+            entry.cookingMethod;
+
+    }
+
+
+    if (
+        entry.oilAmount !==
+        undefined
+    ) {
+
+        oilAmount.value =
+            entry.oilAmount;
 
     }
 
 
-    try {
+    if (
+        entry.preparation
+    ) {
 
-        return JSON.parse(
-            stored
-        );
-
-    }
-
-    catch (error) {
-
-        return [];
+        document.getElementById(
+            "supplementPreparation"
+        ).value =
+            entry.preparation;
 
     }
+
+
+    document.getElementById(
+        "nutritionFormTitle"
+    ).textContent =
+        "Edit Food";
+
+
+    document.getElementById(
+        "mealSubmitText"
+    ).textContent =
+        "Update Meal";
+
+
+    document
+        .getElementById(
+            "mealSubmitButton"
+        )
+        .querySelector("i")
+        .className =
+            "bi bi-check-circle-fill me-2";
+
+
+    cancelEditButton.classList.remove(
+        "d-none"
+    );
+
+
+    updateNutritionPreview();
+
+
+    document.getElementById(
+        "nutritionFormPanel"
+    ).scrollIntoView(
+        {
+            behavior:
+                "smooth",
+
+            block:
+                "start"
+        }
+    );
 
 }
 
 
+function finishMealEdit() {
 
-/* Meals */
+    const currentDate =
+        mealDate.value;
+
+
+    editingMealId =
+        null;
+
+
+    nutritionForm.reset();
+
+
+    mealDate.value =
+        currentDate;
+
+
+    document.getElementById(
+        "nutritionFormTitle"
+    ).textContent =
+        "Add Food";
+
+
+    document.getElementById(
+        "mealSubmitText"
+    ).textContent =
+        "Add Meal";
+
+
+    document
+        .getElementById(
+            "mealSubmitButton"
+        )
+        .querySelector("i")
+        .className =
+            "bi bi-plus-circle-fill me-2";
+
+
+    cancelEditButton.classList.add(
+        "d-none"
+    );
+
+
+    updateFoodInterface();
+
+}
+
+
+cancelEditButton.addEventListener(
+    "click",
+    finishMealEdit
+);
+
+
+/* Display Meals */
 
 function displayMeals() {
+
+    updateSummaryTitle();
+
+
+    const entries =
+        FitHealthData
+            .getMealEntriesByDate(
+                mealDate.value
+            );
+
 
     const container =
         document.getElementById(
@@ -1824,25 +1728,7 @@ function displayMeals() {
         );
 
 
-    const entries =
-        getMealEntries()
-            .filter(
-
-                function (entry) {
-
-                    return (
-                        entry.date
-                        ===
-                        mealDate.value
-                    );
-
-                }
-
-            );
-
-
-    const meals = {
-
+    const groups = {
         breakfast:
             "Breakfast",
 
@@ -1854,7 +1740,6 @@ function displayMeals() {
 
         dinner:
             "Dinner"
-
     };
 
 
@@ -1863,7 +1748,7 @@ function displayMeals() {
 
 
     Object.entries(
-        meals
+        groups
     ).forEach(
 
         function (
@@ -1875,23 +1760,19 @@ function displayMeals() {
 
             const mealEntries =
                 entries.filter(
-
                     function (entry) {
 
                         return (
-                            entry.meal
-                            ===
+                            entry.mealType ===
                             key
                         );
 
                     }
-
                 );
 
 
             const calories =
                 mealEntries.reduce(
-
                     function (
                         total,
                         entry
@@ -1906,9 +1787,7 @@ function displayMeals() {
                         );
 
                     },
-
                     0
-
                 );
 
 
@@ -1938,16 +1817,13 @@ function displayMeals() {
 
 
             if (
-                mealEntries.length
-                ===
+                mealEntries.length ===
                 0
             ) {
 
                 group.innerHTML += `
                     <p class="text-body-secondary small">
-
                         No food added.
-
                     </p>
                 `;
 
@@ -1955,132 +1831,15 @@ function displayMeals() {
 
 
             mealEntries.forEach(
-
                 function (entry) {
 
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    item.className =
-                        "meal-entry";
-
-
-                    let methodText =
-                        "";
-
-
-                    if (
-                        entry.cookingMethod
-                    ) {
-
-                        methodText =
-                            formatCookingMethod(
-                                entry.cookingMethod
-                            );
-
-                    }
-
-
-                    if (
-                        entry.preparation
-                    ) {
-
-                        methodText =
-                            formatPreparation(
-                                entry.preparation
-                            );
-
-                    }
-
-
-                    item.innerHTML = `
-                        <div>
-
-                            <div class="food-name">
-
-                                ${entry.foodName}
-
-                            </div>
-
-
-                            <div class="food-details">
-
-                                ${entry.displayAmount}
-
-                                ${
-                                    methodText
-                                    ?
-                                    `• ${methodText}`
-                                    :
-                                    ""
-                                }
-
-                            </div>
-
-
-                            <div class="food-macros">
-
-                                Protein:
-                                ${entry.protein} g
-
-                                • Carbs:
-                                ${entry.carbs} g
-
-                                • Fat:
-                                ${entry.fat} g
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="d-flex align-items-center gap-2">
-
-                            <span class="food-calories">
-
-                                ${entry.calories} kcal
-
-                            </span>
-
-
-                            <button
-                                class="delete-food"
-                                type="button"
-                            >
-
-                                <i class="bi bi-trash-fill"></i>
-
-                            </button>
-
-                        </div>
-                    `;
-
-
-                    item
-                        .querySelector(
-                            ".delete-food"
-                        )
-                        .addEventListener(
-                            "click",
-                            function () {
-
-                                deleteMealEntry(
-                                    entry.id
-                                );
-
-                            }
-                        );
-
-
                     group.appendChild(
-                        item
+                        createMealElement(
+                            entry
+                        )
                     );
 
                 }
-
             );
 
 
@@ -2100,45 +1859,177 @@ function displayMeals() {
 }
 
 
+/* Meal Element */
 
-/* Delete */
-
-function deleteMealEntry(
-    id
+function createMealElement(
+    entry
 ) {
 
-    const entries =
-        getMealEntries()
-            .filter(
+    const item =
+        document.createElement(
+            "div"
+        );
 
-                function (entry) {
 
-                    return (
+    item.className =
+        "meal-entry";
+
+
+    let extra =
+        "";
+
+
+    if (
+        entry.cookingMethod
+    ) {
+
+        extra =
+            formatCookingMethod(
+                entry.cookingMethod
+            );
+
+    }
+
+
+    if (
+        entry.preparation
+    ) {
+
+        extra =
+            formatPreparation(
+                entry.preparation
+            );
+
+    }
+
+
+    item.innerHTML = `
+        <div>
+
+            <div class="food-name">
+                ${entry.foodName}
+            </div>
+
+            <div class="food-details">
+
+                ${entry.amount}
+                ${entry.unit}
+
+                ${
+                    extra
+                        ?
+                        `• ${extra}`
+                        :
+                        ""
+                }
+
+            </div>
+
+            <div class="food-macros">
+
+                Protein:
+                ${entry.protein} g
+
+                • Carbs:
+                ${entry.carbs} g
+
+                • Fat:
+                ${entry.fat} g
+
+            </div>
+
+        </div>
+
+
+        <div class="d-flex align-items-center gap-2">
+
+            <span class="food-calories">
+                ${entry.calories} kcal
+            </span>
+
+            <div class="meal-actions">
+
+                <button
+                    type="button"
+                    class="edit-food"
+                    aria-label="Edit food"
+                >
+                    <i class="bi bi-pencil-fill"></i>
+                </button>
+
+                <button
+                    type="button"
+                    class="delete-food"
+                    aria-label="Delete food"
+                >
+                    <i class="bi bi-trash-fill"></i>
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+
+    item
+        .querySelector(
+            ".edit-food"
+        )
+        .addEventListener(
+            "click",
+            function () {
+
+                startMealEdit(
+                    entry
+                );
+
+            }
+        );
+
+
+    item
+        .querySelector(
+            ".delete-food"
+        )
+        .addEventListener(
+            "click",
+            function () {
+
+                FitHealthData
+                    .deleteMealEntry(
                         entry.id
-                        !==
-                        id
                     );
+
+
+                if (
+                    editingMealId ===
+                    entry.id
+                ) {
+
+                    finishMealEdit();
 
                 }
 
-            );
+
+                displayMeals();
 
 
-    localStorage.setItem(
-        "fithealthMealEntries",
-        JSON.stringify(
-            entries
-        )
-    );
+                showMessage(
+                    "nutritionMessage",
+                    "Meal deleted.",
+                    "warning"
+                );
+
+            }
+        );
 
 
-    displayMeals();
+    return item;
 
 }
 
 
-
-/* Daily Summary */
+/* Summary */
 
 function updateDailySummary(
     entries
@@ -2159,14 +2050,12 @@ function updateDailySummary(
                     ||
                     0;
 
-
                 total.protein +=
                     Number(
                         entry.protein
                     )
                     ||
                     0;
-
 
                 total.carbs +=
                     Number(
@@ -2175,7 +2064,6 @@ function updateDailySummary(
                     ||
                     0;
 
-
                 total.fat +=
                     Number(
                         entry.fat
@@ -2183,11 +2071,9 @@ function updateDailySummary(
                     ||
                     0;
 
-
                 return total;
 
             },
-
             {
                 calories: 0,
                 protein: 0,
@@ -2209,85 +2095,79 @@ function updateDailySummary(
     document.getElementById(
         "dailyProtein"
     ).textContent =
-        totals.protein.toFixed(
-            1
-        );
+        totals.protein.toFixed(1);
 
 
     document.getElementById(
         "dailyCarbs"
     ).textContent =
-        totals.carbs.toFixed(
-            1
-        );
+        totals.carbs.toFixed(1);
 
 
     document.getElementById(
         "dailyFat"
     ).textContent =
-        totals.fat.toFixed(
-            1
-        );
+        totals.fat.toFixed(1);
 
 
-    updateDailyTargets();
+    const profile =
+        updateDailyTargets();
+
+
+    updateNutritionProgress(
+        totals,
+        profile
+    );
+
+
+    updateRemainingCalories(
+        totals.calories
+    );
 
 }
 
 
-
-/* Targets */
+/* Target */
 
 function updateDailyTargets() {
 
-    const stored =
-        localStorage.getItem(
-            "fithealthHealthProfile"
-        );
+    const profile =
+        FitHealthData
+            .getHealthProfile();
 
 
-    if (!stored) {
+    if (!profile) {
 
         document.getElementById(
             "dailyTarget"
         ).textContent =
             "--";
 
-
         document.getElementById(
             "dailyProteinTarget"
         ).textContent =
             "--";
-
 
         document.getElementById(
             "dailyCarbsTarget"
         ).textContent =
             "--";
 
-
         document.getElementById(
             "dailyFatTarget"
         ).textContent =
             "--";
 
-
-        return;
+        return null;
 
     }
-
-
-    const profile =
-        JSON.parse(
-            stored
-        );
 
 
     document.getElementById(
         "dailyTarget"
     ).textContent =
         Math.round(
-            profile.calories
+            profile.targetCalories
         );
 
 
@@ -2295,7 +2175,7 @@ function updateDailyTargets() {
         "dailyProteinTarget"
     ).textContent =
         Math.round(
-            profile.protein
+            profile.proteinTarget
         );
 
 
@@ -2303,7 +2183,7 @@ function updateDailyTargets() {
         "dailyCarbsTarget"
     ).textContent =
         Math.round(
-            profile.carbs
+            profile.carbsTarget
         );
 
 
@@ -2311,48 +2191,279 @@ function updateDailyTargets() {
         "dailyFatTarget"
     ).textContent =
         Math.round(
-            profile.fat
+            profile.fatTarget
         );
+
+
+    return profile;
 
 }
 
 
+/* Progress */
 
-/* Cooking */
+function updateNutritionProgress(
+    totals,
+    profile
+) {
+
+    if (!profile) {
+
+        setProgress(
+            "caloriesProgress",
+            0,
+            0
+        );
+
+        setProgress(
+            "proteinProgress",
+            0,
+            0
+        );
+
+        setProgress(
+            "carbsProgress",
+            0,
+            0
+        );
+
+        setProgress(
+            "fatProgress",
+            0,
+            0
+        );
+
+        return;
+
+    }
+
+
+    setProgress(
+        "caloriesProgress",
+        totals.calories,
+        profile.targetCalories
+    );
+
+    setProgress(
+        "proteinProgress",
+        totals.protein,
+        profile.proteinTarget
+    );
+
+    setProgress(
+        "carbsProgress",
+        totals.carbs,
+        profile.carbsTarget
+    );
+
+    setProgress(
+        "fatProgress",
+        totals.fat,
+        profile.fatTarget
+    );
+
+}
+
+
+function setProgress(
+    elementId,
+    current,
+    target
+) {
+
+    const bar =
+        document.getElementById(
+            elementId
+        );
+
+
+    if (
+        !target
+        ||
+        target <= 0
+    ) {
+
+        bar.style.width =
+            "0%";
+
+        bar.classList.remove(
+            "over-target"
+        );
+
+        return;
+
+    }
+
+
+    const percentage =
+        (
+            current /
+            target
+        )
+        *
+        100;
+
+
+    bar.style.width =
+        `${Math.min(
+            percentage,
+            100
+        )}%`;
+
+
+    if (
+        current > target
+    ) {
+
+        bar.classList.add(
+            "over-target"
+        );
+
+    } else {
+
+        bar.classList.remove(
+            "over-target"
+        );
+
+    }
+
+}
+
+
+/* Remaining */
+
+function updateRemainingCalories(
+    consumed
+) {
+
+    const profile =
+        FitHealthData
+            .getHealthProfile();
+
+
+    const card =
+        document.getElementById(
+            "remainingCalories"
+        );
+
+
+    const value =
+        document.getElementById(
+            "remainingCaloriesValue"
+        );
+
+
+    if (!profile) {
+
+        value.textContent =
+            "Calculate your Health Profile first";
+
+        card.classList.remove(
+            "over-target"
+        );
+
+        return;
+
+    }
+
+
+    const remaining =
+        Math.round(
+            profile.targetCalories
+            -
+            consumed
+        );
+
+
+    if (
+        remaining >= 0
+    ) {
+
+        value.textContent =
+            `${remaining} kcal remaining`;
+
+        card.classList.remove(
+            "over-target"
+        );
+
+    } else {
+
+        value.textContent =
+            `${Math.abs(
+                remaining
+            )} kcal over target`;
+
+        card.classList.add(
+            "over-target"
+        );
+
+    }
+
+}
+
+
+/* Summary Title */
+
+function updateSummaryTitle() {
+
+    const title =
+        document.getElementById(
+            "dailySummaryTitle"
+        );
+
+
+    if (
+        mealDate.value ===
+        getTodayString()
+    ) {
+
+        title.textContent =
+            "Today's Summary";
+
+        return;
+
+    }
+
+
+    const date =
+        new Date(
+            `${mealDate.value}T00:00:00`
+        );
+
+
+    const formatted =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+
+    title.textContent =
+        `${formatted} Summary`;
+
+}
+
+
+/* Formatting */
 
 function formatCookingMethod(
     method
 ) {
 
     const methods = {
-
-        raw:
-            "Raw",
-
-        boiled:
-            "Boiled",
-
-        steamed:
-            "Steamed",
-
-        grilled:
-            "Grilled",
-
-        baked:
-            "Baked",
-
-        airFried:
-            "Air Fried",
-
-        panFried:
-            "Pan Fried",
-
-        stirFried:
-            "Stir Fried",
-
-        deepFried:
-            "Deep Fried"
-
+        raw: "Raw",
+        boiled: "Boiled",
+        steamed: "Steamed",
+        grilled: "Grilled",
+        baked: "Baked",
+        airFried: "Air Fried",
+        panFried: "Pan Fried",
+        stirFried: "Stir Fried",
+        deepFried: "Deep Fried"
     };
 
 
@@ -2365,16 +2476,12 @@ function formatCookingMethod(
 }
 
 
-
-/* Preparation */
-
 function formatPreparation(
     preparation
 ) {
 
     if (
-        preparation
-        ===
+        preparation ===
         "water"
     ) {
 
