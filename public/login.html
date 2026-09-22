@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="description"
+        content="Sign in to FitHealth to access your health, nutrition, workout, running and training data."
+    >
+
+    <title>
+        Login - FitHealth
+    </title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <!-- Login CSS -->
+    <link
+        rel="stylesheet"
+        href="css/login.css"
+    >
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <header class="login-topbar">
+
+        <div class="container">
+
+            <div class="d-flex align-items-center justify-content-between gap-3">
+
+                <a
+                    class="navbar-brand fw-bold text-success mb-0"
+                    href="index.html"
+                >
+                    FitHealth
+                </a>
+
+                <a
+                    href="index.html"
+                    class="btn btn-outline-secondary btn-sm"
+                >
+                    <i class="bi bi-arrow-left me-1"></i>
+                    Back Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- Login -->
+    <main class="login-page">
+
+        <div class="container">
+
+            <div class="login-shell">
+
+                <div class="row g-0">
+
+                    <!-- Information -->
+                    <div class="col-lg-6">
+
+                        <section class="login-info-panel h-100">
+
+                            <div>
+
+                                <p class="login-eyebrow mb-3">
+                                    Welcome Back
+                                </p>
+
+                                <h1 class="display-5 fw-bold mb-4">
+                                    Continue your
+                                    <span class="text-success">
+                                        FitHealth
+                                    </span>
+                                    journey.
+                                </h1>
+
+                                <p class="lead text-body-secondary login-info-text">
+                                    Sign in to access your health profile,
+                                    nutrition records, running history and
+                                    Training Calendar.
+                                </p>
+
+                            </div>
+
+
+                            <div class="login-feature-list">
+
+                                <div class="login-feature-item">
+
+                                    <div class="login-feature-icon">
+                                        <i class="bi bi-heart-pulse-fill"></i>
+                                    </div>
+
+                                    <div>
+                                        <h5 class="fw-bold mb-1">
+                                            Health & Nutrition
+                                        </h5>
+
+                                        <p class="text-body-secondary mb-0">
+                                            Keep your health targets and meal records together.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="login-feature-item">
+
+                                    <div class="login-feature-icon">
+                                        <i class="bi bi-activity"></i>
+                                    </div>
+
+                                    <div>
+                                        <h5 class="fw-bold mb-1">
+                                            Running Progress
+                                        </h5>
+
+                                        <p class="text-body-secondary mb-0">
+                                            Review your distance, pace and running sessions.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="login-feature-item">
+
+                                    <div class="login-feature-icon">
+                                        <i class="bi bi-calendar2-week-fill"></i>
+                                    </div>
+
+                                    <div>
+                                        <h5 class="fw-bold mb-1">
+                                            Training Calendar
+                                        </h5>
+
+                                        <p class="text-body-secondary mb-0">
+                                            Organize workouts and review activities by date.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="login-security-note">
+
+                                <i class="bi bi-shield-check"></i>
+
+                                <div>
+                                    <strong>
+                                        Authentication-ready design
+                                    </strong>
+
+                                    <p class="mb-0">
+                                        Password verification will be handled by the Java Servlet backend.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+
+                    <!-- Form -->
+                    <div class="col-lg-6">
+
+                        <section class="login-form-panel h-100">
+
+                            <div class="login-form-wrapper">
+
+                                <div class="mb-4">
+
+                                    <p class="text-success fw-bold text-uppercase mb-2">
+                                        Account Login
+                                    </p>
+
+                                    <h2 class="fw-bold mb-2">
+                                        Sign in to FitHealth
+                                    </h2>
+
+                                    <p class="text-body-secondary mb-0">
+                                        Enter your email and password.
+                                    </p>
+
+                                </div>
+
+
+                                <div
+                                    id="loginMessage"
+                                    class="alert d-none"
+                                    role="alert"
+                                ></div>
+
+
+                                <form
+                                    id="loginForm"
+                                    novalidate
+                                >
+
+                                    <!-- Email -->
+                                    <div class="mb-3">
+
+                                        <label
+                                            for="loginEmail"
+                                            class="form-label"
+                                        >
+                                            Email
+                                        </label>
+
+                                        <div class="input-group login-input-group">
+
+                                            <span class="input-group-text">
+                                                <i class="bi bi-envelope"></i>
+                                            </span>
+
+                                            <input
+                                                type="email"
+                                                id="loginEmail"
+                                                class="form-control"
+                                                placeholder="name@example.com"
+                                                autocomplete="email"
+                                                required
+                                            >
+
+                                        </div>
+
+                                        <div
+                                            id="loginEmailError"
+                                            class="form-error"
+                                        ></div>
+
+                                    </div>
+
+
+                                    <!-- Password -->
+                                    <div class="mb-3">
+
+                                        <label
+                                            for="loginPassword"
+                                            class="form-label"
+                                        >
+                                            Password
+                                        </label>
+
+                                        <div class="input-group login-input-group">
+
+                                            <span class="input-group-text">
+                                                <i class="bi bi-lock"></i>
+                                            </span>
+
+                                            <input
+                                                type="password"
+                                                id="loginPassword"
+                                                class="form-control"
+                                                placeholder="Enter your password"
+                                                autocomplete="current-password"
+                                                required
+                                            >
+
+                                            <button
+                                                type="button"
+                                                id="togglePasswordButton"
+                                                class="btn btn-outline-secondary password-toggle-button"
+                                                aria-label="Show password"
+                                            >
+                                                <i
+                                                    id="passwordToggleIcon"
+                                                    class="bi bi-eye"
+                                                ></i>
+                                            </button>
+
+                                        </div>
+
+                                        <div
+                                            id="loginPasswordError"
+                                            class="form-error"
+                                        ></div>
+
+                                    </div>
+
+
+                                    <!-- Options -->
+                                    <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+
+                                        <div class="form-check">
+
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                id="rememberEmail"
+                                            >
+
+                                            <label
+                                                class="form-check-label"
+                                                for="rememberEmail"
+                                            >
+                                                Remember my email
+                                            </label>
+
+                                        </div>
+
+                                        <button
+                                            type="button"
+                                            id="forgotPasswordButton"
+                                            class="btn btn-link text-success text-decoration-none p-0"
+                                        >
+                                            Forgot password?
+                                        </button>
+
+                                    </div>
+
+
+                                    <!-- Submit -->
+                                    <button
+                                        type="submit"
+                                        id="loginButton"
+                                        class="btn btn-success btn-lg w-100"
+                                    >
+                                        <span id="loginButtonText">
+                                            Sign In
+                                        </span>
+
+                                        <span
+                                            id="loginButtonLoading"
+                                            class="d-none"
+                                        >
+                                            <span
+                                                class="spinner-border spinner-border-sm me-2"
+                                                aria-hidden="true"
+                                            ></span>
+
+                                            Signing in...
+                                        </span>
+                                    </button>
+
+                                </form>
+
+
+                                <div class="login-divider">
+
+                                    <span>
+                                        New to FitHealth?
+                                    </span>
+
+                                </div>
+
+
+                                <a
+                                    href="register.html"
+                                    class="btn btn-outline-success w-100"
+                                >
+                                    <i class="bi bi-person-plus me-2"></i>
+                                    Create an Account
+                                </a>
+
+
+                                <div class="frontend-note mt-4">
+
+                                    <i class="bi bi-info-circle"></i>
+
+                                    <p class="mb-0">
+                                        This page currently provides frontend validation only.
+                                        Real account verification will be connected to
+                                        <strong>LoginServlet</strong>.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+
+    <!-- Login JS -->
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

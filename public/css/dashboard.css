@@ -1,0 +1,907 @@
+/* Header */
+
+.dashboard-header {
+    padding:
+        55px 0 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25, 135, 84, 0.10),
+            transparent 60%
+        );
+}
+
+.dashboard-description {
+    max-width:
+        700px;
+}
+
+.dashboard-account-card {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        13px;
+
+    padding:
+        16px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        18px;
+
+    background-color:
+        var(--bs-body-bg);
+}
+
+.dashboard-account-icon {
+    width:
+        48px;
+
+    height:
+        48px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        15px;
+
+    color:
+        var(--bs-success);
+
+    background-color:
+        rgba(25, 135, 84, 0.12);
+
+    font-size:
+        1.45rem;
+}
+
+.dashboard-account-card small {
+    display:
+        block;
+
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.72rem;
+}
+
+.dashboard-account-card strong {
+    display:
+        block;
+}
+
+.dashboard-account-card p {
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.76rem;
+}
+
+
+/* Page */
+
+.dashboard-section {
+    padding:
+        25px 0 70px;
+}
+
+
+/* Summary */
+
+.dashboard-summary-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        14px;
+}
+
+.dashboard-summary-card {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+    padding:
+        18px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        18px;
+
+    color:
+        var(--bs-body-color);
+
+    background-color:
+        var(--bs-body-bg);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.dashboard-summary-card:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(25, 135, 84, 0.35);
+}
+
+.summary-icon {
+    width:
+        50px;
+
+    height:
+        50px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        15px;
+
+    font-size:
+        1.3rem;
+}
+
+.health-summary-icon {
+    color:
+        #dc3545;
+
+    background-color:
+        rgba(220, 53, 69, 0.10);
+}
+
+.nutrition-summary-icon {
+    color:
+        #fd7e14;
+
+    background-color:
+        rgba(253, 126, 20, 0.11);
+}
+
+.workout-summary-icon {
+    color:
+        #198754;
+
+    background-color:
+        rgba(25, 135, 84, 0.11);
+}
+
+.running-summary-icon {
+    color:
+        #0d6efd;
+
+    background-color:
+        rgba(13, 110, 253, 0.10);
+}
+
+.dashboard-summary-card small {
+    display:
+        block;
+
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.75rem;
+}
+
+.dashboard-summary-card strong {
+    display:
+        block;
+
+    margin:
+        2px 0;
+
+    font-size:
+        1.35rem;
+}
+
+.dashboard-summary-card > div:last-child > span:last-child {
+    display:
+        block;
+
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.77rem;
+}
+
+.summary-unit {
+    font-size:
+        0.78rem;
+
+    font-weight:
+        600;
+}
+
+
+/* Cards */
+
+.dashboard-card {
+    padding:
+        23px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        22px;
+
+    background-color:
+        var(--bs-body-bg);
+
+    box-shadow:
+        0 12px 35px
+        rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-card-header {
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        18px;
+
+    margin-bottom:
+        22px;
+}
+
+.compact-header {
+    align-items:
+        center;
+
+    margin-bottom:
+        18px;
+}
+
+.dashboard-label {
+    color:
+        var(--bs-success);
+
+    font-size:
+        0.76rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+}
+
+.dashboard-icon-link {
+    width:
+        38px;
+
+    height:
+        38px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    flex-shrink:
+        0;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        12px;
+
+    color:
+        var(--bs-success);
+
+    text-decoration:
+        none;
+
+    background-color:
+        var(--bs-tertiary-bg);
+}
+
+
+/* Nutrition */
+
+.nutrition-dashboard-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        18px 24px;
+}
+
+.nutrition-dashboard-heading {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        0.85rem;
+}
+
+.nutrition-dashboard-heading strong {
+    font-size:
+        0.8rem;
+}
+
+.dashboard-progress {
+    height:
+        8px;
+
+    border-radius:
+        999px;
+
+    background-color:
+        var(--bs-tertiary-bg);
+}
+
+.dashboard-progress .progress-bar {
+    border-radius:
+        inherit;
+
+    background-color:
+        var(--bs-success);
+}
+
+
+/* Workout */
+
+.workout-progress-row {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+}
+
+.workout-progress-row strong,
+.workout-progress-row small {
+    display:
+        block;
+}
+
+.workout-progress-percent {
+    color:
+        var(--bs-success);
+
+    font-size:
+        1.2rem;
+
+    font-weight:
+        800;
+}
+
+.workout-progress {
+    margin-top:
+        10px;
+}
+
+.dashboard-list {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        9px;
+}
+
+.dashboard-list-item {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+
+    padding:
+        12px 13px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        13px;
+
+    background-color:
+        var(--bs-tertiary-bg);
+}
+
+.dashboard-list-main {
+    min-width:
+        0;
+}
+
+.dashboard-list-main strong {
+    display:
+        block;
+}
+
+.dashboard-list-main small {
+    display:
+        block;
+
+    margin-top:
+        2px;
+
+    overflow:
+        hidden;
+
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.76rem;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+}
+
+.dashboard-list-value {
+    flex-shrink:
+        0;
+
+    color:
+        var(--bs-success);
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        700;
+}
+
+.dashboard-list-item.completed {
+    opacity:
+        0.72;
+}
+
+.dashboard-list-item.completed .dashboard-list-main strong {
+    text-decoration:
+        line-through;
+}
+
+
+/* Empty */
+
+.dashboard-empty {
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        12px;
+
+    padding:
+        15px;
+
+    border:
+        1px dashed
+        var(--bs-border-color);
+
+    border-radius:
+        14px;
+
+    color:
+        var(--bs-secondary-color);
+
+    background-color:
+        var(--bs-tertiary-bg);
+}
+
+.dashboard-empty > i {
+    color:
+        var(--bs-success);
+
+    font-size:
+        1.25rem;
+}
+
+.dashboard-empty p {
+    margin-top:
+        3px;
+
+    font-size:
+        0.82rem;
+}
+
+
+/* Table */
+
+.dashboard-table th {
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.75rem;
+
+    font-weight:
+        700;
+
+    text-transform:
+        uppercase;
+}
+
+.dashboard-table td {
+    font-size:
+        0.86rem;
+}
+
+
+/* Health */
+
+.health-profile-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        10px;
+}
+
+.health-profile-item {
+    padding:
+        13px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        13px;
+
+    background-color:
+        var(--bs-tertiary-bg);
+}
+
+.health-profile-item small {
+    display:
+        block;
+
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.72rem;
+}
+
+.health-profile-item strong {
+    display:
+        block;
+
+    margin-top:
+        4px;
+}
+
+
+/* Running */
+
+.running-dashboard-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        9px;
+}
+
+.running-dashboard-grid > div {
+    padding:
+        12px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        13px;
+
+    background-color:
+        var(--bs-tertiary-bg);
+}
+
+.running-dashboard-grid small {
+    display:
+        block;
+
+    color:
+        var(--bs-secondary-color);
+
+    font-size:
+        0.7rem;
+}
+
+.running-dashboard-grid strong {
+    display:
+        block;
+
+    margin-top:
+        4px;
+}
+
+.latest-run-card {
+    margin-top:
+        14px;
+
+    padding:
+        14px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        14px;
+}
+
+
+/* Quick Actions */
+
+.quick-action-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        10px;
+}
+
+.quick-action-card {
+    min-height:
+        100px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    padding:
+        14px;
+
+    border:
+        1px solid
+        var(--bs-border-color);
+
+    border-radius:
+        14px;
+
+    color:
+        var(--bs-body-color);
+
+    text-decoration:
+        none;
+
+    background-color:
+        var(--bs-tertiary-bg);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.quick-action-card:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(25, 135, 84, 0.40);
+}
+
+.quick-action-card i {
+    color:
+        var(--bs-success);
+
+    font-size:
+        1.25rem;
+}
+
+.quick-action-card span {
+    font-weight:
+        700;
+}
+
+
+/* Footer */
+
+.dashboard-footer {
+    padding:
+        22px 0;
+
+    border-top:
+        1px solid
+        var(--bs-border-color);
+}
+
+
+/* Dark */
+
+[data-bs-theme="dark"] .dashboard-card,
+[data-bs-theme="dark"] .dashboard-summary-card {
+    box-shadow:
+        0 12px 35px
+        rgba(0, 0, 0, 0.24);
+}
+
+
+/* Tablet */
+
+@media (max-width: 1199.98px) {
+
+    .dashboard-summary-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 767.98px) {
+
+    .dashboard-header {
+        padding:
+            40px 0 25px;
+    }
+
+    .nutrition-dashboard-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .dashboard-card-header {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+    .compact-header {
+        flex-direction:
+            row;
+    }
+
+}
+
+
+/* Small Mobile */
+
+@media (max-width: 575.98px) {
+
+    .dashboard-summary-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .dashboard-card {
+        padding:
+            18px;
+    }
+
+    .dashboard-list-item {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+    .quick-action-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .quick-action-card {
+        min-height:
+            80px;
+    }
+
+}

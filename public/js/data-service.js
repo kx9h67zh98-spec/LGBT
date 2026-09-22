@@ -317,6 +317,168 @@ const FitHealthData = {
 
             );
 
+    },
+
+
+    /* Running Sessions */
+
+    getRunningSessions: function () {
+
+        const stored =
+            localStorage.getItem(
+                "fithealthRunningSessions"
+            );
+
+
+        if (!stored) {
+            return [];
+        }
+
+
+        try {
+
+            const parsed =
+                JSON.parse(stored);
+
+
+            return (
+                Array.isArray(parsed)
+                ?
+                parsed
+                :
+                []
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load running sessions:",
+                error
+            );
+
+            return [];
+
+        }
+
+    },
+
+
+    saveRunningSessions: function (sessions) {
+
+        localStorage.setItem(
+            "fithealthRunningSessions",
+            JSON.stringify(sessions)
+        );
+
+    },
+
+
+    addRunningSession: function (session) {
+
+        const sessions =
+            this.getRunningSessions();
+
+
+        sessions.push(session);
+
+
+        this.saveRunningSessions(
+            sessions
+        );
+
+    },
+
+
+    updateRunningSession: function (updatedSession) {
+
+        const sessions =
+            this.getRunningSessions();
+
+
+        const updated =
+            sessions.map(
+
+                function (session) {
+
+                    if (
+                        session.id ===
+                        updatedSession.id
+                    ) {
+
+                        return updatedSession;
+
+                    }
+
+                    return session;
+
+                }
+
+            );
+
+
+        this.saveRunningSessions(
+            updated
+        );
+
+    },
+
+
+    deleteRunningSession: function (id) {
+
+        const sessions =
+            this.getRunningSessions();
+
+
+        const updated =
+            sessions.filter(
+
+                function (session) {
+
+                    return session.id !== id;
+
+                }
+
+            );
+
+
+        this.saveRunningSessions(
+            updated
+        );
+
+    },
+
+
+    getRunningSessionById: function (id) {
+
+        return this
+            .getRunningSessions()
+            .find(
+
+                function (session) {
+
+                    return session.id === id;
+
+                }
+
+            );
+
+    },
+
+
+    getRunningSessionsByDate: function (date) {
+
+        return this
+            .getRunningSessions()
+            .filter(
+
+                function (session) {
+
+                    return session.date === date;
+
+                }
+
+            );
+
     }
 
 };
