@@ -2,3 +2,12 @@ node_modules/
 .env
 .DS_Store
 npm-debug.log*
+
+# Maven build
+target/
+
+# Local/session files
+cookies.txt
+
+# macOS
+.DS_Store

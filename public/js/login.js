@@ -1,4 +1,4 @@
-/* Login Elements */
+/** Login Elements */
 
 let loginForm;
 let loginEmail;
@@ -17,7 +17,7 @@ let loginButtonText;
 let loginButtonLoading;
 
 
-/* Start */
+/** Start */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -33,7 +33,7 @@ document.addEventListener(
 );
 
 
-/* Elements */
+/** Elements */
 
 function getLoginElements() {
 
@@ -105,7 +105,7 @@ function getLoginElements() {
 }
 
 
-/* Events */
+/** Events */
 
 function setupLoginEvents() {
 
@@ -162,9 +162,9 @@ function setupLoginEvents() {
 }
 
 
-/* Login */
+/** Login */
 
-function handleLoginSubmit(
+async function handleLoginSubmit(
     event
 ) {
 
@@ -212,59 +212,103 @@ function handleLoginSubmit(
     );
 
 
-    /*
-        Frontend stage only.
-
-        Do NOT store the password in localStorage.
-
-        Later this section will become:
-
-        fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        })
-
-        The Java LoginServlet will verify
-        the account and create a server session.
-    */
-
-
     setLoginLoading(
         true
     );
 
 
-    window.setTimeout(
-        function () {
+    try {
 
-            setLoginLoading(
-                false
+        const response =
+            await fetch(
+                "login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    credentials:
+                        "same-origin",
+
+                    body:
+                        JSON.stringify(
+                            {
+                                email:
+                                    email,
+
+                                password:
+                                    password
+                            }
+                        )
+                }
             );
 
 
-            showLoginMessage(
-                "Login form is valid. Backend authentication with LoginServlet has not been connected yet.",
-                "success"
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                "Unable to login."
             );
 
+        }
 
-            loginPassword.value =
-                "";
 
-        },
-        650
-    );
+        showLoginMessage(
+            data.message
+            ||
+            "Login successful.",
+            "success"
+        );
+
+
+        loginPassword.value =
+            "";
+
+
+        window.setTimeout(
+            function () {
+
+                window.location.href =
+                    "dashboard.html";
+
+            },
+            500
+        );
+
+    } catch (error) {
+
+        showLoginMessage(
+            error.message
+            ||
+            "Unable to login.",
+            "danger"
+        );
+
+    } finally {
+
+        setLoginLoading(
+            false
+        );
+
+    }
 
 }
 
 
-/* Validation */
+/** Validation */
 
 function validateEmail(
     email
@@ -362,7 +406,7 @@ function validatePassword(
 }
 
 
-/* Field Errors */
+/** Field Errors */
 
 function setFieldError(
     input,
@@ -397,7 +441,7 @@ function clearFieldError(
 }
 
 
-/* Password */
+/** Password */
 
 function togglePasswordVisibility() {
 
@@ -435,7 +479,7 @@ function togglePasswordVisibility() {
 }
 
 
-/* Remember Email */
+/** Remember Email */
 
 function handleRememberEmail(
     email
@@ -488,7 +532,7 @@ function loadRememberedEmail() {
 }
 
 
-/* Loading */
+/** Loading */
 
 function setLoginLoading(
     loading
@@ -512,7 +556,7 @@ function setLoginLoading(
 }
 
 
-/* Message */
+/** Message */
 
 function showLoginMessage(
     message,

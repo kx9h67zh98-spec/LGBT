@@ -2716,11 +2716,11 @@ const anatomyFiles = {
 
         front:
 
-            "/images/muscles/anatomy-front.svg",
+            "images/muscles/anatomy-front.svg",
 
         back:
 
-            "/images/muscles/anatomy-back.svg"
+            "images/muscles/anatomy-back.svg"
 
     },
 
@@ -2730,11 +2730,11 @@ const anatomyFiles = {
 
         front:
 
-            "/images/muscles/female-front.svg",
+            "images/muscles/female-front.svg",
 
         back:
 
-            "/images/muscles/female-back.svg"
+            "images/muscles/female-back.svg"
 
     }
 
@@ -3105,6 +3105,11 @@ let workoutMessage =
     null;
 
 
+let databaseExercises =
+
+    [];
+
+
 
 
 
@@ -3128,7 +3133,13 @@ document.addEventListener(
 
         updateGenderButtons();
 
-        await loadMuscleMaps();
+        await Promise.all([
+
+            loadDatabaseExercises(),
+
+            loadMuscleMaps()
+
+        ]);
 
     }
 
@@ -3588,7 +3599,7 @@ function resetWorkoutForm() {
 }
 
 
-function addCurrentExerciseToWorkout() {
+async function addCurrentExerciseToWorkout() {
 
     if (
 
@@ -3688,40 +3699,34 @@ function addCurrentExerciseToWorkout() {
     }
 
 
-    const entry = {
+    const databaseExercise =
+        findDatabaseExercise(
+            currentExercise
+        );
 
-        id:
-            Date.now(),
 
-        date:
-            date,
+    const requestBody = {
 
-        exerciseKey:
-            createExerciseKey(
-
-                currentExerciseMuscle,
-
-                currentExercise.name
-
-            ),
+        exerciseId:
+            databaseExercise
+            ?
+            databaseExercise.id
+            :
+            null,
 
         exerciseName:
             currentExercise.name,
 
         muscleGroup:
+            currentExercise.primaryMuscle
+            ||
             currentExerciseMuscle,
 
-        primaryMuscle:
-            currentExercise.primaryMuscle,
+        date:
+            date,
 
-        equipment:
-            currentExercise.equipment,
-
-        difficulty:
-            currentExercise.difficulty,
-
-        type:
-            currentExercise.type,
+        workoutName:
+            "Training",
 
         sets:
             sets,
@@ -3730,61 +3735,294 @@ function addCurrentExerciseToWorkout() {
             reps,
 
         weight:
-            weight,
-
-        completed:
-            false
+            weight
 
     };
 
 
-    if (
+    try {
 
-        typeof FitHealthData ===
-        "undefined"
+        addToWorkoutButton.disabled =
+            true;
 
-        ||
 
-        typeof FitHealthData.addWorkoutDraftEntry !==
-        "function"
+        const response =
+            await fetch(
+                "api/workout-plans",
+                {
+                    method:
+                        "POST",
 
+                    credentials:
+                        "same-origin",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            requestBody
+                        )
+                }
+            );
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        const responseText =
+            await response.text();
+
+
+        let data = {};
+
+
+        if (
+            responseText
+        ) {
+
+            data =
+                JSON.parse(
+                    responseText
+                );
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                "Unable to add exercise to Calendar."
+            );
+
+        }
+
+
+        showWorkoutMessage(
+            `${currentExercise.name} added to Calendar.`,
+            "success"
+        );
+
+
+    } catch (
+        error
     ) {
 
         console.error(
-
-            "FitHealthData.addWorkoutDraftEntry() is not available."
-
+            "Unable to add exercise to Calendar:",
+            error
         );
 
 
         showWorkoutMessage(
-
-            "Workout storage is not available.",
-
+            error.message
+            ||
+            "Unable to add exercise to Calendar.",
             "danger"
-
         );
 
 
-        return;
+    } finally {
+
+        addToWorkoutButton.disabled =
+            false;
+
+    }
+
+}
+
+
+async function loadDatabaseExercises() {
+
+    try {
+
+        const response =
+            await fetch(
+                "api/exercises",
+                {
+                    method:
+                        "GET",
+
+                    credentials:
+                        "same-origin",
+
+                    cache:
+                        "no-store"
+                }
+            );
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                "Unable to load exercises."
+            );
+
+        }
+
+
+        databaseExercises =
+            Array.isArray(
+                data.entries
+            )
+            ?
+            data.entries
+            :
+            [];
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "Unable to load exercises from database:",
+            error
+        );
+
+        databaseExercises =
+            [];
+
+    }
+
+}
+
+
+function findDatabaseExercise(
+    exercise
+) {
+
+    if (
+        !exercise
+    ) {
+
+        return null;
 
     }
 
 
-    FitHealthData
-        .addWorkoutDraftEntry(
+    const name =
+        String(
+            exercise.name
+            ||
+            ""
+        )
+            .trim()
+            .toLowerCase();
 
-            entry
 
+    const primaryMuscle =
+        String(
+            exercise.primaryMuscle
+            ||
+            ""
+        )
+            .trim()
+            .toLowerCase();
+
+
+    const exact =
+        databaseExercises.find(
+            function (
+                item
+            ) {
+
+                return (
+                    String(
+                        item.name
+                        ||
+                        ""
+                    )
+                        .trim()
+                        .toLowerCase()
+                    ===
+                    name
+                    &&
+                    String(
+                        item.muscleGroup
+                        ||
+                        ""
+                    )
+                        .trim()
+                        .toLowerCase()
+                    ===
+                    primaryMuscle
+                );
+
+            }
         );
 
 
-    showWorkoutMessage(
+    if (
+        exact
+    ) {
 
-        `${currentExercise.name} added to your workout.`,
+        return exact;
 
-        "success"
+    }
 
+
+    return (
+        databaseExercises.find(
+            function (
+                item
+            ) {
+
+                return (
+                    String(
+                        item.name
+                        ||
+                        ""
+                    )
+                        .trim()
+                        .toLowerCase()
+                    ===
+                    name
+                );
+
+            }
+        )
+        ||
+        null
     );
 
 }

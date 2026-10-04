@@ -13,6 +13,7 @@ let accumulatedTimeMs = 0;
 let activeStartedAt = null;
 let lastAcceptedPosition = null;
 let healthProfileWeight = null;
+let currentRunningSessions = [];
 
 
 /* Elements */
@@ -57,11 +58,16 @@ let runningHistoryList = null;
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    async function () {
 
         getElements();
 
-        loadHealthProfile();
+        setDefaultDates();
+
+        await Promise.all([
+            loadHealthProfile(),
+            loadRunningSessions()
+        ]);
 
         initializeMap();
 
@@ -70,8 +76,6 @@ document.addEventListener(
         setupManualForm();
 
         setupHistoryFilter();
-
-        setDefaultDates();
 
         updateManualPreview();
 
@@ -239,52 +243,248 @@ function getElements() {
 
 /* Health Profile */
 
-function loadHealthProfile() {
+async function loadHealthProfile() {
 
-    if (
-        typeof FitHealthData
-        ===
-        "undefined"
-        ||
-        typeof FitHealthData.getHealthProfile
-        !==
-        "function"
-    ) {
+    try {
+
+        const response =
+            await fetch(
+                "api/health-profile",
+                {
+                    method:
+                        "GET",
+
+                    credentials:
+                        "same-origin",
+
+                    cache:
+                        "no-store"
+                }
+            );
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const profile =
+            data
+            &&
+            data.success
+            ?
+            data.profile
+            :
+            null;
+
+
+        if (
+            !profile
+            ||
+            !Number(
+                profile.weight
+            )
+        ) {
+
+            healthProfileWeight =
+                null;
+
+            profileWeightValue.textContent =
+                "Not available";
+
+            return;
+        }
+
+
+        healthProfileWeight =
+            Number(
+                profile.weight
+            );
+
 
         profileWeightValue.textContent =
-            "Not available";
+            `${formatNumber(healthProfileWeight, 1)} kg`;
 
-        return;
+    } catch (error) {
 
-    }
-
-
-    const profile =
-        FitHealthData.getHealthProfile();
-
-
-    if (
-        !profile
-        ||
-        !Number(profile.weight)
-    ) {
-
-        profileWeightValue.textContent =
-            "Not available";
-
-        return;
-
-    }
-
-
-    healthProfileWeight =
-        Number(
-            profile.weight
+        console.error(
+            "Unable to load health profile:",
+            error
         );
 
+        healthProfileWeight =
+            null;
 
-    profileWeightValue.textContent =
-        `${formatNumber(healthProfileWeight, 1)} kg`;
+        profileWeightValue.textContent =
+            "Not available";
+
+    }
+
+}
+
+
+/* Running API */
+
+async function loadRunningSessions() {
+
+    try {
+
+        const response =
+            await fetch(
+                "api/running-sessions",
+                {
+                    method:
+                        "GET",
+
+                    credentials:
+                        "same-origin",
+
+                    cache:
+                        "no-store"
+                }
+            );
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+
+
+        const responseText =
+            await response.text();
+
+
+        let data = {};
+
+
+        if (
+            responseText
+        ) {
+
+            data =
+                JSON.parse(
+                    responseText
+                );
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                "Unable to load running sessions."
+            );
+
+        }
+
+
+        currentRunningSessions =
+            Array.isArray(
+                data.entries
+            )
+            ?
+            data.entries.map(
+                normalizeRunningSession
+            )
+            :
+            [];
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load running sessions:",
+            error
+        );
+
+        currentRunningSessions =
+            [];
+
+        showMessage(
+            "Unable to load running history from the server.",
+            "warning"
+        );
+
+    }
+
+}
+
+
+function normalizeRunningSession(
+    session
+) {
+
+    if (
+        !session
+    ) {
+
+        return null;
+
+    }
+
+
+    const normalized = {
+        ...session
+    };
+
+
+    [
+        "id",
+        "distance",
+        "duration",
+        "averageSpeed",
+        "averagePace",
+        "calories"
+    ].forEach(
+        function (field) {
+
+            if (
+                normalized[field]
+                !==
+                null
+                &&
+                normalized[field]
+                !==
+                undefined
+                &&
+                normalized[field]
+                !==
+                ""
+            ) {
+
+                normalized[field] =
+                    Number(
+                        normalized[field]
+                    );
+
+            }
+
+        }
+    );
+
+
+    return normalized;
 
 }
 
@@ -580,7 +780,7 @@ function resumeRun() {
 
 /* Finish */
 
-function finishRun() {
+async function finishRun() {
 
     if (
         runState !==
@@ -725,9 +925,24 @@ function finishRun() {
     };
 
 
-    saveRunningSession(
-        session
-    );
+    const savedSession =
+        await saveRunningSession(
+            session
+        );
+
+
+    if (
+        !savedSession
+    ) {
+
+        runState =
+            "paused";
+
+        updateRunStatus();
+
+        return;
+
+    }
 
 
     runState =
@@ -1457,7 +1672,7 @@ function setupManualForm() {
 
     manualRunForm.addEventListener(
         "submit",
-        function (event) {
+        async function (event) {
 
             event.preventDefault();
 
@@ -1594,9 +1809,19 @@ function setupManualForm() {
             };
 
 
-            saveRunningSession(
-                session
-            );
+            const savedSession =
+                await saveRunningSession(
+                    session
+                );
+
+
+            if (
+                !savedSession
+            ) {
+
+                return;
+
+            }
 
 
             manualRunForm.reset();
@@ -1905,7 +2130,11 @@ function createRunHistoryCard(
         ?
         "GPS"
         :
-        "Manual";
+        session.source === "manual"
+        ?
+        "Manual"
+        :
+        "Saved";
 
 
     top.appendChild(
@@ -2000,11 +2229,21 @@ function createRunHistoryCard(
 
     deleteButton.addEventListener(
         "click",
-        function () {
+        async function () {
 
-            deleteRunningSession(
-                session.id
-            );
+            const deleted =
+                await deleteRunningSession(
+                    session.id
+                );
+
+
+            if (
+                !deleted
+            ) {
+
+                return;
+
+            }
 
 
             renderRunningHistory();
@@ -2213,161 +2452,235 @@ function updateRunningOverview() {
 
 function getRunningSessions() {
 
-    if (
-        typeof FitHealthData
-        !==
-        "undefined"
-        &&
-        typeof FitHealthData.getRunningSessions
-        ===
-        "function"
-    ) {
-
-        return (
-            FitHealthData.getRunningSessions()
-            ||
-            []
-        );
-
-    }
-
-
-    return readRunningSessionsFallback();
+    return currentRunningSessions;
 
 }
 
 
-function saveRunningSession(
+async function saveRunningSession(
     session
 ) {
 
-    if (
-        typeof FitHealthData
-        !==
-        "undefined"
-        &&
-        typeof FitHealthData.addRunningSession
-        ===
-        "function"
-    ) {
+    try {
 
-        FitHealthData.addRunningSession(
-            session
+        const response =
+            await fetch(
+                "api/running-sessions",
+                {
+                    method:
+                        "POST",
+
+                    credentials:
+                        "same-origin",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                date:
+                                    session.date,
+
+                                distance:
+                                    session.distance,
+
+                                duration:
+                                    session.duration,
+
+                                calories:
+                                    session.calories,
+
+                                source:
+                                    session.source
+                            }
+                        )
+                }
+            );
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "login.html";
+
+            return null;
+        }
+
+
+        const responseText =
+            await response.text();
+
+
+        let data = {};
+
+
+        if (
+            responseText
+        ) {
+
+            data =
+                JSON.parse(
+                    responseText
+                );
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            !data.success
+            ||
+            !data.entry
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                "Unable to save running session."
+            );
+
+        }
+
+
+        const savedSession =
+            normalizeRunningSession(
+                data.entry
+            );
+
+
+        currentRunningSessions.push(
+            savedSession
         );
 
-        return;
+
+        return savedSession;
+
+    } catch (error) {
+
+        console.error(
+            "Unable to save running session:",
+            error
+        );
+
+        showMessage(
+            error.message
+            ||
+            "Unable to save run.",
+            "danger"
+        );
+
+        return null;
 
     }
-
-
-    const sessions =
-        readRunningSessionsFallback();
-
-
-    sessions.push(
-        session
-    );
-
-
-    localStorage.setItem(
-        "fithealthRunningSessions",
-        JSON.stringify(
-            sessions
-        )
-    );
 
 }
 
 
-function deleteRunningSession(
+async function deleteRunningSession(
     id
 ) {
 
-    if (
-        typeof FitHealthData
-        !==
-        "undefined"
-        &&
-        typeof FitHealthData.deleteRunningSession
-        ===
-        "function"
-    ) {
+    try {
 
-        FitHealthData.deleteRunningSession(
-            id
-        );
+        const response =
+            await fetch(
+                `api/running-sessions?id=${encodeURIComponent(id)}`,
+                {
+                    method:
+                        "DELETE",
 
-        return;
-
-    }
+                    credentials:
+                        "same-origin"
+                }
+            );
 
 
-    const updated =
-        readRunningSessionsFallback()
-            .filter(
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "login.html";
+
+            return false;
+        }
+
+
+        const responseText =
+            await response.text();
+
+
+        let data = {};
+
+
+        if (
+            responseText
+        ) {
+
+            data =
+                JSON.parse(
+                    responseText
+                );
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                "Unable to delete running session."
+            );
+
+        }
+
+
+        currentRunningSessions =
+            currentRunningSessions.filter(
                 function (session) {
 
                     return (
-                        session.id !== id
+                        Number(
+                            session.id
+                        )
+                        !==
+                        Number(
+                            id
+                        )
                     );
 
                 }
             );
 
 
-    localStorage.setItem(
-        "fithealthRunningSessions",
-        JSON.stringify(
-            updated
-        )
-    );
-
-}
-
-
-function readRunningSessionsFallback() {
-
-    try {
-
-        const stored =
-            localStorage.getItem(
-                "fithealthRunningSessions"
-            );
-
-
-        if (
-            !stored
-        ) {
-
-            return [];
-
-        }
-
-
-        const parsed =
-            JSON.parse(
-                stored
-            );
-
-
-        return (
-            Array.isArray(
-                parsed
-            )
-            ?
-            parsed
-            :
-            []
-        );
+        return true;
 
     } catch (error) {
 
         console.error(
-            "Unable to load running sessions:",
+            "Unable to delete running session:",
             error
         );
 
-        return [];
+        showMessage(
+            error.message
+            ||
+            "Unable to delete run.",
+            "danger"
+        );
+
+        return false;
 
     }
 

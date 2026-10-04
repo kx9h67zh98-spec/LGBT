@@ -1,4 +1,4 @@
-/* Register Elements */
+/** Register Elements */
 
 let registerForm;
 
@@ -31,7 +31,7 @@ let registerButtonText;
 let registerButtonLoading;
 
 
-/* Start */
+/** Start */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -45,7 +45,7 @@ document.addEventListener(
 );
 
 
-/* Elements */
+/** Elements */
 
 function getRegisterElements() {
 
@@ -84,7 +84,6 @@ function getRegisterElements() {
             "agreeTerms"
         );
 
-
     firstNameError =
         document.getElementById(
             "firstNameError"
@@ -115,7 +114,6 @@ function getRegisterElements() {
             "agreeTermsError"
         );
 
-
     togglePasswordButton =
         document.getElementById(
             "togglePasswordButton"
@@ -136,7 +134,6 @@ function getRegisterElements() {
             "confirmPasswordToggleIcon"
         );
 
-
     passwordStrengthBar =
         document.getElementById(
             "passwordStrengthBar"
@@ -147,12 +144,10 @@ function getRegisterElements() {
             "passwordStrengthText"
         );
 
-
     registerMessage =
         document.getElementById(
             "registerMessage"
         );
-
 
     registerButton =
         document.getElementById(
@@ -172,7 +167,7 @@ function getRegisterElements() {
 }
 
 
-/* Events */
+/** Events */
 
 function setupRegisterEvents() {
 
@@ -313,9 +308,9 @@ function setupRegisterEvents() {
 }
 
 
-/* Submit */
+/** Submit */
 
-function handleRegisterSubmit(
+async function handleRegisterSubmit(
     event
 ) {
 
@@ -407,74 +402,133 @@ function handleRegisterSubmit(
     }
 
 
-    /*
-        Frontend stage only.
-
-        Do NOT save passwords in localStorage.
-
-        Later this section will become:
-
-        fetch("/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                firstName: firstNameValue,
-                lastName: lastNameValue,
-                email: emailValue,
-                password: passwordValue
-            })
-        })
-
-        RegisterServlet will:
-        1. Validate input again.
-        2. Check whether the email already exists.
-        3. Hash the password.
-        4. Create the User entity.
-        5. Persist it using JPA.
-    */
-
-
     setRegisterLoading(
         true
     );
 
 
-    window.setTimeout(
-        function () {
+    try {
 
-            setRegisterLoading(
-                false
+        const response =
+            await fetch(
+                "register",
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    credentials:
+                        "same-origin",
+
+                    body:
+                        JSON.stringify(
+                            {
+                                firstName:
+                                    firstNameValue,
+
+                                lastName:
+                                    lastNameValue,
+
+                                email:
+                                    emailValue,
+
+                                password:
+                                    passwordValue
+                            }
+                        )
+                }
             );
 
 
-            showRegisterMessage(
-                "Registration form is valid. Account creation with RegisterServlet has not been connected yet.",
-                "success"
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.success
+        ) {
+
+            if (
+                response.status === 409
+            ) {
+
+                setFieldError(
+                    registerEmail,
+                    registerEmailError,
+                    data.message
+                    ||
+                    "Email is already registered."
+                );
+
+            }
+
+            throw new Error(
+                data.message
+                ||
+                "Unable to create account."
             );
 
-
-            registerPassword.value =
-                "";
+        }
 
 
-            confirmPassword.value =
-                "";
+        showRegisterMessage(
+            data.message
+            ||
+            "Account created successfully.",
+            "success"
+        );
 
 
-            updatePasswordStrength(
-                ""
-            );
+        registerPassword.value =
+            "";
 
-        },
-        700
-    );
+
+        confirmPassword.value =
+            "";
+
+
+        updatePasswordStrength(
+            ""
+        );
+
+
+        window.setTimeout(
+            function () {
+
+                window.location.href =
+                    "login.html";
+
+            },
+            800
+        );
+
+    } catch (error) {
+
+        showRegisterMessage(
+            error.message
+            ||
+            "Unable to create account.",
+            "danger"
+        );
+
+    } finally {
+
+        setRegisterLoading(
+            false
+        );
+
+    }
 
 }
 
 
-/* Name Validation */
+/** Name Validation */
 
 function validateName(
     input,
@@ -524,7 +578,7 @@ function validateName(
 }
 
 
-/* Email Validation */
+/** Email Validation */
 
 function validateEmail(
     email
@@ -577,7 +631,7 @@ function validateEmail(
 }
 
 
-/* Password Validation */
+/** Password Validation */
 
 function validatePassword(
     password
@@ -645,7 +699,7 @@ function validatePassword(
 }
 
 
-/* Confirm Password */
+/** Confirm Password */
 
 function validateConfirmPassword(
     password,
@@ -693,7 +747,7 @@ function validateConfirmPassword(
 }
 
 
-/* Terms */
+/** Terms */
 
 function validateTerms() {
 
@@ -719,7 +773,7 @@ function validateTerms() {
 }
 
 
-/* Field Errors */
+/** Field Errors */
 
 function setFieldError(
     input,
@@ -754,7 +808,7 @@ function clearFieldError(
 }
 
 
-/* Password Visibility */
+/** Password Visibility */
 
 function togglePasswordVisibility(
     input,
@@ -797,7 +851,7 @@ function togglePasswordVisibility(
 }
 
 
-/* Password Strength */
+/** Password Strength */
 
 function updatePasswordStrength(
     password
@@ -814,6 +868,9 @@ function updatePasswordStrength(
     if (
         !password
     ) {
+
+        passwordStrengthBar.style.backgroundColor =
+            "";
 
         passwordStrengthText.textContent =
             "Not set";
@@ -940,7 +997,7 @@ function updatePasswordStrength(
 }
 
 
-/* Loading */
+/** Loading */
 
 function setRegisterLoading(
     loading
@@ -964,7 +1021,7 @@ function setRegisterLoading(
 }
 
 
-/* Message */
+/** Message */
 
 function showRegisterMessage(
     message,
@@ -998,7 +1055,7 @@ function clearRegisterMessage() {
 }
 
 
-/* Helper */
+/** Helper */
 
 function capitalize(
     value
