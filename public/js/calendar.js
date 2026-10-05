@@ -1,17 +1,3 @@
-/* =========================================================
-   FitHealth Training Calendar
-   Backend/MySQL version
-   - Meals:            GET  api/meal-entries?date=YYYY-MM-DD
-   - Workouts:         GET/POST/PUT/DELETE api/workout-plans
-   - Running sessions: GET  api/running-sessions
-   - Exercise library: GET  api/exercises
-   ========================================================= */
-
-
-/* =========================================================
-   State
-   ========================================================= */
-
 let calendarViewDate =
     startOfMonth(
         new Date()
@@ -1565,81 +1551,113 @@ async function loadMealEntriesForVisibleCalendar() {
     const visibleDates =
         getVisibleCalendarDates();
 
+    const results = [];
 
-    const results =
-        await Promise.all(
-            visibleDates.map(
-                async function (
-                    date
-                ) {
+    /*
+     * Load visible calendar dates in small batches instead of
+     * sending all 42 meal requests at the same time.
+     * This is safer for cloud database connections.
+     */
+    const batchSize = 3;
 
-                    const dateString =
-                        getLocalDateString(
-                            date
-                        );
+    for (
+        let index = 0;
+        index < visibleDates.length;
+        index += batchSize
+    ) {
 
+        const batch =
+            visibleDates.slice(
+                index,
+                index + batchSize
+            );
 
-                    const response =
-                        await fetch(
-                            `api/meal-entries?date=${encodeURIComponent(dateString)}`,
-                            {
-                                credentials:
-                                    "same-origin"
-                            }
-                        );
+        const batchResults =
+            await Promise.all(
+                batch.map(
+                    async function (
+                        date
+                    ) {
 
+                        const dateString =
+                            getLocalDateString(
+                                date
+                            );
 
-                    handleAuthentication(
-                        response
-                    );
+                        const response =
+                            await fetch(
+                                `api/meal-entries?date=${encodeURIComponent(dateString)}`,
+                                {
+                                    method:
+                                        "GET",
 
+                                    credentials:
+                                        "same-origin",
 
-                    const data =
-                        await parseApiResponse(
+                                    cache:
+                                        "no-store"
+                                }
+                            );
+
+                        handleAuthentication(
                             response
                         );
 
-
-                    if (
-                        !response.ok
-                        ||
-                        !data.success
-                    ) {
-
-                        throw new Error(
-                            data.message
-                            ||
-                            `Unable to load meals for ${dateString}.`
-                        );
-
-                    }
-
-
-                    const entries =
-                        extractArray(
-                            data,
-                            [
-                                "entries",
-                                "meals",
-                                "items",
-                                "data"
-                            ]
-                        )
-                            .map(
-                                normalizeMealEntry
+                        const data =
+                            await parseApiResponse(
+                                response
                             );
 
+                        if (
+                            !response.ok
+                            ||
+                            !data.success
+                        ) {
 
-                    return {
-                        date:
-                            dateString,
-                        entries:
-                            entries
-                    };
+                            console.error(
+                                `Meal API error for ${dateString}:`,
+                                response.status,
+                                data
+                            );
 
-                }
-            )
+                            return {
+                                date:
+                                    dateString,
+
+                                entries:
+                                    []
+                            };
+                        }
+
+                        const entries =
+                            extractArray(
+                                data,
+                                [
+                                    "entries",
+                                    "meals",
+                                    "items",
+                                    "data"
+                                ]
+                            )
+                                .map(
+                                    normalizeMealEntry
+                                );
+
+                        return {
+                            date:
+                                dateString,
+
+                            entries:
+                                entries
+                        };
+                    }
+                )
+            );
+
+        results.push(
+            ...batchResults
         );
+    }
 
 
     mealEntriesByDate.clear();
@@ -1654,7 +1672,6 @@ async function loadMealEntriesForVisibleCalendar() {
                 result.date,
                 result.entries
             );
-
         }
     );
 
@@ -1663,7 +1680,6 @@ async function loadMealEntriesForVisibleCalendar() {
         Array.from(
             mealEntriesByDate.values()
         ).flat();
-
 }
 
 
