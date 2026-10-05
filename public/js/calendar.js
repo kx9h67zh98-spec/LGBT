@@ -1,4 +1,16 @@
-/* Calendar State */
+/* =========================================================
+   FitHealth Training Calendar
+   Backend/MySQL version
+   - Meals:            GET  api/meal-entries?date=YYYY-MM-DD
+   - Workouts:         GET/POST/PUT/DELETE api/workout-plans
+   - Running sessions: GET  api/running-sessions
+   - Exercise library: GET  api/exercises
+   ========================================================= */
+
+
+/* =========================================================
+   State
+   ========================================================= */
 
 let calendarViewDate =
     startOfMonth(
@@ -19,35 +31,66 @@ let currentWorkoutEntries =
 let currentRunningEntries =
     [];
 
+let currentExercises =
+    [];
+
 const mealEntriesByDate =
     new Map();
 
+let editingWorkoutId =
+    null;
 
-/* Elements */
+let workoutModal =
+    null;
+
+
+/* =========================================================
+   Elements
+   ========================================================= */
 
 let calendarGrid;
 let calendarMonthTitle;
 let previousMonthButton;
 let nextMonthButton;
 let todayButton;
+
 let selectedDateTitle;
 let selectedDateSubtitle;
 let selectedDateNumber;
+
 let monthMealCount;
 let monthWorkoutCount;
 let monthRunCount;
+
 let selectedCalories;
 let selectedWorkoutCount;
 let selectedRunDistance;
+
 let selectedMealCount;
 let selectedExerciseCount;
 let selectedRunCount;
+
 let selectedMealList;
 let selectedWorkoutList;
 let selectedRunList;
 
+let calendarMessage;
 
-/* Start */
+let addWorkoutButton;
+let workoutForm;
+let workoutModalTitle;
+let workoutDate;
+let workoutExerciseName;
+let workoutMuscle;
+let workoutSets;
+let workoutReps;
+let workoutWeight;
+let workoutCompleted;
+
+
+/* =========================================================
+   Start
+   ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -57,7 +100,27 @@ document.addEventListener(
 
         setupCalendarActions();
 
-        await loadCalendarData();
+        setupWorkoutPlanner();
+
+        try {
+
+            await loadCalendarData();
+
+        } catch (error) {
+
+            console.error(
+                "Unable to initialize calendar:",
+                error
+            );
+
+            showCalendarMessage(
+                error.message
+                ||
+                "Unable to load calendar data.",
+                "danger"
+            );
+
+        }
 
         renderCalendar();
 
@@ -65,7 +128,9 @@ document.addEventListener(
 );
 
 
-/* Elements */
+/* =========================================================
+   Elements
+   ========================================================= */
 
 function getCalendarElements() {
 
@@ -94,6 +159,7 @@ function getCalendarElements() {
             "todayButton"
         );
 
+
     selectedDateTitle =
         document.getElementById(
             "selectedDateTitle"
@@ -108,6 +174,7 @@ function getCalendarElements() {
         document.getElementById(
             "selectedDateNumber"
         );
+
 
     monthMealCount =
         document.getElementById(
@@ -124,6 +191,7 @@ function getCalendarElements() {
             "monthRunCount"
         );
 
+
     selectedCalories =
         document.getElementById(
             "selectedCalories"
@@ -138,6 +206,7 @@ function getCalendarElements() {
         document.getElementById(
             "selectedRunDistance"
         );
+
 
     selectedMealCount =
         document.getElementById(
@@ -154,6 +223,7 @@ function getCalendarElements() {
             "selectedRunCount"
         );
 
+
     selectedMealList =
         document.getElementById(
             "selectedMealList"
@@ -169,107 +239,727 @@ function getCalendarElements() {
             "selectedRunList"
         );
 
+
+    calendarMessage =
+        document.getElementById(
+            "calendarMessage"
+        );
+
+
+    addWorkoutButton =
+        document.getElementById(
+            "addWorkoutButton"
+        );
+
+    workoutForm =
+        document.getElementById(
+            "workoutForm"
+        );
+
+    workoutModalTitle =
+        document.getElementById(
+            "workoutModalTitle"
+        );
+
+    workoutDate =
+        document.getElementById(
+            "workoutDate"
+        );
+
+    workoutExerciseName =
+        document.getElementById(
+            "workoutExerciseName"
+        );
+
+    workoutMuscle =
+        document.getElementById(
+            "workoutMuscle"
+        );
+
+    workoutSets =
+        document.getElementById(
+            "workoutSets"
+        );
+
+    workoutReps =
+        document.getElementById(
+            "workoutReps"
+        );
+
+    workoutWeight =
+        document.getElementById(
+            "workoutWeight"
+        );
+
+    workoutCompleted =
+        document.getElementById(
+            "workoutCompleted"
+        );
+
 }
 
 
-/* Actions */
+/* =========================================================
+   Calendar actions
+   ========================================================= */
 
 function setupCalendarActions() {
 
-    previousMonthButton.addEventListener(
-        "click",
-        async function () {
+    if (
+        previousMonthButton
+    ) {
 
-            calendarViewDate =
-                new Date(
-                    calendarViewDate.getFullYear(),
-                    calendarViewDate.getMonth() - 1,
-                    1
-                );
+        previousMonthButton.addEventListener(
+            "click",
+            async function () {
 
-            await loadMealEntriesForVisibleCalendar();
+                calendarViewDate =
+                    new Date(
+                        calendarViewDate.getFullYear(),
+                        calendarViewDate.getMonth() - 1,
+                        1
+                    );
 
-            renderCalendar();
+                await reloadMealsAndRender();
 
-        }
-    );
+            }
+        );
 
-
-    nextMonthButton.addEventListener(
-        "click",
-        async function () {
-
-            calendarViewDate =
-                new Date(
-                    calendarViewDate.getFullYear(),
-                    calendarViewDate.getMonth() + 1,
-                    1
-                );
-
-            await loadMealEntriesForVisibleCalendar();
-
-            renderCalendar();
-
-        }
-    );
+    }
 
 
-    todayButton.addEventListener(
-        "click",
-        async function () {
+    if (
+        nextMonthButton
+    ) {
 
-            const today =
-                new Date();
+        nextMonthButton.addEventListener(
+            "click",
+            async function () {
 
-            calendarViewDate =
-                startOfMonth(
-                    today
-                );
+                calendarViewDate =
+                    new Date(
+                        calendarViewDate.getFullYear(),
+                        calendarViewDate.getMonth() + 1,
+                        1
+                    );
 
-            selectedCalendarDate =
-                getLocalDateString(
-                    today
-                );
+                await reloadMealsAndRender();
 
-            await loadMealEntriesForVisibleCalendar();
+            }
+        );
 
-            renderCalendar();
+    }
 
-        }
-    );
+
+    if (
+        todayButton
+    ) {
+
+        todayButton.addEventListener(
+            "click",
+            async function () {
+
+                const today =
+                    new Date();
+
+                calendarViewDate =
+                    startOfMonth(
+                        today
+                    );
+
+                selectedCalendarDate =
+                    getLocalDateString(
+                        today
+                    );
+
+                await reloadMealsAndRender();
+
+            }
+        );
+
+    }
 
 }
 
 
-/* API Load */
-
-async function loadCalendarData() {
-
-    await Promise.all([
-        loadWorkoutEntries(),
-        loadRunningEntries(),
-        loadMealEntriesForVisibleCalendar()
-    ]);
-
-}
-
-
-async function loadWorkoutEntries() {
+async function reloadMealsAndRender() {
 
     try {
+
+        await loadMealEntriesForVisibleCalendar();
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load meals for calendar:",
+            error
+        );
+
+        showCalendarMessage(
+            error.message
+            ||
+            "Unable to load meals.",
+            "danger"
+        );
+
+    }
+
+    renderCalendar();
+
+}
+
+
+/* =========================================================
+   Workout Planner
+   ========================================================= */
+
+function setupWorkoutPlanner() {
+
+    const modalElement =
+        document.getElementById(
+            "workoutModal"
+        );
+
+
+    if (
+        modalElement
+        &&
+        typeof bootstrap !==
+            "undefined"
+    ) {
+
+        workoutModal =
+            new bootstrap.Modal(
+                modalElement
+            );
+
+        modalElement.addEventListener(
+            "hidden.bs.modal",
+            function () {
+
+                editingWorkoutId =
+                    null;
+
+                setWorkoutExerciseFieldsLocked(
+                    false
+                );
+
+            }
+        );
+
+    }
+
+
+    if (
+        addWorkoutButton
+    ) {
+
+        addWorkoutButton.addEventListener(
+            "click",
+            function () {
+
+                openWorkoutModal();
+
+            }
+        );
+
+    }
+
+
+    if (
+        workoutForm
+    ) {
+
+        workoutForm.addEventListener(
+            "submit",
+            async function (
+                event
+            ) {
+
+                event.preventDefault();
+
+                await saveWorkoutFromForm();
+
+            }
+        );
+
+    }
+
+
+    if (
+        workoutExerciseName
+    ) {
+
+        workoutExerciseName.addEventListener(
+            "change",
+            syncExerciseMuscleFromName
+        );
+
+        workoutExerciseName.addEventListener(
+            "blur",
+            syncExerciseMuscleFromName
+        );
+
+    }
+
+}
+
+
+function openWorkoutModal(
+    workout = null
+) {
+
+    if (
+        !workoutForm
+    ) {
+
+        return;
+
+    }
+
+
+    workoutForm.reset();
+
+
+    if (
+        workout
+    ) {
+
+        editingWorkoutId =
+            Number(
+                workout.id
+            );
+
+        if (
+            workoutModalTitle
+        ) {
+
+            workoutModalTitle.textContent =
+                "Edit Exercise";
+
+        }
+
+
+        workoutDate.value =
+            getWorkoutDate(
+                workout
+            )
+            ||
+            selectedCalendarDate;
+
+        workoutExerciseName.value =
+            workout.exerciseName
+            ||
+            workout.name
+            ||
+            "";
+
+        workoutMuscle.value =
+            workout.primaryMuscle
+            ||
+            workout.muscleGroup
+            ||
+            "";
+
+        workoutSets.value =
+            Number(
+                workout.sets
+                ||
+                3
+            );
+
+        workoutReps.value =
+            Number(
+                workout.reps
+                ||
+                10
+            );
+
+        workoutWeight.value =
+            Number(
+                workout.weight
+                ||
+                0
+            );
+
+        workoutCompleted.checked =
+            Boolean(
+                workout.completed
+            );
+
+        /*
+         * PUT /api/workout-plans edits the planned
+         * exercise details, not the exercise identity.
+         */
+        setWorkoutExerciseFieldsLocked(
+            true
+        );
+
+    } else {
+
+        editingWorkoutId =
+            null;
+
+        if (
+            workoutModalTitle
+        ) {
+
+            workoutModalTitle.textContent =
+                "Add Exercise";
+
+        }
+
+
+        workoutDate.value =
+            selectedCalendarDate;
+
+        workoutExerciseName.value =
+            "";
+
+        workoutMuscle.value =
+            "";
+
+        workoutSets.value =
+            3;
+
+        workoutReps.value =
+            10;
+
+        workoutWeight.value =
+            0;
+
+        workoutCompleted.checked =
+            false;
+
+        setWorkoutExerciseFieldsLocked(
+            false
+        );
+
+    }
+
+
+    if (
+        workoutModal
+    ) {
+
+        workoutModal.show();
+
+        return;
+
+    }
+
+
+    showCalendarMessage(
+        "Workout modal is not available. Check Bootstrap JavaScript.",
+        "danger"
+    );
+
+}
+
+
+function setWorkoutExerciseFieldsLocked(
+    locked
+) {
+
+    if (
+        workoutExerciseName
+    ) {
+
+        workoutExerciseName.readOnly =
+            locked;
+
+    }
+
+
+    if (
+        workoutMuscle
+    ) {
+
+        workoutMuscle.readOnly =
+            locked;
+
+    }
+
+}
+
+
+async function saveWorkoutFromForm() {
+
+    const date =
+        workoutDate
+            ?
+            workoutDate.value
+            :
+            "";
+
+    const exerciseName =
+        workoutExerciseName
+            ?
+            workoutExerciseName.value.trim()
+            :
+            "";
+
+    let muscleGroup =
+        workoutMuscle
+            ?
+            workoutMuscle.value.trim()
+            :
+            "";
+
+    const sets =
+        Number(
+            workoutSets
+                ?
+                workoutSets.value
+                :
+                0
+        );
+
+    const reps =
+        Number(
+            workoutReps
+                ?
+                workoutReps.value
+                :
+                0
+        );
+
+    const weight =
+        Number(
+            workoutWeight
+                ?
+                workoutWeight.value
+                :
+                0
+        );
+
+    const completed =
+        Boolean(
+            workoutCompleted
+            &&
+            workoutCompleted.checked
+        );
+
+
+    if (
+        !date
+        ||
+        !exerciseName
+    ) {
+
+        showCalendarMessage(
+            "Please choose a date and exercise.",
+            "danger"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(
+            sets
+        )
+        ||
+        sets < 1
+        ||
+        sets > 20
+    ) {
+
+        showCalendarMessage(
+            "Sets must be between 1 and 20.",
+            "danger"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(
+            reps
+        )
+        ||
+        reps < 1
+        ||
+        reps > 100
+    ) {
+
+        showCalendarMessage(
+            "Reps must be between 1 and 100.",
+            "danger"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isFinite(
+            weight
+        )
+        ||
+        weight < 0
+    ) {
+
+        showCalendarMessage(
+            "Weight cannot be negative.",
+            "danger"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        editingWorkoutId !==
+        null
+    ) {
+
+        const workout =
+            getWorkoutEntryById(
+                editingWorkoutId
+            );
+
+
+        if (
+            !workout
+        ) {
+
+            showCalendarMessage(
+                "The workout exercise could not be found.",
+                "danger"
+            );
+
+            return;
+
+        }
+
+
+        await updateWorkoutEntry(
+            workout,
+            {
+                date:
+                    date,
+
+                sets:
+                    sets,
+
+                reps:
+                    reps,
+
+                weight:
+                    weight,
+
+                completed:
+                    completed
+            }
+        );
+
+
+        if (
+            workoutModal
+        ) {
+
+            workoutModal.hide();
+
+        }
+
+
+        showCalendarMessage(
+            "Workout exercise updated.",
+            "success"
+        );
+
+        return;
+
+    }
+
+
+    const matchedExercise =
+        findExerciseByName(
+            exerciseName
+        );
+
+
+    if (
+        matchedExercise
+    ) {
+
+        muscleGroup =
+            matchedExercise.muscleGroup
+            ||
+            muscleGroup;
+
+        if (
+            workoutMuscle
+        ) {
+
+            workoutMuscle.value =
+                muscleGroup;
+
+        }
+
+    }
+
+
+    try {
+
+        const body = {
+
+            date:
+                date,
+
+            exerciseId:
+                matchedExercise
+                    ?
+                    matchedExercise.id
+                    :
+                    null,
+
+            exerciseName:
+                exerciseName,
+
+            muscleGroup:
+                muscleGroup,
+
+            sets:
+                sets,
+
+            reps:
+                reps,
+
+            weight:
+                weight,
+
+            completed:
+                completed
+        };
+
 
         const response =
             await fetch(
                 "api/workout-plans",
                 {
                     method:
-                        "GET",
+                        "POST",
 
                     credentials:
                         "same-origin",
 
-                    cache:
-                        "no-store"
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            body
+                        )
                 }
             );
 
@@ -294,24 +984,85 @@ async function loadWorkoutEntries() {
             throw new Error(
                 data.message
                 ||
-                "Unable to load Calendar exercises."
+                "Unable to add exercise."
             );
 
         }
 
 
-        currentWorkoutEntries =
-            (
-                Array.isArray(
-                    data.entries
+        if (
+            data.entry
+        ) {
+
+            const created =
+                normalizeWorkoutEntry(
+                    data.entry
+                );
+
+            const alreadyExists =
+                currentWorkoutEntries.some(
+                    function (
+                        entry
+                    ) {
+
+                        return (
+                            Number(
+                                entry.id
+                            )
+                            ===
+                            Number(
+                                created.id
+                            )
+                        );
+
+                    }
+                );
+
+
+            if (
+                !alreadyExists
+            ) {
+
+                currentWorkoutEntries.push(
+                    created
+                );
+
+            }
+
+        } else {
+
+            await loadWorkoutEntries();
+
+        }
+
+
+        selectedCalendarDate =
+            date;
+
+        calendarViewDate =
+            startOfMonth(
+                parseLocalDate(
+                    date
                 )
-                ?
-                data.entries
-                :
-                []
-            ).map(
-                normalizeWorkoutEntry
             );
+
+
+        if (
+            workoutModal
+        ) {
+
+            workoutModal.hide();
+
+        }
+
+
+        showCalendarMessage(
+            "Exercise added to the Training Calendar.",
+            "success"
+        );
+
+
+        renderCalendar();
 
 
     } catch (
@@ -319,246 +1070,1012 @@ async function loadWorkoutEntries() {
     ) {
 
         console.error(
-            "Unable to load Calendar exercises:",
+            "Unable to add exercise:",
             error
         );
 
-        currentWorkoutEntries =
+        showCalendarMessage(
+            error.message
+            ||
+            "Unable to add exercise.",
+            "danger"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   Exercise library
+   ========================================================= */
+
+async function loadExerciseLibrary() {
+
+    try {
+
+        const response =
+            await fetch(
+                "api/exercises",
+                {
+                    credentials:
+                        "same-origin"
+                }
+            );
+
+
+        handleAuthentication(
+            response
+        );
+
+
+        const data =
+            await parseApiResponse(
+                response
+            );
+
+
+        if (
+            !response.ok
+            ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                "Unable to load exercises."
+            );
+
+        }
+
+
+        currentExercises =
+            extractArray(
+                data,
+                [
+                    "entries",
+                    "exercises",
+                    "items",
+                    "data"
+                ]
+            )
+                .map(
+                    normalizeExercise
+                )
+                .filter(
+                    function (
+                        exercise
+                    ) {
+
+                        return (
+                            exercise.id
+                            &&
+                            exercise.name
+                        );
+
+                    }
+                );
+
+
+        installExerciseDatalist();
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "Unable to load exercise library:",
+            error
+        );
+
+        currentExercises =
             [];
 
     }
+
+}
+
+
+function normalizeExercise(
+    exercise
+) {
+
+    return {
+
+        id:
+            Number(
+                exercise.id
+                ||
+                0
+            ),
+
+        name:
+            String(
+                exercise.name
+                ||
+                ""
+            ).trim(),
+
+        muscleGroup:
+            String(
+                exercise.muscleGroup
+                ||
+                exercise.muscle_group
+                ||
+                ""
+            ).trim(),
+
+        equipment:
+            String(
+                exercise.equipment
+                ||
+                ""
+            ).trim(),
+
+        difficulty:
+            String(
+                exercise.difficulty
+                ||
+                ""
+            ).trim(),
+
+        exerciseType:
+            String(
+                exercise.exerciseType
+                ||
+                exercise.exercise_type
+                ||
+                ""
+            ).trim()
+    };
+
+}
+
+
+function installExerciseDatalist() {
+
+    if (
+        !workoutExerciseName
+    ) {
+
+        return;
+
+    }
+
+
+    let datalist =
+        document.getElementById(
+            "calendarExerciseOptions"
+        );
+
+
+    if (
+        !datalist
+    ) {
+
+        datalist =
+            document.createElement(
+                "datalist"
+            );
+
+        datalist.id =
+            "calendarExerciseOptions";
+
+        document.body.appendChild(
+            datalist
+        );
+
+    }
+
+
+    datalist.innerHTML =
+        "";
+
+
+    currentExercises
+        .slice()
+        .sort(
+            function (
+                first,
+                second
+            ) {
+
+                return (
+                    first.name.localeCompare(
+                        second.name
+                    )
+                );
+
+            }
+        )
+        .forEach(
+            function (
+                exercise
+            ) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    exercise.name;
+
+                if (
+                    exercise.muscleGroup
+                ) {
+
+                    option.label =
+                        exercise.muscleGroup;
+
+                }
+
+                datalist.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+    workoutExerciseName.setAttribute(
+        "list",
+        datalist.id
+    );
+
+}
+
+
+function syncExerciseMuscleFromName() {
+
+    if (
+        !workoutExerciseName
+        ||
+        !workoutMuscle
+    ) {
+
+        return;
+
+    }
+
+
+    const exercise =
+        findExerciseByName(
+            workoutExerciseName.value
+        );
+
+
+    if (
+        exercise
+        &&
+        exercise.muscleGroup
+    ) {
+
+        workoutMuscle.value =
+            exercise.muscleGroup;
+
+    }
+
+}
+
+
+function findExerciseByName(
+    name
+) {
+
+    const normalizedName =
+        String(
+            name
+            ||
+            ""
+        )
+            .trim()
+            .toLowerCase();
+
+
+    if (
+        !normalizedName
+    ) {
+
+        return null;
+
+    }
+
+
+    return (
+        currentExercises.find(
+            function (
+                exercise
+            ) {
+
+                return (
+                    exercise.name
+                        .toLowerCase()
+                    ===
+                    normalizedName
+                );
+
+            }
+        )
+        ||
+        null
+    );
+
+}
+
+
+/* =========================================================
+   Data loading
+   ========================================================= */
+
+async function loadCalendarData() {
+
+    await Promise.all(
+        [
+            loadWorkoutEntries(),
+            loadRunningEntries(),
+            loadExerciseLibrary()
+        ]
+    );
+
+
+    await loadMealEntriesForVisibleCalendar();
+
+}
+
+
+async function loadWorkoutEntries() {
+
+    const response =
+        await fetch(
+            "api/workout-plans",
+            {
+                credentials:
+                    "same-origin"
+            }
+        );
+
+
+    handleAuthentication(
+        response
+    );
+
+
+    const data =
+        await parseApiResponse(
+            response
+        );
+
+
+    if (
+        !response.ok
+        ||
+        !data.success
+    ) {
+
+        throw new Error(
+            data.message
+            ||
+            "Unable to load workout plans."
+        );
+
+    }
+
+
+    currentWorkoutEntries =
+        extractArray(
+            data,
+            [
+                "entries",
+                "workouts",
+                "plans",
+                "items",
+                "data"
+            ]
+        )
+            .map(
+                normalizeWorkoutEntry
+            )
+            .filter(
+                function (
+                    workout
+                ) {
+
+                    return Boolean(
+                        workout.date
+                    );
+
+                }
+            );
 
 }
 
 
 async function loadRunningEntries() {
 
-    try {
-
-        const response =
-            await fetch(
-                "api/running-sessions",
-                {
-                    method:
-                        "GET",
-
-                    credentials:
-                        "same-origin",
-
-                    cache:
-                        "no-store"
-                }
-            );
+    const response =
+        await fetch(
+            "api/running-sessions",
+            {
+                credentials:
+                    "same-origin"
+            }
+        );
 
 
-        handleAuthentication(
+    handleAuthentication(
+        response
+    );
+
+
+    const data =
+        await parseApiResponse(
             response
         );
 
 
-        const data =
-            await parseApiResponse(
-                response
-            );
-
-
-        if (
-            !response.ok
-            ||
-            !data.success
-        ) {
-
-            throw new Error(
-                data.message
-                ||
-                "Unable to load running sessions."
-            );
-
-        }
-
-
-        currentRunningEntries =
-            (
-                Array.isArray(
-                    data.entries
-                )
-                ?
-                data.entries
-                :
-                []
-            ).map(
-                normalizeRunningEntry
-            );
-
-
-    } catch (
-        error
+    if (
+        !response.ok
+        ||
+        !data.success
     ) {
 
-        console.error(
-            "Unable to load running sessions:",
-            error
+        throw new Error(
+            data.message
+            ||
+            "Unable to load running sessions."
         );
 
-        currentRunningEntries =
-            [];
-
     }
+
+
+    currentRunningEntries =
+        extractArray(
+            data,
+            [
+                "entries",
+                "sessions",
+                "runs",
+                "items",
+                "data"
+            ]
+        )
+            .map(
+                normalizeRunningEntry
+            )
+            .filter(
+                function (
+                    run
+                ) {
+
+                    return Boolean(
+                        run.date
+                    );
+
+                }
+            );
 
 }
 
 
 async function loadMealEntriesForVisibleCalendar() {
 
-    const dates =
-        getVisibleCalendarDateStrings();
+    const visibleDates =
+        getVisibleCalendarDates();
 
 
-    const missingDates =
-        dates.filter(
-            function (
-                dateString
-            ) {
+    const results =
+        await Promise.all(
+            visibleDates.map(
+                async function (
+                    date
+                ) {
 
-                return (
-                    !mealEntriesByDate.has(
-                        dateString
-                    )
-                );
+                    const dateString =
+                        getLocalDateString(
+                            date
+                        );
 
-            }
+
+                    const response =
+                        await fetch(
+                            `api/meal-entries?date=${encodeURIComponent(dateString)}`,
+                            {
+                                credentials:
+                                    "same-origin"
+                            }
+                        );
+
+
+                    handleAuthentication(
+                        response
+                    );
+
+
+                    const data =
+                        await parseApiResponse(
+                            response
+                        );
+
+
+                    if (
+                        !response.ok
+                        ||
+                        !data.success
+                    ) {
+
+                        throw new Error(
+                            data.message
+                            ||
+                            `Unable to load meals for ${dateString}.`
+                        );
+
+                    }
+
+
+                    const entries =
+                        extractArray(
+                            data,
+                            [
+                                "entries",
+                                "meals",
+                                "items",
+                                "data"
+                            ]
+                        )
+                            .map(
+                                normalizeMealEntry
+                            );
+
+
+                    return {
+                        date:
+                            dateString,
+                        entries:
+                            entries
+                    };
+
+                }
+            )
         );
 
 
-    if (
-        missingDates.length > 0
-    ) {
+    mealEntriesByDate.clear();
 
-        const results =
-            await Promise.all(
-                missingDates.map(
-                    loadMealEntriesForDate
-                )
+
+    results.forEach(
+        function (
+            result
+        ) {
+
+            mealEntriesByDate.set(
+                result.date,
+                result.entries
             );
 
-
-        results.forEach(
-            function (
-                result,
-                index
-            ) {
-
-                mealEntriesByDate.set(
-                    missingDates[index],
-                    result
-                );
-
-            }
-        );
-
-    }
+        }
+    );
 
 
     currentMealEntries =
-        dates.flatMap(
-            function (
-                dateString
-            ) {
-
-                return (
-                    mealEntriesByDate.get(
-                        dateString
-                    )
-                    ||
-                    []
-                );
-
-            }
-        );
+        Array.from(
+            mealEntriesByDate.values()
+        ).flat();
 
 }
 
 
-async function loadMealEntriesForDate(
-    dateString
+/* =========================================================
+   API helpers
+   ========================================================= */
+
+function handleAuthentication(
+    response
 ) {
+
+    if (
+        response.status ===
+        401
+        ||
+        response.status ===
+        403
+    ) {
+
+        window.location.href =
+            "login.html";
+
+        throw new Error(
+            "Your session has expired. Please sign in again."
+        );
+
+    }
+
+}
+
+
+async function parseApiResponse(
+    response
+) {
+
+    const text =
+        await response.text();
+
+
+    if (
+        !text
+    ) {
+
+        return {};
+
+    }
+
 
     try {
 
-        const response =
-            await fetch(
-                `api/meal-entries?date=${encodeURIComponent(dateString)}`,
-                {
-                    method:
-                        "GET",
-
-                    credentials:
-                        "same-origin",
-
-                    cache:
-                        "no-store"
-                }
-            );
-
-
-        handleAuthentication(
-            response
+        return JSON.parse(
+            text
         );
-
-
-        const data =
-            await parseApiResponse(
-                response
-            );
-
-
-        if (
-            !response.ok
-            ||
-            !data.success
-        ) {
-
-            throw new Error(
-                data.message
-                ||
-                `Unable to load meals for ${dateString}.`
-            );
-
-        }
-
-
-        return (
-            Array.isArray(
-                data.entries
-            )
-            ?
-            data.entries.map(
-                normalizeMealEntry
-            )
-            :
-            []
-        );
-
 
     } catch (
         error
     ) {
 
         console.error(
-            `Unable to load meals for ${dateString}:`,
-            error
+            "Invalid API response:",
+            text
         );
 
-        return [];
+        throw new Error(
+            "The server returned an invalid response."
+        );
 
     }
 
 }
 
 
-/* Render Calendar */
+function extractArray(
+    data,
+    keys
+) {
+
+    if (
+        Array.isArray(
+            data
+        )
+    ) {
+
+        return data;
+
+    }
+
+
+    for (
+        const key
+        of keys
+    ) {
+
+        if (
+            Array.isArray(
+                data[
+                    key
+                ]
+            )
+        ) {
+
+            return data[
+                key
+            ];
+
+        }
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =========================================================
+   Normalization
+   ========================================================= */
+
+function normalizeMealEntry(
+    entry
+) {
+
+    return {
+
+        ...entry,
+
+        id:
+            Number(
+                entry.id
+                ||
+                0
+            ),
+
+        date:
+            entry.date
+            ||
+            entry.entryDate
+            ||
+            entry.entry_date
+            ||
+            "",
+
+        mealType:
+            entry.mealType
+            ||
+            entry.meal_type
+            ||
+            "",
+
+        foodName:
+            entry.foodName
+            ||
+            entry.food_name
+            ||
+            entry.name
+            ||
+            "Food",
+
+        amount:
+            Number(
+                entry.amount
+                ||
+                0
+            ),
+
+        unit:
+            entry.unit
+            ||
+            "",
+
+        calories:
+            Number(
+                entry.calories
+                ||
+                0
+            ),
+
+        protein:
+            Number(
+                entry.protein
+                ||
+                0
+            ),
+
+        carbs:
+            Number(
+                entry.carbs
+                ||
+                0
+            ),
+
+        fat:
+            Number(
+                entry.fat
+                ||
+                0
+            ),
+
+        cookingMethod:
+            entry.cookingMethod
+            ||
+            entry.cooking_method
+            ||
+            "",
+
+        preparation:
+            entry.preparation
+            ||
+            ""
+    };
+
+}
+
+
+function normalizeWorkoutEntry(
+    entry
+) {
+
+    return {
+
+        ...entry,
+
+        id:
+            Number(
+                entry.id
+                ||
+                0
+            ),
+
+        exerciseId:
+            Number(
+                entry.exerciseId
+                ||
+                entry.exercise_id
+                ||
+                0
+            ),
+
+        date:
+            entry.date
+            ||
+            entry.workoutDate
+            ||
+            entry.workout_date
+            ||
+            "",
+
+        exerciseName:
+            entry.exerciseName
+            ||
+            entry.exercise_name
+            ||
+            entry.name
+            ||
+            "Exercise",
+
+        muscleGroup:
+            entry.muscleGroup
+            ||
+            entry.muscle_group
+            ||
+            entry.primaryMuscle
+            ||
+            "",
+
+        primaryMuscle:
+            entry.primaryMuscle
+            ||
+            entry.muscleGroup
+            ||
+            entry.muscle_group
+            ||
+            "",
+
+        sets:
+            Number(
+                entry.sets
+                ||
+                0
+            ),
+
+        reps:
+            Number(
+                entry.reps
+                ||
+                0
+            ),
+
+        weight:
+            Number(
+                entry.weight
+                ||
+                0
+            ),
+
+        completed:
+            normalizeBoolean(
+                entry.completed
+            )
+    };
+
+}
+
+
+function normalizeRunningEntry(
+    entry
+) {
+
+    return {
+
+        ...entry,
+
+        id:
+            Number(
+                entry.id
+                ||
+                0
+            ),
+
+        date:
+            entry.date
+            ||
+            entry.runDate
+            ||
+            entry.run_date
+            ||
+            "",
+
+        distance:
+            Number(
+                entry.distance
+                ||
+                0
+            ),
+
+        duration:
+            Number(
+                entry.duration
+                ||
+                0
+            ),
+
+        calories:
+            Number(
+                entry.calories
+                ||
+                0
+            ),
+
+        averageSpeed:
+            Number(
+                entry.averageSpeed
+                ||
+                entry.average_speed
+                ||
+                0
+            ),
+
+        averagePace:
+            Number(
+                entry.averagePace
+                ||
+                entry.average_pace
+                ||
+                0
+            )
+    };
+
+}
+
+
+function normalizeBoolean(
+    value
+) {
+
+    if (
+        value === true
+        ||
+        value === 1
+        ||
+        value === "1"
+        ||
+        value === "true"
+    ) {
+
+        return true;
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =========================================================
+   Render calendar
+   ========================================================= */
 
 function renderCalendar() {
+
+    if (
+        !calendarGrid
+        ||
+        !calendarMonthTitle
+    ) {
+
+        return;
+
+    }
+
 
     const year =
         calendarViewDate.getFullYear();
@@ -573,7 +2090,6 @@ function renderCalendar() {
             {
                 month:
                     "long",
-
                 year:
                     "numeric"
             }
@@ -586,55 +2102,35 @@ function renderCalendar() {
         "";
 
 
-    const firstDay =
-        new Date(
-            year,
-            month,
-            1
-        );
+    const visibleDates =
+        getVisibleCalendarDates();
 
 
-    const startDate =
-        new Date(
-            year,
-            month,
-            1 - firstDay.getDay()
-        );
+    visibleDates.forEach(
+        function (
+            date
+        ) {
+
+            const dateString =
+                getLocalDateString(
+                    date
+                );
 
 
-    for (
-        let index = 0;
-        index < 42;
-        index++
-    ) {
+            const dayElement =
+                createCalendarDay(
+                    date,
+                    dateString,
+                    month
+                );
 
-        const date =
-            new Date(
-                startDate.getFullYear(),
-                startDate.getMonth(),
-                startDate.getDate() + index
+
+            calendarGrid.appendChild(
+                dayElement
             );
 
-
-        const dateString =
-            getLocalDateString(
-                date
-            );
-
-
-        const dayElement =
-            createCalendarDay(
-                date,
-                dateString,
-                month
-            );
-
-
-        calendarGrid.appendChild(
-            dayElement
-        );
-
-    }
+        }
+    );
 
 
     updateMonthOverview();
@@ -644,7 +2140,9 @@ function renderCalendar() {
 }
 
 
-/* Day Cell */
+/* =========================================================
+   Day cell
+   ========================================================= */
 
 function createCalendarDay(
     date,
@@ -765,7 +2263,9 @@ function createCalendarDay(
 
 
     if (
-        events.length > 3
+        events.length
+        >
+        3
     ) {
 
         const more =
@@ -795,6 +2295,13 @@ function createCalendarDay(
         "click",
         async function () {
 
+            const oldYear =
+                calendarViewDate.getFullYear();
+
+            const oldMonth =
+                calendarViewDate.getMonth();
+
+
             selectedCalendarDate =
                 dateString;
 
@@ -803,9 +2310,28 @@ function createCalendarDay(
                     date
                 );
 
-            await loadMealEntriesForVisibleCalendar();
 
-            renderCalendar();
+            const changedMonth =
+                oldYear
+                !==
+                calendarViewDate.getFullYear()
+                ||
+                oldMonth
+                !==
+                calendarViewDate.getMonth();
+
+
+            if (
+                changedMonth
+            ) {
+
+                await reloadMealsAndRender();
+
+            } else {
+
+                renderCalendar();
+
+            }
 
         }
     );
@@ -816,17 +2342,22 @@ function createCalendarDay(
 }
 
 
-/* Calendar Event Preview */
+/* =========================================================
+   Day preview
+   ========================================================= */
 
 function buildDayEventPreview(
     data
 ) {
 
-    const events = [];
+    const events =
+        [];
 
 
     if (
-        data.meals.length > 0
+        data.meals.length
+        >
+        0
     ) {
 
         events.push(
@@ -849,13 +2380,23 @@ function buildDayEventPreview(
                 workout
             ) {
 
+                const prefix =
+                    workout.completed
+                        ?
+                        "✓ "
+                        :
+                        "";
+
+
                 events.push(
                     createEventBadge(
-                        workout.exerciseName
-                        ||
-                        workout.name
-                        ||
-                        "Exercise",
+                        prefix
+                        +
+                        (
+                            workout.exerciseName
+                            ||
+                            "Workout"
+                        ),
                         "workout-event"
                     )
                 );
@@ -865,7 +2406,9 @@ function buildDayEventPreview(
 
 
     if (
-        data.runs.length > 0
+        data.runs.length
+        >
+        0
     ) {
 
         const distance =
@@ -915,20 +2458,33 @@ function createEventBadge(
             "div"
         );
 
+
     event.className =
         `day-event ${className}`;
 
     event.textContent =
         text;
 
+
     return event;
 
 }
 
 
-/* Selected Date */
+/* =========================================================
+   Selected date
+   ========================================================= */
 
 function renderSelectedDate() {
+
+    if (
+        !selectedDateTitle
+    ) {
+
+        return;
+
+    }
+
 
     const date =
         parseLocalDate(
@@ -959,10 +2515,8 @@ function renderSelectedDate() {
             {
                 month:
                     "long",
-
                 day:
                     "numeric",
-
                 year:
                     "numeric"
             }
@@ -1032,6 +2586,7 @@ function renderSelectedDate() {
             runDistance
         );
 
+
     selectedMealCount.textContent =
         data.meals.length;
 
@@ -1057,7 +2612,9 @@ function renderSelectedDate() {
 }
 
 
-/* Meals */
+/* =========================================================
+   Meals
+   ========================================================= */
 
 function renderMealList(
     meals
@@ -1068,7 +2625,8 @@ function renderMealList(
 
 
     if (
-        meals.length === 0
+        meals.length ===
+        0
     ) {
 
         selectedMealList.appendChild(
@@ -1092,7 +2650,9 @@ function renderMealList(
                     meal.foodName
                     ||
                     "Food",
+
                     `${Math.round(Number(meal.calories || 0))} kcal`,
+
                     formatMealMeta(
                         meal
                     )
@@ -1105,7 +2665,9 @@ function renderMealList(
 }
 
 
-/* Workouts */
+/* =========================================================
+   Workouts
+   ========================================================= */
 
 function renderWorkoutList(
     workouts
@@ -1116,7 +2678,8 @@ function renderWorkoutList(
 
 
     if (
-        workouts.length === 0
+        workouts.length ===
+        0
     ) {
 
         selectedWorkoutList.appendChild(
@@ -1157,7 +2720,7 @@ function createWorkoutItem(
         );
 
     item.className =
-        "day-item";
+        "day-item workout-plan-item";
 
 
     if (
@@ -1165,7 +2728,7 @@ function createWorkoutItem(
     ) {
 
         item.classList.add(
-            "completed"
+            "workout-completed"
         );
 
     }
@@ -1188,12 +2751,39 @@ function createWorkoutItem(
     nameElement.className =
         "day-item-name";
 
-    nameElement.textContent =
+
+    if (
+        workout.completed
+    ) {
+
+        const icon =
+            document.createElement(
+                "i"
+            );
+
+        icon.className =
+            "bi bi-check-circle-fill text-success me-2";
+
+        nameElement.appendChild(
+            icon
+        );
+
+    }
+
+
+    const nameText =
+        document.createElement(
+            "span"
+        );
+
+    nameText.textContent =
         workout.exerciseName
         ||
-        workout.name
-        ||
         "Exercise";
+
+    nameElement.appendChild(
+        nameText
+    );
 
 
     const valueElement =
@@ -1206,10 +2796,10 @@ function createWorkoutItem(
 
     valueElement.textContent =
         workout.completed
-        ?
-        "Done"
-        :
-        "Planned";
+            ?
+            "Done"
+            :
+            "Planned";
 
 
     header.appendChild(
@@ -1225,24 +2815,22 @@ function createWorkoutItem(
     );
 
 
-    const weight =
-        Number(
-            workout.weight
-            ||
-            0
-        );
-
-
     let meta =
         `${workout.sets || 0} sets × ${workout.reps || 0} reps`;
 
 
     if (
-        weight > 0
+        Number(
+            workout.weight
+            ||
+            0
+        )
+        >
+        0
     ) {
 
         meta +=
-            ` • ${formatNumber(weight)} kg`;
+            ` • ${formatNumber(workout.weight)} kg`;
 
     }
 
@@ -1285,22 +2873,28 @@ function createWorkoutItem(
         );
 
     actions.className =
-        "d-flex flex-wrap gap-2 mt-3";
+        "workout-item-actions";
 
 
     const completeButton =
         createWorkoutActionButton(
             workout.completed
-            ?
-            "Mark Planned"
-            :
-            "Mark Done",
+                ?
+                "Undo"
+                :
+                "Complete",
+
             workout.completed
-            ?
-            "bi-arrow-counterclockwise"
-            :
-            "bi-check-circle",
-            "btn-outline-success"
+                ?
+                "bi-arrow-counterclockwise"
+                :
+                "bi-check2-circle",
+
+            workout.completed
+                ?
+                "btn-outline-secondary"
+                :
+                "btn-outline-success"
         );
 
 
@@ -1312,7 +2906,9 @@ function createWorkoutItem(
                 workout,
                 {
                     completed:
-                        !workout.completed
+                        !Boolean(
+                            workout.completed
+                        )
                 }
             );
 
@@ -1330,9 +2926,9 @@ function createWorkoutItem(
 
     editButton.addEventListener(
         "click",
-        async function () {
+        function () {
 
-            await editWorkoutEntry(
+            openWorkoutModal(
                 workout
             );
 
@@ -1343,7 +2939,7 @@ function createWorkoutItem(
     const deleteButton =
         createWorkoutActionButton(
             "Delete",
-            "bi-trash",
+            "bi-trash3",
             "btn-outline-danger"
         );
 
@@ -1372,6 +2968,7 @@ function createWorkoutItem(
         deleteButton
     );
 
+
     item.appendChild(
         actions
     );
@@ -1393,174 +2990,42 @@ function createWorkoutActionButton(
             "button"
         );
 
+
     button.type =
         "button";
 
     button.className =
         `btn btn-sm ${buttonClass}`;
 
-    button.innerHTML =
-        `<i class="bi ${iconClass} me-1"></i>${text}`;
+
+    const icon =
+        document.createElement(
+            "i"
+        );
+
+    icon.className =
+        `bi ${iconClass} me-1`;
+
+
+    button.appendChild(
+        icon
+    );
+
+    button.appendChild(
+        document.createTextNode(
+            text
+        )
+    );
+
 
     return button;
 
 }
 
 
-async function editWorkoutEntry(
-    workout
-) {
-
-    const date =
-        window.prompt(
-            "Workout date (YYYY-MM-DD):",
-            getWorkoutDate(
-                workout
-            )
-        );
-
-
-    if (
-        date === null
-    ) {
-
-        return;
-
-    }
-
-
-    const sets =
-        window.prompt(
-            "Sets:",
-            String(
-                workout.sets
-                ||
-                0
-            )
-        );
-
-
-    if (
-        sets === null
-    ) {
-
-        return;
-
-    }
-
-
-    const reps =
-        window.prompt(
-            "Reps:",
-            String(
-                workout.reps
-                ||
-                0
-            )
-        );
-
-
-    if (
-        reps === null
-    ) {
-
-        return;
-
-    }
-
-
-    const weight =
-        window.prompt(
-            "Weight (kg):",
-            String(
-                workout.weight
-                ||
-                0
-            )
-        );
-
-
-    if (
-        weight === null
-    ) {
-
-        return;
-
-    }
-
-
-    const parsedSets =
-        Number(
-            sets
-        );
-
-    const parsedReps =
-        Number(
-            reps
-        );
-
-    const parsedWeight =
-        Number(
-            weight
-        );
-
-
-    if (
-        !/^\d{4}-\d{2}-\d{2}$/.test(
-            date
-        )
-        ||
-        !Number.isInteger(
-            parsedSets
-        )
-        ||
-        parsedSets < 1
-        ||
-        parsedSets > 20
-        ||
-        !Number.isInteger(
-            parsedReps
-        )
-        ||
-        parsedReps < 1
-        ||
-        parsedReps > 100
-        ||
-        !Number.isFinite(
-            parsedWeight
-        )
-        ||
-        parsedWeight < 0
-    ) {
-
-        window.alert(
-            "Please enter a valid date, sets, reps and weight."
-        );
-
-        return;
-
-    }
-
-
-    await updateWorkoutEntry(
-        workout,
-        {
-            date:
-                date,
-
-            sets:
-                parsedSets,
-
-            reps:
-                parsedReps,
-
-            weight:
-                parsedWeight
-        }
-    );
-
-}
-
+/* =========================================================
+   Update workout
+   ========================================================= */
 
 async function updateWorkoutEntry(
     workout,
@@ -1570,6 +3035,7 @@ async function updateWorkoutEntry(
     try {
 
         const body = {
+
             id:
                 workout.id,
 
@@ -1654,8 +3120,6 @@ async function updateWorkoutEntry(
             !response.ok
             ||
             !data.success
-            ||
-            !data.entry
         ) {
 
             throw new Error(
@@ -1667,53 +3131,63 @@ async function updateWorkoutEntry(
         }
 
 
-        const updated =
-            normalizeWorkoutEntry(
-                data.entry
-            );
-
-
-        currentWorkoutEntries =
-            currentWorkoutEntries.map(
-                function (
-                    entry
-                ) {
-
-                    return (
-                        Number(
-                            entry.id
-                        )
-                        ===
-                        Number(
-                            updated.id
-                        )
-                        ?
-                        updated
-                        :
-                        entry
-                    );
-
-                }
-            );
-
-
         if (
-            updated.date
-            !==
-            selectedCalendarDate
+            data.entry
         ) {
 
-            selectedCalendarDate =
-                updated.date;
-
-            calendarViewDate =
-                startOfMonth(
-                    parseLocalDate(
-                        updated.date
-                    )
+            const updated =
+                normalizeWorkoutEntry(
+                    data.entry
                 );
 
-            await loadMealEntriesForVisibleCalendar();
+
+            currentWorkoutEntries =
+                currentWorkoutEntries.map(
+                    function (
+                        entry
+                    ) {
+
+                        return (
+                            Number(
+                                entry.id
+                            )
+                            ===
+                            Number(
+                                updated.id
+                            )
+                            ?
+                            updated
+                            :
+                            entry
+                        );
+
+                    }
+                );
+
+
+            if (
+                updated.date
+                !==
+                selectedCalendarDate
+            ) {
+
+                selectedCalendarDate =
+                    updated.date;
+
+                calendarViewDate =
+                    startOfMonth(
+                        parseLocalDate(
+                            updated.date
+                        )
+                    );
+
+                await loadMealEntriesForVisibleCalendar();
+
+            }
+
+        } else {
+
+            await loadWorkoutEntries();
 
         }
 
@@ -1730,16 +3204,21 @@ async function updateWorkoutEntry(
             error
         );
 
-        window.alert(
+        showCalendarMessage(
             error.message
             ||
-            "Unable to update exercise."
+            "Unable to update exercise.",
+            "danger"
         );
 
     }
 
 }
 
+
+/* =========================================================
+   Delete workout
+   ========================================================= */
 
 async function deleteWorkoutEntry(
     workout
@@ -1821,6 +3300,12 @@ async function deleteWorkoutEntry(
             );
 
 
+        showCalendarMessage(
+            "Exercise deleted from Calendar.",
+            "success"
+        );
+
+
         renderCalendar();
 
 
@@ -1833,10 +3318,11 @@ async function deleteWorkoutEntry(
             error
         );
 
-        window.alert(
+        showCalendarMessage(
             error.message
             ||
-            "Unable to delete exercise."
+            "Unable to delete exercise.",
+            "danger"
         );
 
     }
@@ -1844,7 +3330,9 @@ async function deleteWorkoutEntry(
 }
 
 
-/* Running */
+/* =========================================================
+   Running
+   ========================================================= */
 
 function renderRunList(
     runs
@@ -1855,7 +3343,8 @@ function renderRunList(
 
 
     if (
-        runs.length === 0
+        runs.length ===
+        0
     ) {
 
         selectedRunList.appendChild(
@@ -1888,35 +3377,30 @@ function renderRunList(
                     0
                 );
 
-            let meta =
-                "";
+
+            const parts =
+                [];
 
 
             if (
                 run.duration
             ) {
 
-                meta =
-                    `Duration: ${formatDuration(run.duration)}`;
+                parts.push(
+                    `Duration: ${formatDuration(run.duration)}`
+                );
 
             }
 
 
             if (
-                calories > 0
+                calories >
+                0
             ) {
 
-                if (
-                    meta
-                ) {
-
-                    meta +=
-                        " • ";
-
-                }
-
-                meta +=
-                    `${Math.round(calories)} kcal`;
+                parts.push(
+                    `${Math.round(calories)} kcal`
+                );
 
             }
 
@@ -1925,7 +3409,9 @@ function renderRunList(
                 createDayItem(
                     "Running Session",
                     `${formatNumber(distance)} km`,
-                    meta
+                    parts.join(
+                        " • "
+                    )
                     ||
                     "Run saved"
                 )
@@ -1937,7 +3423,9 @@ function renderRunList(
 }
 
 
-/* Day Item */
+/* =========================================================
+   Generic day item
+   ========================================================= */
 
 function createDayItem(
     name,
@@ -2011,6 +3499,7 @@ function createDayItem(
     metaElement.textContent =
         meta;
 
+
     item.appendChild(
         metaElement
     );
@@ -2030,18 +3519,22 @@ function createEmptyState(
             "div"
         );
 
+
     empty.className =
         "day-empty";
 
     empty.textContent =
         message;
 
+
     return empty;
 
 }
 
 
-/* Month Overview */
+/* =========================================================
+   Overview / data selectors
+   ========================================================= */
 
 function updateMonthOverview() {
 
@@ -2062,6 +3555,7 @@ function updateMonthOverview() {
                     parseLocalDate(
                         meal.date
                     );
+
 
                 return (
                     date.getFullYear()
@@ -2090,6 +3584,7 @@ function updateMonthOverview() {
                         )
                     );
 
+
                 return (
                     date.getFullYear()
                     ===
@@ -2117,6 +3612,7 @@ function updateMonthOverview() {
                         )
                     );
 
+
                 return (
                     date.getFullYear()
                     ===
@@ -2143,13 +3639,12 @@ function updateMonthOverview() {
 }
 
 
-/* Data */
-
 function getDataForDate(
     date
 ) {
 
     return {
+
         meals:
             getMealEntries().filter(
                 function (
@@ -2205,277 +3700,129 @@ function getDataForDate(
 
 function getMealEntries() {
 
-    return currentMealEntries;
+    return (
+        currentMealEntries
+        ||
+        []
+    );
 
 }
 
 
 function getWorkoutEntries() {
 
-    return currentWorkoutEntries;
+    return (
+        currentWorkoutEntries
+        ||
+        []
+    );
+
+}
+
+
+function getWorkoutEntryById(
+    id
+) {
+
+    return (
+        currentWorkoutEntries.find(
+            function (
+                entry
+            ) {
+
+                return (
+                    Number(
+                        entry.id
+                    )
+                    ===
+                    Number(
+                        id
+                    )
+                );
+
+            }
+        )
+        ||
+        null
+    );
 
 }
 
 
 function getRunningEntries() {
 
-    return currentRunningEntries;
+    return (
+        currentRunningEntries
+        ||
+        []
+    );
 
 }
 
 
-/* Normalizers */
+/* =========================================================
+   Messages
+   ========================================================= */
 
-function normalizeMealEntry(
-    entry
-) {
-
-    return {
-        ...entry,
-
-        id:
-            Number(
-                entry.id
-            ),
-
-        amount:
-            Number(
-                entry.amount
-                ||
-                0
-            ),
-
-        calories:
-            Number(
-                entry.calories
-                ||
-                0
-            ),
-
-        protein:
-            Number(
-                entry.protein
-                ||
-                0
-            )
-    };
-
-}
-
-
-function normalizeWorkoutEntry(
-    entry
-) {
-
-    return {
-        ...entry,
-
-        id:
-            Number(
-                entry.id
-            ),
-
-        workoutId:
-            Number(
-                entry.workoutId
-                ||
-                0
-            ),
-
-        exerciseId:
-            Number(
-                entry.exerciseId
-                ||
-                0
-            ),
-
-        sets:
-            Number(
-                entry.sets
-                ||
-                0
-            ),
-
-        reps:
-            Number(
-                entry.reps
-                ||
-                0
-            ),
-
-        weight:
-            Number(
-                entry.weight
-                ||
-                0
-            ),
-
-        completed:
-            Boolean(
-                entry.completed
-            )
-    };
-
-}
-
-
-function normalizeRunningEntry(
-    entry
-) {
-
-    return {
-        ...entry,
-
-        id:
-            Number(
-                entry.id
-            ),
-
-        distance:
-            Number(
-                entry.distance
-                ||
-                0
-            ),
-
-        duration:
-            Number(
-                entry.duration
-                ||
-                0
-            ),
-
-        calories:
-            Number(
-                entry.calories
-                ||
-                0
-            )
-    };
-
-}
-
-
-/* API Helpers */
-
-async function parseApiResponse(
-    response
-) {
-
-    const text =
-        await response.text();
-
-
-    if (
-        !text
-    ) {
-
-        return {};
-
-    }
-
-
-    try {
-
-        return JSON.parse(
-            text
-        );
-
-    } catch (
-        error
-    ) {
-
-        console.error(
-            "Invalid API response:",
-            text
-        );
-
-        throw new Error(
-            "Server returned an invalid response."
-        );
-
-    }
-
-}
-
-
-function handleAuthentication(
-    response
+function showCalendarMessage(
+    message,
+    type = "success"
 ) {
 
     if (
-        response.status === 401
+        !calendarMessage
     ) {
 
-        window.location.href =
-            "login.html";
+        if (
+            type ===
+            "danger"
+        ) {
 
-        throw new Error(
-            "Not authenticated."
-        );
-
-    }
-
-}
-
-
-/* Visible Date Range */
-
-function getVisibleCalendarDateStrings() {
-
-    const year =
-        calendarViewDate.getFullYear();
-
-    const month =
-        calendarViewDate.getMonth();
-
-    const firstDay =
-        new Date(
-            year,
-            month,
-            1
-        );
-
-    const startDate =
-        new Date(
-            year,
-            month,
-            1 - firstDay.getDay()
-        );
-
-
-    const dates = [];
-
-
-    for (
-        let index = 0;
-        index < 42;
-        index++
-    ) {
-
-        const date =
-            new Date(
-                startDate.getFullYear(),
-                startDate.getMonth(),
-                startDate.getDate() + index
+            window.alert(
+                message
             );
 
+        }
 
-        dates.push(
-            getLocalDateString(
-                date
-            )
-        );
+        return;
 
     }
 
 
-    return dates;
+    calendarMessage.className =
+        `alert alert-${type}`;
+
+    calendarMessage.textContent =
+        message;
+
+    calendarMessage.classList.remove(
+        "d-none"
+    );
+
+
+    window.clearTimeout(
+        showCalendarMessage.timer
+    );
+
+
+    showCalendarMessage.timer =
+        window.setTimeout(
+            function () {
+
+                calendarMessage.classList.add(
+                    "d-none"
+                );
+
+            },
+            4000
+        );
 
 }
 
 
-/* Date Helpers */
+/* =========================================================
+   Date helpers
+   ========================================================= */
 
 function startOfMonth(
     date
@@ -2490,6 +3837,63 @@ function startOfMonth(
 }
 
 
+function getVisibleCalendarDates() {
+
+    const year =
+        calendarViewDate.getFullYear();
+
+    const month =
+        calendarViewDate.getMonth();
+
+
+    const firstDay =
+        new Date(
+            year,
+            month,
+            1
+        );
+
+
+    const startDate =
+        new Date(
+            year,
+            month,
+            1
+            -
+            firstDay.getDay()
+        );
+
+
+    const dates =
+        [];
+
+
+    for (
+        let index =
+            0;
+        index <
+            42;
+        index++
+    ) {
+
+        dates.push(
+            new Date(
+                startDate.getFullYear(),
+                startDate.getMonth(),
+                startDate.getDate()
+                +
+                index
+            )
+        );
+
+    }
+
+
+    return dates;
+
+}
+
+
 function getLocalDateString(
     date
 ) {
@@ -2499,7 +3903,9 @@ function getLocalDateString(
 
     const month =
         String(
-            date.getMonth() + 1
+            date.getMonth()
+            +
+            1
         ).padStart(
             2,
             "0"
@@ -2514,7 +3920,9 @@ function getLocalDateString(
         );
 
 
-    return `${year}-${month}-${day}`;
+    return (
+        `${year}-${month}-${day}`
+    );
 
 }
 
@@ -2547,7 +3955,9 @@ function parseLocalDate(
 
 
     if (
-        parts.length !== 3
+        parts.length
+        !==
+        3
         ||
         parts.some(
             Number.isNaN
@@ -2562,15 +3972,21 @@ function parseLocalDate(
 
 
     return new Date(
-        parts[0],
-        parts[1] - 1,
-        parts[2]
+        parts[
+            0
+        ],
+        parts[
+            1
+        ]
+        -
+        1,
+        parts[
+            2
+        ]
     );
 
 }
 
-
-/* Data Date Helpers */
 
 function getWorkoutDate(
     workout
@@ -2606,13 +4022,16 @@ function getRunDate(
 }
 
 
-/* Formatting */
+/* =========================================================
+   Formatting
+   ========================================================= */
 
 function formatMealMeta(
     meal
 ) {
 
-    const parts = [];
+    const parts =
+        [];
 
 
     if (
@@ -2629,24 +4048,43 @@ function formatMealMeta(
 
 
     if (
-        meal.amount
+        Number(
+            meal.amount
+            ||
+            0
+        )
+        >
+        0
     ) {
 
         parts.push(
-            `${formatNumber(meal.amount)} ${meal.unit || "g"}`
+            `${formatNumber(meal.amount)} ${meal.unit || ""}`.trim()
         );
 
     }
 
 
     if (
-        meal.protein
-        !==
-        undefined
+        meal.cookingMethod
     ) {
 
         parts.push(
-            `${formatNumber(meal.protein)}g protein`
+            capitalizeWords(
+                meal.cookingMethod
+            )
+        );
+
+    }
+
+
+    if (
+        meal.preparation
+    ) {
+
+        parts.push(
+            capitalizeWords(
+                meal.preparation
+            )
         );
 
     }
@@ -2663,80 +4101,74 @@ function formatMealMeta(
 }
 
 
-function capitalizeWords(
-    value
-) {
-
-    return String(
-        value
-    )
-        .replace(
-            /([A-Z])/g,
-            " $1"
-        )
-        .replace(
-            /[-_]/g,
-            " "
-        )
-        .trim()
-        .replace(
-            /\b\w/g,
-            function (
-                letter
-            ) {
-
-                return letter.toUpperCase();
-
-            }
-        );
-
-}
-
-
 function formatDuration(
-    value
+    totalSeconds
 ) {
 
-    const duration =
-        Number(
-            value
+    const seconds =
+        Math.max(
+            0,
+            Math.round(
+                Number(
+                    totalSeconds
+                    ||
+                    0
+                )
+            )
         );
 
 
+    const hours =
+        Math.floor(
+            seconds
+            /
+            3600
+        );
+
+    const minutes =
+        Math.floor(
+            (
+                seconds
+                %
+                3600
+            )
+            /
+            60
+        );
+
+    const remainingSeconds =
+        seconds
+        %
+        60;
+
+
     if (
-        !Number.isFinite(
-            duration
-        )
-        ||
-        duration <= 0
+        hours >
+        0
     ) {
 
-        return "0 min";
+        return (
+            `${hours}h ${minutes}m ${remainingSeconds}s`
+        );
 
     }
 
 
     if (
-        duration > 300
+        minutes >
+        0
     ) {
 
-        const minutes =
-            Math.floor(
-                duration / 60
-            );
-
-        const seconds =
-            Math.round(
-                duration % 60
-            );
-
-
-        return `${minutes}m ${seconds}s`;
+        return (
+            `${minutes}m ${remainingSeconds}s`
+        );
 
     }
 
 
-    return `${Math.round(duration)} min`;
+    return (
+        `${remainingSeconds}s`
+    );
 
 }
 
@@ -2748,6 +4180,8 @@ function formatNumber(
     const number =
         Number(
             value
+            ||
+            0
         );
 
 
@@ -2762,10 +4196,39 @@ function formatNumber(
     }
 
 
-    return Number(
-        number.toFixed(
-            1
+    return number.toLocaleString(
+        undefined,
+        {
+            maximumFractionDigits:
+                2
+        }
+    );
+
+}
+
+
+function capitalizeWords(
+    value
+) {
+
+    return String(
+        value
+        ||
+        ""
+    )
+        .replace(
+            /[_-]+/g,
+            " "
         )
-    ).toString();
+        .replace(
+            /\b\w/g,
+            function (
+                character
+            ) {
+
+                return character.toUpperCase();
+
+            }
+        );
 
 }

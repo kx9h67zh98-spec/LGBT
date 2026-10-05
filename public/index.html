@@ -1,167 +1,249 @@
 <!doctype html>
+
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
+
         name="viewport"
+
         content="width=device-width, initial-scale=1"
+
     >
 
     <meta
+
         name="description"
+
         content="FitHealth combines health analysis, nutrition tracking, exercise discovery, running tracking and training planning in one platform."
+
     >
 
-    <title>
-        FitHealth
-    </title>
+    <title>FitHealth</title>
 
-    <!-- Bootstrap -->
+    <!-- *Bootstrap* -->
+
     <link
+
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+
         rel="stylesheet"
+
     >
 
-    <!-- Bootstrap Icons -->
+    <!-- *Bootstrap Icons* -->
+
     <link
+
         rel="stylesheet"
+
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+
     >
 
-    <!-- Main CSS -->
+    <!-- *Main CSS* -->
+
     <link
+
         rel="stylesheet"
+
         href="css/style.css"
+
     >
+
 </head>
 
 <body>
 
-    <!-- Navbar -->
+    <!-- *Navbar* -->
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
 
         <div class="container">
 
-            <!-- Logo -->
+            <!-- *Logo* -->
+
             <a
+
                 class="navbar-brand fw-bold text-success"
+
                 href="#home"
+
             >
+
                 FitHealth
+
             </a>
 
 
-            <!-- Mobile Menu -->
+
+            <!-- *Mobile Menu Button* -->
+
             <button
+
                 class="navbar-toggler"
+
                 type="button"
+
                 data-bs-toggle="collapse"
+
                 data-bs-target="#navbarMenu"
+
                 aria-controls="navbarMenu"
+
                 aria-expanded="false"
+
                 aria-label="Toggle navigation"
+
             >
+
                 <span class="navbar-toggler-icon"></span>
+
             </button>
 
 
-            <!-- Menu -->
+
+            <!-- *Menu* -->
+
             <div
+
                 class="collapse navbar-collapse"
+
                 id="navbarMenu"
+
             >
 
-                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
 
                     <li class="nav-item">
+
                         <a
+
                             class="nav-link active"
+
                             href="#home"
+
                         >
+
                             Home
+
                         </a>
+
                     </li>
 
-
                     <li class="nav-item">
+
                         <a
+
                             class="nav-link"
+
                             href="#features"
+
                         >
+
                             Features
+
                         </a>
+
                     </li>
 
-
                     <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            href="dashboard.html"
-                        >
-                            Dashboard
-                        </a>
-                    </li>
 
-
-                    <li class="nav-item">
                         <a
+
                             class="nav-link"
+
                             href="health-nutrition.html"
+
                         >
+
                             Health
+
                         </a>
+
                     </li>
 
-
                     <li class="nav-item">
+
                         <a
+
                             class="nav-link"
+
                             href="muscle-map.html"
+
                         >
+
                             Exercises
+
                         </a>
+
                     </li>
 
-
                     <li class="nav-item">
+
                         <a
+
                             class="nav-link"
+
                             href="running.html"
+
                         >
+
                             Running
+
                         </a>
+
                     </li>
 
-
                     <li class="nav-item">
+
                         <a
+
                             class="nav-link"
+
                             href="calendar.html"
+
                         >
+
                             Calendar
+
                         </a>
+
                     </li>
 
-
                     <li class="nav-item">
+
                         <a
-                            class="btn btn-outline-success"
-                            href="login.html"
+
+                            class="nav-link"
+
+                            href="#workout"
+
                         >
-                            Login
+
+                            Workout
+
                         </a>
+
                     </li>
 
-
                     <li class="nav-item">
+
                         <a
+
                             class="btn btn-success"
-                            href="register.html"
+
+                            href="health-nutrition.html"
+
                         >
+
                             Get Started
+
                         </a>
+
                     </li>
 
                 </ul>
@@ -173,28 +255,41 @@
     </nav>
 
 
-    <!-- Hero -->
+
+    <!-- *Hero* -->
+
     <section
+
         id="home"
+
         class="hero-section"
+
     >
 
         <div class="container">
 
             <div class="row align-items-center g-5">
 
-                <!-- Left -->
+                <!-- *Left* -->
+
                 <div class="col-lg-6">
 
                     <p
+
                         id="greeting"
+
                         class="fw-semibold mb-3"
+
                     >
+
                         Good morning
+
                     </p>
 
                     <p class="text-success fw-bold text-uppercase">
+
                         Your Health, Your Future
+
                     </p>
 
                     <h1 class="display-3 fw-bold mb-4">
@@ -202,7 +297,9 @@
                         Build a healthier life with
 
                         <span class="text-success">
+
                             FitHealth
+
                         </span>
 
                     </h1>
@@ -210,56 +307,55 @@
                     <p class="lead text-body-secondary mb-4">
 
                         Understand your body,
+
                         manage your nutrition,
+
                         discover the right exercises,
+
                         track your runs and organize
+
                         your training in one place.
 
                     </p>
 
 
+
                     <div class="d-flex gap-3 flex-wrap">
 
                         <a
-                            href="register.html"
+
+                            href="health-nutrition.html"
+
                             class="btn btn-success btn-lg"
+
                         >
-                            <i class="bi bi-person-plus-fill me-2"></i>
-                            Create Account
+
+                            <i class="bi bi-heart-pulse me-2"></i>
+
+                            Check Your Health
+
                         </a>
 
                         <a
-                            href="dashboard.html"
+
+                            href="#features"
+
                             class="btn btn-outline-success btn-lg"
+
                         >
-                            <i class="bi bi-grid-1x2-fill me-2"></i>
-                            Open Dashboard
+
+                            Explore Features
+
                         </a>
-
-                    </div>
-
-
-                    <div class="mt-4">
-
-                        <small class="text-body-secondary">
-
-                            Already have an account?
-
-                            <a
-                                href="login.html"
-                                class="text-success text-decoration-none fw-semibold"
-                            >
-                                Sign in
-                            </a>
-
-                        </small>
 
                     </div>
 
                 </div>
 
 
-                <!-- Right -->
+
+                <!-- *Right* -->
+
                 <div class="col-lg-6">
 
                     <div class="health-card p-4 rounded-4">
@@ -269,11 +365,15 @@
                             <div>
 
                                 <p class="text-success fw-semibold mb-1">
+
                                     Dashboard Preview
+
                                 </p>
 
                                 <h2 class="fw-bold mb-0">
+
                                     Your Health
+
                                 </h2>
 
                             </div>
@@ -282,103 +382,105 @@
 
                         </div>
 
-
-                        <p class="text-body-secondary">
-                            Example data shown on the homepage.
+                        <p
+                            id="homeDashboardMessage"
+                            class="text-body-secondary"
+                        >
+                            Sign in to view your personal health data.
                         </p>
 
-
                         <div class="row g-3 mt-2">
-
                             <div class="col-6">
-
                                 <div class="metric-card p-3 rounded-4 h-100">
-
                                     <small class="text-body-secondary">
                                         BMI
                                     </small>
 
-                                    <h3 class="mt-2 fw-bold">
-                                        22.8
+                                    <h3
+                                        id="homeBmiValue"
+                                        class="mt-2 fw-bold"
+                                    >
+                                        —
                                     </h3>
 
-                                    <span class="text-success">
-                                        Normal
+                                    <span
+                                        id="homeBmiStatus"
+                                        class="text-success"
+                                    >
+                                        —
                                     </span>
-
                                 </div>
-
                             </div>
 
-
                             <div class="col-6">
-
                                 <div class="metric-card p-3 rounded-4 h-100">
-
                                     <small class="text-body-secondary">
                                         Calories
                                     </small>
 
-                                    <h3 class="mt-2 fw-bold">
-                                        2,500
+                                    <h3
+                                        id="homeCaloriesValue"
+                                        class="mt-2 fw-bold"
+                                    >
+                                        —
                                     </h3>
 
                                     <span class="text-success">
                                         kcal / day
                                     </span>
-
                                 </div>
-
                             </div>
 
-
                             <div class="col-6">
-
                                 <div class="metric-card p-3 rounded-4 h-100">
-
                                     <small class="text-body-secondary">
                                         Running
                                     </small>
 
-                                    <h3 class="mt-2 fw-bold">
-                                        5.2
+                                    <h3
+                                        id="homeRunningValue"
+                                        class="mt-2 fw-bold"
+                                    >
+                                        —
                                     </h3>
 
                                     <span class="text-success">
                                         km this week
                                     </span>
-
                                 </div>
-
                             </div>
 
-
                             <div class="col-6">
-
                                 <div class="metric-card p-3 rounded-4 h-100">
-
                                     <small class="text-body-secondary">
                                         Workouts
                                     </small>
 
-                                    <h3 class="mt-2 fw-bold">
-                                        4
+                                    <h3
+                                        id="homeWorkoutValue"
+                                        class="mt-2 fw-bold"
+                                    >
+                                        —
                                     </h3>
 
                                     <span class="text-success">
-                                        Sessions
+                                        Sessions this week
                                     </span>
-
                                 </div>
-
                             </div>
-
                         </div>
 
+                        <div class="mt-3">
+                            <a
+                                href="dashboard.html"
+                                class="btn btn-outline-success w-100"
+                            >
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Open Full Dashboard
+                            </a>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
 
         </div>
@@ -386,10 +488,15 @@
     </section>
 
 
-    <!-- Features -->
+
+    <!-- *Features* -->
+
     <section
+
         id="features"
+
         class="py-5"
+
     >
 
         <div class="container py-5">
@@ -397,57 +504,89 @@
             <div class="text-center mb-5">
 
                 <p class="text-success fw-bold text-uppercase mb-2">
+
                     Our Features
+
                 </p>
 
                 <h2 class="display-6 fw-bold">
+
                     Everything you need for your health and fitness journey
+
                 </h2>
 
                 <p
+
                     class="text-body-secondary mx-auto mt-3"
+
                     style="max-width: 760px;"
+
                 >
+
                     FitHealth combines health analysis,
+
                     nutrition tracking, exercise discovery,
+
                     GPS running and training organization
+
                     in one simple platform.
+
                 </p>
 
             </div>
+
 
 
             <div class="row g-4">
 
-                <!-- Health -->
+                <!-- *Health* -->
+
                 <div
-                    class="col-md-6 col-lg-3"
+
+                    class="col-md-6 col-lg-4 col-xl"
+
                     id="calculator"
+
                 >
 
                     <div class="feature-card h-100 p-4 rounded-4">
 
                         <div class="feature-icon mb-4">
+
                             <i class="bi bi-heart-pulse-fill"></i>
+
                         </div>
 
                         <h4 class="fw-bold">
+
                             Health & Nutrition
+
                         </h4>
 
                         <p class="text-body-secondary">
+
                             Calculate BMI, BMR, TDEE,
+
                             calorie targets and macros,
+
                             then record meals and monitor
+
                             daily nutrition.
+
                         </p>
 
                         <a
+
                             href="health-nutrition.html"
+
                             class="text-success text-decoration-none fw-bold"
+
                         >
+
                             Open Health
+
                             <i class="bi bi-arrow-right"></i>
+
                         </a>
 
                     </div>
@@ -455,35 +594,55 @@
                 </div>
 
 
-                <!-- Muscle Map -->
+
+                <!-- *Muscle Map* -->
+
                 <div
-                    class="col-md-6 col-lg-3"
+
+                    class="col-md-6 col-lg-4 col-xl"
+
                     id="exercises"
+
                 >
 
                     <div class="feature-card h-100 p-4 rounded-4">
 
                         <div class="feature-icon mb-4">
+
                             <i class="bi bi-person-arms-up"></i>
+
                         </div>
 
                         <h4 class="fw-bold">
+
                             Muscle Map
+
                         </h4>
 
                         <p class="text-body-secondary">
+
                             Explore an interactive anatomy map,
+
                             choose muscle groups and discover
+
                             exercises, equipment and training
+
                             instructions.
+
                         </p>
 
                         <a
+
                             href="muscle-map.html"
+
                             class="text-success text-decoration-none fw-bold"
+
                         >
+
                             Explore Exercises
+
                             <i class="bi bi-arrow-right"></i>
+
                         </a>
 
                     </div>
@@ -491,35 +650,55 @@
                 </div>
 
 
-                <!-- Running -->
+
+                <!-- *Running* -->
+
                 <div
-                    class="col-md-6 col-lg-3"
+
+                    class="col-md-6 col-lg-4 col-xl"
+
                     id="running"
+
                 >
 
                     <div class="feature-card h-100 p-4 rounded-4">
 
                         <div class="feature-icon mb-4">
+
                             <i class="bi bi-activity"></i>
+
                         </div>
 
                         <h4 class="fw-bold">
+
                             Running Tracker
+
                         </h4>
 
                         <p class="text-body-secondary">
+
                             Track GPS route, distance,
+
                             duration, pace, speed and
+
                             estimated calories, or add
+
                             a run manually.
+
                         </p>
 
                         <a
+
                             href="running.html"
+
                             class="text-success text-decoration-none fw-bold"
+
                         >
+
                             Start Running
+
                             <i class="bi bi-arrow-right"></i>
+
                         </a>
 
                     </div>
@@ -527,40 +706,58 @@
                 </div>
 
 
-                <!-- Training Calendar -->
+
                 <div
+
                     class="col-md-6 col-lg-3"
+
                     id="calendar"
+
                 >
 
                     <div class="feature-card h-100 p-4 rounded-4">
 
-                        <div class="feature-icon mb-4">
-                            <i class="bi bi-calendar2-week-fill"></i>
-                        </div>
+                    <div class="feature-icon mb-4">
 
-                        <h4 class="fw-bold">
-                            Training Calendar
-                        </h4>
-
-                        <p class="text-body-secondary">
-                            Plan your workouts,
-                            organize exercises by date,
-                            and review meals and
-                            running sessions in one calendar.
-                        </p>
-
-                        <a
-                            href="calendar.html"
-                            class="text-success text-decoration-none fw-bold"
-                        >
-                            Open Calendar
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-
-                    </div>
+                    <i class="bi bi-calendar2-week-fill"></i>
 
                 </div>
+
+                <h4 class="fw-bold">
+
+            Training Calendar
+
+        </h4>
+
+        <p class="text-body-secondary">
+
+            Plan your workouts,
+
+            organize exercises by date,
+
+            and review meals and
+
+            running sessions in one calendar.
+
+        </p>
+
+        <a
+
+            href="calendar.html"
+
+            class="text-success text-decoration-none fw-bold"
+
+        >
+
+            Open Calendar
+
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</div>
 
             </div>
 
@@ -569,235 +766,29 @@
     </section>
 
 
-    <!-- Dashboard -->
+
+    <!-- *How It Works* -->
+
     <section class="py-5 bg-body-tertiary">
-
-        <div class="container py-5">
-
-            <div class="row align-items-center g-5">
-
-                <!-- Text -->
-                <div class="col-lg-5">
-
-                    <p class="text-success fw-bold text-uppercase mb-2">
-                        Personal Dashboard
-                    </p>
-
-                    <h2 class="display-6 fw-bold mb-4">
-                        See your progress in one place
-                    </h2>
-
-                    <p class="lead text-body-secondary">
-                        The FitHealth Dashboard combines data
-                        from your health profile, meals,
-                        Training Calendar and running sessions.
-                    </p>
-
-
-                    <div class="d-flex flex-column gap-3 mt-4">
-
-                        <div class="d-flex align-items-start gap-3">
-
-                            <i class="bi bi-check-circle-fill text-success fs-5"></i>
-
-                            <div>
-                                <strong>
-                                    Daily Nutrition
-                                </strong>
-
-                                <p class="text-body-secondary mb-0">
-                                    Review calories and macronutrient progress.
-                                </p>
-                            </div>
-
-                        </div>
-
-
-                        <div class="d-flex align-items-start gap-3">
-
-                            <i class="bi bi-check-circle-fill text-success fs-5"></i>
-
-                            <div>
-                                <strong>
-                                    Today's Workout
-                                </strong>
-
-                                <p class="text-body-secondary mb-0">
-                                    See planned and completed exercises.
-                                </p>
-                            </div>
-
-                        </div>
-
-
-                        <div class="d-flex align-items-start gap-3">
-
-                            <i class="bi bi-check-circle-fill text-success fs-5"></i>
-
-                            <div>
-                                <strong>
-                                    Running Progress
-                                </strong>
-
-                                <p class="text-body-secondary mb-0">
-                                    Review monthly distance and recent sessions.
-                                </p>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="dashboard.html"
-                        class="btn btn-success btn-lg mt-4"
-                    >
-                        Open Dashboard
-                        <i class="bi bi-arrow-right ms-2"></i>
-                    </a>
-
-                </div>
-
-
-                <!-- Preview -->
-                <div class="col-lg-7">
-
-                    <div class="health-card p-4 rounded-4">
-
-                        <div class="d-flex justify-content-between align-items-center gap-3 mb-4">
-
-                            <div>
-
-                                <small class="text-success fw-bold text-uppercase">
-                                    Dashboard
-                                </small>
-
-                                <h3 class="fw-bold mb-0 mt-1">
-                                    Today's Overview
-                                </h3>
-
-                            </div>
-
-                            <i class="bi bi-grid-1x2-fill text-success fs-2"></i>
-
-                        </div>
-
-
-                        <div class="row g-3">
-
-                            <div class="col-sm-6">
-
-                                <div class="metric-card p-3 rounded-4 h-100">
-
-                                    <small class="text-body-secondary">
-                                        Nutrition
-                                    </small>
-
-                                    <h4 class="fw-bold mt-2 mb-1">
-                                        1,820 kcal
-                                    </h4>
-
-                                    <span class="text-success">
-                                        Daily progress
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-sm-6">
-
-                                <div class="metric-card p-3 rounded-4 h-100">
-
-                                    <small class="text-body-secondary">
-                                        Workout
-                                    </small>
-
-                                    <h4 class="fw-bold mt-2 mb-1">
-                                        3 / 5
-                                    </h4>
-
-                                    <span class="text-success">
-                                        Exercises completed
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-sm-6">
-
-                                <div class="metric-card p-3 rounded-4 h-100">
-
-                                    <small class="text-body-secondary">
-                                        Running
-                                    </small>
-
-                                    <h4 class="fw-bold mt-2 mb-1">
-                                        18.6 km
-                                    </h4>
-
-                                    <span class="text-success">
-                                        This month
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-sm-6">
-
-                                <div class="metric-card p-3 rounded-4 h-100">
-
-                                    <small class="text-body-secondary">
-                                        Upcoming
-                                    </small>
-
-                                    <h4 class="fw-bold mt-2 mb-1">
-                                        4
-                                    </h4>
-
-                                    <span class="text-success">
-                                        Planned exercises
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- How It Works -->
-    <section class="py-5">
 
         <div class="container py-5">
 
             <div class="text-center mb-5">
 
                 <p class="text-success fw-bold text-uppercase mb-2">
+
                     How FitHealth Works
+
                 </p>
 
                 <h2 class="display-6 fw-bold">
+
                     One connected fitness workflow
+
                 </h2>
 
             </div>
+
 
 
             <div class="row g-4">
@@ -807,17 +798,25 @@
                     <div class="metric-card h-100 p-4 rounded-4">
 
                         <span class="text-success fw-bold">
+
                             01
+
                         </span>
 
                         <h4 class="fw-bold mt-3">
+
                             Calculate
+
                         </h4>
 
                         <p class="text-body-secondary mb-0">
+
                             Enter your body information
+
                             and calculate health and
+
                             nutrition targets.
+
                         </p>
 
                     </div>
@@ -825,22 +824,31 @@
                 </div>
 
 
+
                 <div class="col-md-6 col-lg-3">
 
                     <div class="metric-card h-100 p-4 rounded-4">
 
                         <span class="text-success fw-bold">
+
                             02
+
                         </span>
 
                         <h4 class="fw-bold mt-3">
+
                             Track
+
                         </h4>
 
                         <p class="text-body-secondary mb-0">
+
                             Record meals and running
+
                             sessions to monitor your
+
                             daily activity.
+
                         </p>
 
                     </div>
@@ -848,27 +856,37 @@
                 </div>
 
 
+
                 <div class="col-md-6 col-lg-3">
 
                     <div class="metric-card h-100 p-4 rounded-4">
 
                         <span class="text-success fw-bold">
+
                             03
+
                         </span>
 
                         <h4 class="fw-bold mt-3">
+
                             Train
+
                         </h4>
 
                         <p class="text-body-secondary mb-0">
+
                             Use the Muscle Map to
+
                             discover exercises and
+
                             prepare your workout.
+
                         </p>
 
                     </div>
 
                 </div>
+
 
 
                 <div class="col-md-6 col-lg-3">
@@ -876,17 +894,25 @@
                     <div class="metric-card h-100 p-4 rounded-4">
 
                         <span class="text-success fw-bold">
+
                             04
+
                         </span>
 
                         <h4 class="fw-bold mt-3">
+
                             Organize
+
                         </h4>
 
                         <p class="text-body-secondary mb-0">
+
                             Review meals, workouts
+
                             and runs by date in the
-                            Training Calendar.
+
+                            training calendar.
+
                         </p>
 
                     </div>
@@ -900,64 +926,9 @@
     </section>
 
 
-    <!-- Account -->
-    <section class="py-5 bg-body-tertiary">
 
-        <div class="container py-5">
+    <!-- *Why FitHealth* -->
 
-            <div class="row align-items-center g-5">
-
-                <div class="col-lg-7">
-
-                    <p class="text-success fw-bold text-uppercase mb-2">
-                        Your FitHealth Account
-                    </p>
-
-                    <h2 class="display-6 fw-bold mb-3">
-                        Keep your health journey connected
-                    </h2>
-
-                    <p class="lead text-body-secondary mb-0">
-                        Create an account to prepare for
-                        personalized data storage, secure login
-                        and your personal Dashboard.
-                    </p>
-
-                </div>
-
-
-                <div class="col-lg-5">
-
-                    <div class="d-grid gap-3">
-
-                        <a
-                            href="register.html"
-                            class="btn btn-success btn-lg"
-                        >
-                            <i class="bi bi-person-plus-fill me-2"></i>
-                            Create Account
-                        </a>
-
-                        <a
-                            href="login.html"
-                            class="btn btn-outline-success btn-lg"
-                        >
-                            <i class="bi bi-box-arrow-in-right me-2"></i>
-                            Sign In
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Why FitHealth -->
     <section class="py-5">
 
         <div class="container py-5">
@@ -967,23 +938,35 @@
                 <div class="col-lg-6">
 
                     <p class="text-success fw-bold text-uppercase">
+
                         Why FitHealth?
+
                     </p>
 
                     <h2 class="display-6 fw-bold mb-4">
+
                         Your fitness journey,
+
                         all in one place.
+
                     </h2>
 
                     <p class="lead text-body-secondary">
+
                         FitHealth connects health,
+
                         nutrition, exercise discovery,
+
                         running and training organization
+
                         instead of keeping every activity
+
                         in a separate tool.
+
                     </p>
 
                 </div>
+
 
 
                 <div class="col-lg-6">
@@ -997,16 +980,21 @@
                                 <i class="bi bi-heart-pulse-fill text-success fs-3"></i>
 
                                 <h5 class="fw-bold mt-3">
+
                                     Health
+
                                 </h5>
 
                                 <p class="mb-0 text-body-secondary">
+
                                     Understand your body.
+
                                 </p>
 
                             </div>
 
                         </div>
+
 
 
                         <div class="col-6">
@@ -1016,16 +1004,21 @@
                                 <i class="bi bi-egg-fried text-success fs-3"></i>
 
                                 <h5 class="fw-bold mt-3">
+
                                     Nutrition
+
                                 </h5>
 
                                 <p class="mb-0 text-body-secondary">
+
                                     Monitor your meals.
+
                                 </p>
 
                             </div>
 
                         </div>
+
 
 
                         <div class="col-6">
@@ -1035,16 +1028,21 @@
                                 <i class="bi bi-person-arms-up text-success fs-3"></i>
 
                                 <h5 class="fw-bold mt-3">
+
                                     Exercises
+
                                 </h5>
 
                                 <p class="mb-0 text-body-secondary">
+
                                     Discover how to train.
+
                                 </p>
 
                             </div>
 
                         </div>
+
 
 
                         <div class="col-6">
@@ -1054,11 +1052,15 @@
                                 <i class="bi bi-activity text-success fs-3"></i>
 
                                 <h5 class="fw-bold mt-3">
+
                                     Progress
+
                                 </h5>
 
                                 <p class="mb-0 text-body-secondary">
+
                                     Track runs and plans.
+
                                 </p>
 
                             </div>
@@ -1076,174 +1078,141 @@
     </section>
 
 
-    <!-- Final CTA -->
+
+    <!-- *Final CTA* -->
+
     <section class="py-5 bg-body-tertiary">
 
         <div class="container py-5 text-center">
 
             <h2 class="display-6 fw-bold">
-                Ready to start your FitHealth journey?
+
+                Start with your health profile
+
             </h2>
 
-            <p
-                class="text-body-secondary mx-auto mt-3 mb-4"
-                style="max-width: 650px;"
-            >
-                Create an account, set up your health profile
-                and use FitHealth to organize your daily
-                health and fitness activities.
+            <p class="text-body-secondary mx-auto mt-3 mb-4"
+
+               style="max-width: 650px;">
+
+                Calculate your health and nutrition targets,
+
+                then use the other FitHealth features to
+
+                build your training journey.
+
             </p>
 
+            <a
 
-            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                href="health-nutrition.html"
 
-                <a
-                    href="register.html"
-                    class="btn btn-success btn-lg"
-                >
-                    Create Account
-                    <i class="bi bi-arrow-right ms-2"></i>
-                </a>
+                class="btn btn-success btn-lg"
 
-                <a
-                    href="login.html"
-                    class="btn btn-outline-success btn-lg"
-                >
-                    Sign In
-                </a>
+            >
 
-            </div>
+                Get Started
+
+                <i class="bi bi-arrow-right ms-2"></i>
+
+            </a>
 
         </div>
 
     </section>
 
 
-    <!-- Footer -->
+
+    <!-- *Footer* -->
+
     <footer class="py-4 border-top">
 
         <div class="container">
 
-            <div class="row g-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
 
-                <div class="col-lg-4">
+                <div>
 
                     <a
+
                         href="#home"
-                        class="text-success fw-bold fs-5 text-decoration-none"
+
+                        class="text-success fw-bold text-decoration-none"
+
                     >
+
                         FitHealth
+
                     </a>
 
-                    <p class="text-body-secondary mt-2 mb-0">
+                    <p class="text-body-secondary mb-0 mt-1">
+
                         Health, fitness and progress in one place.
+
                     </p>
 
                 </div>
 
 
-                <div class="col-6 col-lg-2">
 
-                    <h6 class="fw-bold">
-                        Features
-                    </h6>
+                <div class="d-flex flex-wrap gap-3">
 
-                    <div class="d-flex flex-column gap-2">
+                    <a
 
-                        <a
-                            href="health-nutrition.html"
-                            class="text-body-secondary text-decoration-none"
-                        >
-                            Health
-                        </a>
+                        href="health-nutrition.html"
 
-                        <a
-                            href="muscle-map.html"
-                            class="text-body-secondary text-decoration-none"
-                        >
-                            Exercises
-                        </a>
+                        class="text-body-secondary text-decoration-none"
 
-                        <a
-                            href="running.html"
-                            class="text-body-secondary text-decoration-none"
-                        >
-                            Running
-                        </a>
+                    >
 
-                        <a
-                            href="calendar.html"
-                            class="text-body-secondary text-decoration-none"
-                        >
-                            Calendar
-                        </a>
+                        Health
 
-                    </div>
+                    </a>
 
-                </div>
+                    <a
 
+                        href="muscle-map.html"
 
-                <div class="col-6 col-lg-2">
+                        class="text-body-secondary text-decoration-none"
 
-                    <h6 class="fw-bold">
-                        Account
-                    </h6>
+                    >
 
-                    <div class="d-flex flex-column gap-2">
+                        Exercises
 
-                        <a
-                            href="dashboard.html"
-                            class="text-body-secondary text-decoration-none"
-                        >
-                            Dashboard
-                        </a>
+                    </a>
 
-                        <a
-                            href="login.html"
-                            class="text-body-secondary text-decoration-none"
-                        >
-                            Login
-                        </a>
+                    <a
 
-                        <a
-                            href="register.html"
-                            class="text-body-secondary text-decoration-none"
-                        >
-                            Register
-                        </a>
+                        href="running.html"
 
-                    </div>
+                        class="text-body-secondary text-decoration-none"
+
+                    >
+
+                        Running
+
+                    </a>
+
+                    <a
+
+                        href="calendar.html"
+
+                        class="text-body-secondary text-decoration-none"
+
+                    >
+
+                        Calendar
+
+                    </a>
 
                 </div>
 
 
-                <div class="col-lg-4">
-
-                    <h6 class="fw-bold">
-                        FitHealth
-                    </h6>
-
-                    <p class="text-body-secondary mb-0">
-                        Frontend built with HTML, CSS,
-                        Bootstrap and vanilla JavaScript.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <hr class="my-4">
-
-
-            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">
 
                 <p class="text-body-secondary mb-0">
+
                     © 2026 FitHealth
-                </p>
 
-                <p class="text-body-secondary mb-0">
-                    Healthcare & Fitness Tracking Website
                 </p>
 
             </div>
@@ -1253,13 +1222,18 @@
     </footer>
 
 
-    <!-- Bootstrap JS -->
+
+    <!-- *Bootstrap JS* -->
+
     <script
+
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+
     ></script>
 
-    <!-- Main JS -->
-    <script src="js/main.js"></script>
+    <!-- *Main JS* -->
+
+    <script src="js/main.js?v=2"></script>
 
 </body>
 

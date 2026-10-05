@@ -3123,6 +3123,18 @@ document.addEventListener(
 
         getElements();
 
+        setupNavbarLogout();
+
+        if (window.FitHealthCurrentUser) {
+
+            renderAuthenticatedNavbar(
+
+                window.FitHealthCurrentUser
+
+            );
+
+        }
+
         setupModal();
 
         setupBackButton();
@@ -6128,5 +6140,290 @@ function getDifficultyClass(
         "difficulty-advanced"
 
     );
+
+}
+
+
+/* =========================================================
+   Navbar Authentication
+   ========================================================= */
+
+document.addEventListener(
+
+    "fithealth:user-authenticated",
+
+    function (event) {
+
+        renderAuthenticatedNavbar(
+
+            event.detail
+
+        );
+
+    }
+
+);
+
+
+function renderAuthenticatedNavbar(
+
+    user
+
+) {
+
+    if (!user) {
+
+        return;
+
+    }
+
+
+    const guestNavItem =
+
+        document.getElementById(
+
+            "guestNavItem"
+
+        );
+
+
+    const userNavItem =
+
+        document.getElementById(
+
+            "userNavItem"
+
+        );
+
+
+    const navbarUserName =
+
+        document.getElementById(
+
+            "navbarUserName"
+
+        );
+
+
+    if (guestNavItem) {
+
+        guestNavItem.classList.add(
+
+            "d-none"
+
+        );
+
+    }
+
+
+    if (userNavItem) {
+
+        userNavItem.classList.remove(
+
+            "d-none"
+
+        );
+
+    }
+
+
+    if (navbarUserName) {
+
+        const fullName =
+
+            [
+
+                user.firstName,
+
+                user.lastName
+
+            ]
+
+                .filter(Boolean)
+
+                .join(" ")
+
+                .trim();
+
+
+        navbarUserName.textContent =
+
+            fullName
+
+            ||
+
+            user.email
+
+            ||
+
+            "Account";
+
+    }
+
+}
+
+
+function setupNavbarLogout() {
+
+    const logoutButton =
+
+        document.getElementById(
+
+            "muscleLogoutButton"
+
+        );
+
+
+    if (!logoutButton) {
+
+        return;
+
+    }
+
+
+    logoutButton.addEventListener(
+
+        "click",
+
+        handleNavbarLogout
+
+    );
+
+}
+
+
+async function handleNavbarLogout() {
+
+    const logoutButton =
+
+        document.getElementById(
+
+            "muscleLogoutButton"
+
+        );
+
+
+    try {
+
+        if (logoutButton) {
+
+            logoutButton.disabled =
+
+                true;
+
+        }
+
+
+        const response =
+
+            await fetch(
+
+                "logout",
+
+                {
+
+                    method:
+
+                        "POST",
+
+                    credentials:
+
+                        "same-origin",
+
+                    cache:
+
+                        "no-store"
+
+                }
+
+            );
+
+
+        let data = {};
+
+
+        try {
+
+            data =
+
+                await response.json();
+
+        } catch (error) {
+
+            console.error(
+
+                "Unable to parse logout response:",
+
+                error
+
+            );
+
+        }
+
+
+        if (
+
+            !response.ok
+
+            ||
+
+            data.success === false
+
+        ) {
+
+            throw new Error(
+
+                data.message
+
+                ||
+
+                "Unable to logout."
+
+            );
+
+        }
+
+
+        window.FitHealthCurrentUser =
+
+            null;
+
+
+        window.location.href =
+
+            "login.html";
+
+
+    } catch (error) {
+
+        console.error(
+
+            "Logout failed:",
+
+            error
+
+        );
+
+
+        window.alert(
+
+            error.message
+
+            ||
+
+            "Unable to logout."
+
+        );
+
+
+        if (logoutButton) {
+
+            logoutButton.disabled =
+
+                false;
+
+        }
+
+    }
 
 }
