@@ -40,7 +40,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=IODxDxX7oi4",
 
             instructions: [
 
@@ -90,7 +90,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=VesHgJR14E8",
 
             instructions: [
 
@@ -140,7 +140,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=lWFknlOTbyM",
 
             instructions: [
 
@@ -190,7 +190,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=IP4oeKh1Sd4",
 
             instructions: [
 
@@ -240,7 +240,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=hhruLxo9yZU",
 
             instructions: [
 
@@ -292,7 +292,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=TrJVszDm7ik",
 
             instructions: [
 
@@ -348,7 +348,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=s9WgXdWJkfQ",
 
             instructions: [
 
@@ -394,7 +394,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=XPPfnSEATJA",
 
             instructions: [
 
@@ -442,7 +442,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=rO_iEImwHyo",
 
             instructions: [
 
@@ -492,7 +492,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=0Po47vvj9g4",
 
             instructions: [
 
@@ -548,7 +548,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=6DeLZ6cbgWQ",
 
             instructions: [
 
@@ -598,7 +598,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=BRVDS6HVR9Q",
 
             instructions: [
 
@@ -646,7 +646,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=kwG2ipFRgfo",
 
             instructions: [
 
@@ -696,7 +696,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=mRy9m2Q9_1I",
 
             instructions: [
 
@@ -750,7 +750,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=-xa-6cQaZKY",
 
             instructions: [
 
@@ -796,7 +796,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=u4sEGN7FlzQ",
 
             instructions: [
 
@@ -842,7 +842,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=N5ImCU0mcpo",
 
             instructions: [
 
@@ -892,7 +892,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=8o7jud9YlHU",
 
             instructions: [
 
@@ -946,7 +946,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=3VLTzIrnb5g",
 
             instructions: [
 
@@ -992,7 +992,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=osYPwlBiCRM",
 
             instructions: [
 
@@ -1042,7 +1042,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=8OtwXwrJizk",
 
             instructions: [
 
@@ -1096,7 +1096,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=cQ5JKgEZCU4",
 
             instructions: [
 
@@ -1146,7 +1146,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=yeKv5oX_6GY",
 
             instructions: [
 
@@ -1194,7 +1194,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=_jLskVdzS4o",
 
             instructions: [
 
@@ -1250,7 +1250,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=VAPN4CmUWqk",
 
             instructions: [
 
@@ -1298,7 +1298,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=gcGNypjIQDo",
 
             instructions: [
 
@@ -1346,7 +1346,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=PkGPokybYaU",
 
             instructions: [
 
@@ -1404,7 +1404,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=7LpLZOdz68A",
 
             instructions: [
 
@@ -1450,7 +1450,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=4ZDm5EbiFI8",
 
             instructions: [
 
@@ -1500,7 +1500,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=q4W4_VJbKW0",
 
             instructions: [
 
@@ -1552,7 +1552,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=aOzrA4FgnM0",
 
             instructions: [
 
@@ -1606,7 +1606,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=XSTcIB2ZpmU",
 
             instructions: [
 
@@ -1652,7 +1652,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=2Dj7hjH8ixw",
 
             instructions: [
 
@@ -1706,7 +1706,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=eMTy3qylqnE",
 
             instructions: [
 
@@ -1752,7 +1752,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=3ZRe_QpvRPg",
 
             instructions: [
 
@@ -1808,7 +1808,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=_t3lrPI6Ns4",
 
             instructions: [
 
@@ -1856,7 +1856,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=M_MjF5Nm_h4",
 
             instructions: [
 
@@ -1906,7 +1906,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=0Po47vvj9g4",
 
             instructions: [
 
@@ -1964,7 +1964,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=JGeRYIZdojU",
 
             instructions: [
 
@@ -2014,7 +2014,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=sIvJTfGxdFo",
 
             instructions: [
 
@@ -2064,7 +2064,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=dFzUjzfih7k",
 
             instructions: [
 
@@ -2122,7 +2122,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=ZdAHe9_HeEw",
 
             instructions: [
 
@@ -2172,7 +2172,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=ENXyYltB7CM",
 
             instructions: [
 
@@ -2226,7 +2226,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=3VXmecChYYM",
 
             instructions: [
 
@@ -2284,7 +2284,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=vtnpY_fYJ4M",
 
             instructions: [
 
@@ -2330,7 +2330,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=kBClX5iOtfA",
 
             instructions: [
 
@@ -2378,7 +2378,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=76t0z3Tdx6Q",
 
             instructions: [
 
@@ -2434,7 +2434,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=FsjyMwqKQ7c",
 
             instructions: [
 
@@ -2484,7 +2484,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=3VXmecChYYM",
 
             instructions: [
 
@@ -2532,7 +2532,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=3-4pKUhkzoQ",
 
             instructions: [
 
@@ -2586,7 +2586,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=CjAVezAggkI",
 
             instructions: [
 
@@ -2636,7 +2636,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=6L7KFAN5MCE",
 
             instructions: [
 
@@ -2684,7 +2684,7 @@ const exercises = {
 
             videoUrl:
 
-                "",
+                "https://www.youtube.com/watch?v=kD1t1hWzIDE",
 
             instructions: [
 
