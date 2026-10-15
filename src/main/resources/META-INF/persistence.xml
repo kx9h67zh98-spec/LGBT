@@ -25,6 +25,10 @@
         </class>
 
         <class>
+            com.fithealth.model.WeightLog
+        </class>
+
+        <class>
             com.fithealth.model.Food
         </class>
 
