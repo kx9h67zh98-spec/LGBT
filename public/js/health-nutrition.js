@@ -978,6 +978,17 @@ healthForm.addEventListener(
             );
 
 
+            if (
+                window.FitHealthInsights
+            ) {
+
+                window.FitHealthInsights
+                    .recordWeight(
+                        currentHealthProfile.weight
+                    );
+            }
+
+
             displayMeals();
 
 
@@ -4031,6 +4042,15 @@ async function displayMeals() {
     );
 
 
+    if (
+        window.FitHealthInsights
+    ) {
+
+        window.FitHealthInsights
+            .refresh();
+    }
+
+
 
 }
 
@@ -5376,3 +5396,111 @@ function formatPreparation(
 
 
 }
+
+/** Health & Nutrition public bridge **/
+
+window.FitHealthNutrition = {
+
+    getProfile:
+        function () {
+
+            return currentHealthProfile;
+        },
+
+    getMeals:
+        function () {
+
+            return Array.isArray(
+                currentMealEntries
+            )
+            ?
+            currentMealEntries
+            :
+            [];
+        },
+
+    getFoods:
+        function () {
+
+            return Array.isArray(
+                foods
+            )
+            ?
+            foods
+            :
+            [];
+        },
+
+    getSelectedDate:
+        function () {
+
+            return mealDate
+                ?
+                mealDate.value
+                :
+                "";
+        },
+
+    applyFoodSuggestion:
+        function (
+            foodId,
+            amount
+        ) {
+
+            const nutritionButton =
+                document.querySelector(
+                    '.health-tab[data-tab="nutrition"]'
+                );
+
+
+            if (
+                nutritionButton
+                &&
+                !nutritionButton.classList.contains(
+                    "active"
+                )
+            ) {
+
+                nutritionButton.click();
+            }
+
+
+            foodSelect.value =
+                String(
+                    foodId
+                );
+
+
+            updateFoodInterface();
+
+
+            foodAmount.value =
+                amount;
+
+
+            updateNutritionPreview();
+
+
+            const formPanel =
+                document.getElementById(
+                    "nutritionFormPanel"
+                );
+
+
+            if (
+                formPanel
+            ) {
+
+                formPanel.scrollIntoView(
+                    {
+                        behavior:
+                            "smooth",
+
+                        block:
+                            "start"
+                    }
+                );
+            }
+        }
+};
+
