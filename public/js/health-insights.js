@@ -82,6 +82,20 @@
         const p = a.getProfile();
         if (!p) { box.innerHTML = empty("Complete your Health Profile first."); return; }
         const r = remaining(p, totals(a.getMeals()));
+
+        if (
+            r.calories <= 25
+            &&
+            r.protein <= 3
+            &&
+            r.carbs <= 5
+            &&
+            r.fat <= 3
+        ) {
+            box.innerHTML = empty("Your main nutrition targets are already covered for this day.");
+            return;
+        }
+
         const suggestions = [];
 
         (a.getFoods() || []).forEach(function (food) {
