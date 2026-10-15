@@ -78,6 +78,7 @@ CREATE TABLE `health_profiles` (
   `weight` decimal(6,2) NOT NULL,
   `activity_level` decimal(5,3) NOT NULL,
   `goal` varchar(30) NOT NULL,
+  `target_weight` decimal(6,2) DEFAULT NULL,
   `bmi` decimal(6,2) DEFAULT NULL,
   `bmr` decimal(10,2) DEFAULT NULL,
   `tdee` decimal(10,2) DEFAULT NULL,
@@ -109,6 +110,27 @@ CREATE TABLE `weight_logs` (
   UNIQUE KEY `uq_weight_user_date` (`user_id`,`log_date`),
   KEY `fk_weight_user` (`user_id`),
   CONSTRAINT `fk_weight_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `water_logs`
+--
+
+DROP TABLE IF EXISTS `water_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `water_logs` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `log_date` date NOT NULL,
+  `amount_ml` int NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_water_user_date` (`user_id`,`log_date`),
+  KEY `fk_water_user` (`user_id`),
+  CONSTRAINT `fk_water_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
