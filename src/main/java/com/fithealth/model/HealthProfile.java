@@ -59,6 +59,13 @@ public class HealthProfile {
     private String goal;
 
     @Column(
+        name = "target_weight",
+        precision = 6,
+        scale = 2
+    )
+    private BigDecimal targetWeight;
+
+    @Column(
         precision = 6,
         scale = 2
     )
@@ -188,6 +195,16 @@ public class HealthProfile {
         String goal
     ) {
         this.goal = goal;
+    }
+
+    public BigDecimal getTargetWeight() {
+        return targetWeight;
+    }
+
+    public void setTargetWeight(
+        BigDecimal targetWeight
+    ) {
+        this.targetWeight = targetWeight;
     }
 
     public BigDecimal getBmi() {
