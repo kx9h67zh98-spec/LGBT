@@ -29,6 +29,10 @@
         </class>
 
         <class>
+            com.fithealth.model.WaterLog
+        </class>
+
+        <class>
             com.fithealth.model.Food
         </class>
 
