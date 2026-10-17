@@ -87,7 +87,7 @@
                 +
                 '<h2 class="fw-bold mb-1">Water Intake</h2>'
                 +
-                '<p class="text-body-secondary mb-0">Track today\'s water and build a consistent hydration habit.</p></div>'
+                '<p class="text-body-secondary mb-0">Track today\'s water and build a consistent hydration habit. The 2,500 ml target is an app tracking goal, not a medical recommendation.</p></div>'
                 +
                 '<div class="insight-heading-icon"><i class="bi bi-droplet-half"></i></div>'
                 +
@@ -569,7 +569,7 @@
                 +
                 '%"></div></div>'
                 +
-                '<div id="waterMessage" class="alert d-none mt-3 mb-0" role="alert"></div>';
+                '<div id="waterMessage" class="alert d-none mt-3 mb-0" role="alert" aria-live="polite" aria-atomic="true"></div>';
 
         } catch (
             error
