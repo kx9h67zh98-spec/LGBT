@@ -667,6 +667,29 @@ function validatePassword(
     }
 
 
+    const passwordBytes =
+        new TextEncoder()
+            .encode(
+                password
+            )
+            .length;
+
+
+    if (
+        passwordBytes > 72
+    ) {
+
+        setFieldError(
+            registerPassword,
+            registerPasswordError,
+            "Password must be 72 UTF-8 bytes or fewer."
+        );
+
+        return false;
+
+    }
+
+
     if (
         !/[A-Za-z]/.test(
             password
