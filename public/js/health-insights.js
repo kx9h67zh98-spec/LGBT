@@ -258,47 +258,22 @@
             if (
                 target > 0
             ) {
-                const totalDistance =
-                    Math.abs(
-                        n(first.weight)
-                        -
+                const progress =
+                    goalProgressPercent(
+                        first.weight,
+                        current.weight,
                         target
                     );
 
                 const remainingDistance =
+                    progress >= 100
+                    ?
+                    0
+                    :
                     Math.abs(
                         n(current.weight)
                         -
                         target
-                    );
-
-                const progress =
-                    totalDistance <= 0.05
-                    ?
-                    (
-                        remainingDistance <= 0.05
-                        ?
-                        100
-                        :
-                        0
-                    )
-                    :
-                    Math.max(
-                        0,
-                        Math.min(
-                            100,
-                            (
-                                1
-                                -
-                                (
-                                    remainingDistance
-                                    /
-                                    totalDistance
-                                )
-                            )
-                            *
-                            100
-                        )
                     );
 
                 summary +=
@@ -416,6 +391,22 @@
         const vals=logs.map(function(x){return n(x.weight);}), min=Math.min.apply(null,vals)-0.5, max=Math.max.apply(null,vals)+0.5;
         const pts=vals.map(function(v,i){const x=40+(520*i/(vals.length-1)); const y=190-150*((v-min)/(max-min)); return x.toFixed(1)+','+y.toFixed(1);}).join(' ');
         return '<div class="weight-chart-wrap mt-4"><svg class="weight-chart" viewBox="0 0 600 220"><line x1="40" y1="190" x2="560" y2="190" class="chart-axis"></line><polyline points="'+pts+'" class="chart-line"></polyline></svg></div>';
+    }
+
+    function goalProgressPercent(startWeight, currentWeight, targetWeight) {
+        const start = n(startWeight);
+        const current = n(currentWeight);
+        const target = n(targetWeight);
+        const totalChange = target - start;
+
+        if (Math.abs(totalChange) <= 0.05) {
+            return Math.abs(current - target) <= 0.05 ? 100 : 0;
+        }
+
+        const completedChange = current - start;
+        const percentage = (completedChange / totalChange) * 100;
+
+        return Math.max(0, Math.min(100, percentage));
     }
 
     function metric(label,value,unit) { return '<div class="remaining-nutrient"><span>'+label+'</span><strong>'+value+' '+unit+'</strong></div>'; }
