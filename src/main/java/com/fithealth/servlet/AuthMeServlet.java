@@ -31,6 +31,11 @@ public class AuthMeServlet extends HttpServlet {
             "UTF-8"
         );
 
+        response.setHeader(
+            "Cache-Control",
+            "no-store"
+        );
+
         HttpSession session =
             request.getSession(false);
 
