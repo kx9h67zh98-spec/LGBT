@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -35,6 +36,11 @@ public class RegisterServlet extends HttpServlet {
 
         response.setCharacterEncoding(
             "UTF-8"
+        );
+
+        response.setHeader(
+            "Cache-Control",
+            "no-store"
         );
 
         try {
@@ -108,7 +114,7 @@ public class RegisterServlet extends HttpServlet {
 
             if (
                 !email.matches(
-                    "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
+                    "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
                 )
             ) {
 
@@ -138,6 +144,42 @@ public class RegisterServlet extends HttpServlet {
                     response,
                     HttpServletResponse.SC_BAD_REQUEST,
                     "Password must contain at least 8 characters."
+                );
+
+                return;
+            }
+
+            if (
+                password
+                    .getBytes(
+                        StandardCharsets.UTF_8
+                    )
+                    .length > 72
+            ) {
+
+                sendError(
+                    response,
+                    HttpServletResponse.SC_BAD_REQUEST,
+                    "Password must be 72 UTF-8 bytes or fewer."
+                );
+
+                return;
+            }
+
+            if (
+                !password.matches(
+                    ".*[A-Za-z].*"
+                )
+                ||
+                !password.matches(
+                    ".*\\d.*"
+                )
+            ) {
+
+                sendError(
+                    response,
+                    HttpServletResponse.SC_BAD_REQUEST,
+                    "Password must contain at least one letter and one number."
                 );
 
                 return;
