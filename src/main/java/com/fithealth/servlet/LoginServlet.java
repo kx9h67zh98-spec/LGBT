@@ -38,6 +38,11 @@ public class LoginServlet extends HttpServlet {
             "UTF-8"
         );
 
+        response.setHeader(
+            "Cache-Control",
+            "no-store"
+        );
+
         try {
 
             LoginRequest data =
