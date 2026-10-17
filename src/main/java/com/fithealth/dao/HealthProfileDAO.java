@@ -128,6 +128,10 @@ public class HealthProfileDAO {
                 data.getGoal()
             );
 
+            profile.setTargetWeight(
+                data.getTargetWeight()
+            );
+
             profile.setBmi(
                 data.getBmi()
             );

@@ -412,6 +412,7 @@ function normalizeHealthProfile(
         "age",
         "height",
         "weight",
+        "targetWeight",
         "activityLevel",
         "bmi",
         "bmr",
@@ -818,6 +819,36 @@ healthForm.addEventListener(
             ).value;
 
 
+        const targetWeightInput =
+
+            document.getElementById(
+
+                "targetWeight"
+
+            );
+
+
+        const targetWeight =
+
+            targetWeightInput
+
+            &&
+
+            targetWeightInput.value !== ""
+
+            ?
+
+            Number(
+
+                targetWeightInput.value
+
+            )
+
+            :
+
+            null;
+
+
         const requestBody = {
 
             age,
@@ -830,7 +861,9 @@ healthForm.addEventListener(
 
             activityLevel,
 
-            goal
+            goal,
+
+            targetWeight
 
         };
 
@@ -1778,6 +1811,40 @@ async function loadHealthProfile() {
         ).value =
 
             currentHealthProfile.goal;
+
+
+        const targetWeightInput =
+
+            document.getElementById(
+
+                "targetWeight"
+
+            );
+
+
+        if (
+
+            targetWeightInput
+
+        ) {
+
+            targetWeightInput.value =
+
+                Number.isFinite(
+
+                    currentHealthProfile.targetWeight
+
+                )
+
+                ?
+
+                currentHealthProfile.targetWeight
+
+                :
+
+                "";
+
+        }
 
 
         displayHealthResults(
@@ -4047,6 +4114,15 @@ async function displayMeals() {
     ) {
 
         window.FitHealthInsights
+            .refresh();
+    }
+
+
+    if (
+        window.FitHealthDashboard
+    ) {
+
+        window.FitHealthDashboard
             .refresh();
     }
 

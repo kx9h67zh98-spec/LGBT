@@ -388,6 +388,22 @@ public class HealthProfileServlet extends HttpServlet {
 
 
         if (
+            body.targetWeight != null
+            &&
+            (
+                body.targetWeight < 30
+                ||
+                body.targetWeight > 300
+            )
+        ) {
+
+            return
+                "Target weight must be between 30 and 300 kg.";
+
+        }
+
+
+        if (
             body.activityLevel == null
             ||
             body.activityLevel <= 0
@@ -620,6 +636,17 @@ public class HealthProfileServlet extends HttpServlet {
             body.goal
         );
 
+        profile.setTargetWeight(
+            body.targetWeight == null
+                ?
+                null
+                :
+                decimal(
+                    body.targetWeight,
+                    2
+                )
+        );
+
         profile.setBmi(
             decimal(
                 bmi,
@@ -722,6 +749,13 @@ public class HealthProfileServlet extends HttpServlet {
         result.put(
             "goal",
             profile.getGoal()
+        );
+
+        result.put(
+            "targetWeight",
+            number(
+                profile.getTargetWeight()
+            )
         );
 
         result.put(
@@ -919,6 +953,8 @@ public class HealthProfileServlet extends HttpServlet {
         private Double activityLevel;
 
         private String goal;
+
+        private Double targetWeight;
 
     }
 

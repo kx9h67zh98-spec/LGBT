@@ -181,17 +181,234 @@
         const a = api();
         if (!box || !a) return;
         const p = a.getProfile();
-        if (!p) { box.innerHTML = empty("Save your Health Profile to start tracking weight."); return; }
+        if (!p) {
+            box.innerHTML = empty("Save your Health Profile to start tracking weight.");
+            return;
+        }
+
         try {
-            let response = await fetch(weightApi+'?limit=30', {credentials:"same-origin", cache:"no-store"});
+            let response = await fetch(
+                weightApi + "?limit=30",
+                {
+                    credentials: "same-origin",
+                    cache: "no-store"
+                }
+            );
+
             let data = await json(response);
-            if (!response.ok || !data.success) throw new Error(data.message || "Unable to load weight history.");
+
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.message || "Unable to load weight history."
+                );
+            }
+
             let logs = data.entries || [];
-            if (!logs.length) { await recordWeight(p.weight,false); response = await fetch(weightApi+'?limit=30',{credentials:"same-origin",cache:"no-store"}); data=await json(response); logs=data.entries||[]; }
-            if (!logs.length) { box.innerHTML=empty("No weight history yet."); return; }
-            const first=logs[0], current=logs[logs.length-1], change=n(current.weight)-n(first.weight);
-            box.innerHTML='<div class="weight-summary-grid">'+wcard("Start",one(first.weight)+" kg",first.date)+wcard("Current",one(current.weight)+" kg",current.date)+wcard("Change",(change>0?"+":"")+one(change)+" kg",p.goal==="lose"&&change<0?"Moving toward goal":p.goal==="gain"&&change>0?"Moving toward goal":"Compared with first record")+'</div>'+weightChart(logs);
-        } catch(e) { console.error(e); box.innerHTML=empty(e.message || "Unable to load weight progress."); }
+
+            if (!logs.length) {
+                await recordWeight(
+                    p.weight,
+                    false
+                );
+
+                response = await fetch(
+                    weightApi + "?limit=30",
+                    {
+                        credentials: "same-origin",
+                        cache: "no-store"
+                    }
+                );
+
+                data = await json(response);
+                logs = data.entries || [];
+            }
+
+            if (!logs.length) {
+                box.innerHTML = empty("No weight history yet.");
+                return;
+            }
+
+            const first = logs[0];
+            const current = logs[logs.length - 1];
+            const change =
+                n(current.weight)
+                -
+                n(first.weight);
+
+            const target =
+                n(p.targetWeight);
+
+            let summary =
+                '<div class="weight-summary-grid">'
+                +
+                wcard(
+                    "Start",
+                    one(first.weight) + " kg",
+                    first.date
+                )
+                +
+                wcard(
+                    "Current",
+                    one(current.weight) + " kg",
+                    current.date
+                );
+
+            let goalProgress = "";
+
+            if (
+                target > 0
+            ) {
+                const totalDistance =
+                    Math.abs(
+                        n(first.weight)
+                        -
+                        target
+                    );
+
+                const remainingDistance =
+                    Math.abs(
+                        n(current.weight)
+                        -
+                        target
+                    );
+
+                const progress =
+                    totalDistance <= 0.05
+                    ?
+                    (
+                        remainingDistance <= 0.05
+                        ?
+                        100
+                        :
+                        0
+                    )
+                    :
+                    Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            (
+                                1
+                                -
+                                (
+                                    remainingDistance
+                                    /
+                                    totalDistance
+                                )
+                            )
+                            *
+                            100
+                        )
+                    );
+
+                summary +=
+                    wcard(
+                        "Target",
+                        one(target) + " kg",
+                        progress >= 100
+                        ?
+                        "Target reached"
+                        :
+                        one(remainingDistance) + " kg remaining"
+                    );
+
+                goalProgress =
+                    '<div class="goal-progress-card mt-4">'
+                    +
+                    '<div class="d-flex justify-content-between align-items-end gap-3">'
+                    +
+                    '<div><span class="goal-progress-label">Goal Progress</span>'
+                    +
+                    '<strong>'
+                    +
+                    Math.round(progress)
+                    +
+                    '%</strong></div>'
+                    +
+                    '<small>'
+                    +
+                    one(first.weight)
+                    +
+                    ' kg → '
+                    +
+                    one(target)
+                    +
+                    ' kg</small></div>'
+                    +
+                    '<div class="goal-progress-track mt-3"><div style="width:'
+                    +
+                    progress.toFixed(1)
+                    +
+                    '%"></div></div>'
+                    +
+                    '<p class="small text-body-secondary mb-0 mt-2">'
+                    +
+                    (
+                        progress >= 100
+                        ?
+                        'You have reached your target weight.'
+                        :
+                        one(remainingDistance)
+                          + ' kg remaining based on your latest log.'
+                    )
+                    +
+                    '</p></div>';
+
+            } else {
+                summary +=
+                    wcard(
+                        "Change",
+                        (change > 0 ? "+" : "")
+                          + one(change)
+                          + " kg",
+                        p.goal === "lose" && change < 0
+                        ?
+                        "Moving toward goal"
+                        :
+                        p.goal === "gain" && change > 0
+                        ?
+                        "Moving toward goal"
+                        :
+                        "Compared with first record"
+                    );
+
+                goalProgress =
+                    '<div class="goal-progress-card mt-4">'
+                    +
+                    '<div class="d-flex align-items-start gap-3">'
+                    +
+                    '<i class="bi bi-bullseye"></i>'
+                    +
+                    '<div><strong>Set a target weight</strong>'
+                    +
+                    '<p class="small text-body-secondary mb-0">'
+                    +
+                    'Add Target Weight in your Health Profile to see percentage progress and remaining kilograms.'
+                    +
+                    '</p></div></div></div>';
+            }
+
+            summary +=
+                '</div>';
+
+            box.innerHTML =
+                summary
+                +
+                goalProgress
+                +
+                weightChart(
+                    logs
+                );
+
+        } catch (e) {
+            console.error(e);
+            box.innerHTML =
+                empty(
+                    e.message
+                    ||
+                    "Unable to load weight progress."
+                );
+        }
     }
 
     function weightChart(logs) {

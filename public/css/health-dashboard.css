@@ -1,0 +1,222 @@
+.goal-progress-card {
+    border: 1px solid var(--bs-border-color);
+    border-radius: 1rem;
+    padding: 1.1rem 1.2rem;
+    background: var(--bs-body-bg);
+}
+
+.goal-progress-card > .d-flex > i {
+    font-size: 1.5rem;
+    color: var(--bs-success);
+}
+
+.goal-progress-label {
+    display: block;
+    color: var(--bs-secondary-color);
+    font-size: 0.82rem;
+    margin-bottom: 0.15rem;
+}
+
+.goal-progress-card strong {
+    display: block;
+    font-size: 1.35rem;
+}
+
+.goal-progress-track,
+.water-progress-track,
+.weekly-score-progress {
+    overflow: hidden;
+    width: 100%;
+    background: var(--bs-tertiary-bg);
+    border-radius: 999px;
+}
+
+.goal-progress-track {
+    height: 0.7rem;
+}
+
+.goal-progress-track > div,
+.water-progress-track > div,
+.weekly-score-progress > div {
+    height: 100%;
+    background: var(--bs-success);
+    border-radius: inherit;
+    transition: width 0.25s ease;
+}
+
+.water-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.2rem;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 1rem;
+    background: var(--bs-body-bg);
+}
+
+.water-value-block > span {
+    display: block;
+    color: var(--bs-secondary-color);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.water-value-block > strong {
+    display: block;
+    margin: 0.15rem 0 0.25rem;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1;
+}
+
+.water-value-block > strong small {
+    font-size: 0.95rem;
+    color: var(--bs-secondary-color);
+}
+
+.water-percentage {
+    display: grid;
+    place-items: center;
+    min-width: 4.6rem;
+    min-height: 4.6rem;
+    padding: 0.7rem;
+    border: 0.45rem solid rgba(var(--bs-success-rgb), 0.2);
+    border-radius: 50%;
+    color: var(--bs-success);
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.water-progress-track {
+    height: 0.8rem;
+}
+
+.water-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.water-custom-input {
+    width: min(100%, 17rem);
+}
+
+.weekly-score-layout {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.7fr) minmax(0, 2fr);
+    gap: 1.25rem;
+}
+
+.weekly-score-main {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 1rem;
+    padding: 1.4rem;
+    background: var(--bs-body-bg);
+}
+
+.weekly-score-number {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+    color: var(--bs-success);
+}
+
+.weekly-score-number strong {
+    font-size: clamp(2.8rem, 7vw, 4.4rem);
+    line-height: 1;
+}
+
+.weekly-score-number span {
+    color: var(--bs-secondary-color);
+    font-weight: 700;
+}
+
+.weekly-score-components {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.weekly-score-card {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.9rem;
+    padding: 0.9rem;
+    background: var(--bs-body-bg);
+}
+
+.weekly-score-card:last-child {
+    grid-column: 1 / -1;
+}
+
+.weekly-score-card-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    background: rgba(var(--bs-success-rgb), 0.12);
+    color: var(--bs-success);
+}
+
+.weekly-score-card-body {
+    min-width: 0;
+    flex: 1;
+}
+
+.weekly-score-card-body span {
+    font-size: 0.9rem;
+}
+
+.weekly-score-progress {
+    height: 0.45rem;
+}
+
+.weekly-score-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.85rem;
+    background: var(--bs-tertiary-bg);
+    color: var(--bs-secondary-color);
+    font-size: 0.85rem;
+}
+
+.weekly-score-note i {
+    color: var(--bs-success);
+}
+
+@media (max-width: 767.98px) {
+    .water-summary {
+        align-items: flex-start;
+    }
+
+    .water-controls > .btn,
+    .water-custom-input {
+        width: 100%;
+    }
+
+    .weekly-score-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .weekly-score-components {
+        grid-template-columns: 1fr;
+    }
+
+    .weekly-score-card:last-child {
+        grid-column: auto;
+    }
+}
