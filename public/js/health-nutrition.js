@@ -868,13 +868,32 @@ healthForm.addEventListener(
         };
 
 
-        console.log(
+        const submitButton =
+            healthForm.querySelector(
+                'button[type="submit"]'
+            );
 
-            "Saving health profile:",
 
-            requestBody
+        const originalButtonHtml =
+            submitButton
+            ?
+            submitButton.innerHTML
+            :
+            "";
 
-        );
+
+        if (
+            submitButton
+        ) {
+
+            submitButton.disabled =
+                true;
+
+
+            submitButton.innerHTML =
+                '<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Saving...';
+
+        }
 
 
         try {
@@ -937,24 +956,6 @@ healthForm.addEventListener(
                     response
 
                 );
-
-
-            console.log(
-
-                "Health API status:",
-
-                response.status
-
-            );
-
-
-            console.log(
-
-                "Health API response:",
-
-                data
-
-            );
 
 
             if (
@@ -1066,6 +1067,21 @@ healthForm.addEventListener(
 
             );
 
+        } finally {
+
+            if (
+                submitButton
+            ) {
+
+                submitButton.disabled =
+                    false;
+
+
+                submitButton.innerHTML =
+                    originalButtonHtml;
+
+            }
+
         }
 
     }
@@ -1073,275 +1089,9 @@ healthForm.addEventListener(
 );
 
 
-/** BMI **/
-
-
-
-
-
-function calculateBMI(
-
-    weight,
-
-    height
-
-) {
-
-
-
-    const meters =
-
-        height / 100;
-
-
-
-
-
-    return (
-
-        weight /
-
-        (meters * meters)
-
-    );
-
-
-
-}
-
-
-
-
-
-/** BMR **/
-
-
-
-function calculateBMR(
-
-    gender,
-
-    weight,
-
-    height,
-
-    age
-
-) {
-
-
-
-    const base =
-
-        (10 * weight)
-
-        +
-
-        (6.25 * height)
-
-        -
-
-        (5 * age);
-
-
-
-
-
-    if (
-
-        gender ===
-
-        "male"
-
-    ) {
-
-
-
-        return base + 5;
-
-
-
-    }
-
-
-
-
-
-    return base - 161;
-
-
-
-}
-
-
-
-
-
-/** Target **/
-
-
-
-function calculateTargetCalories(
-
-    tdee,
-
-    goal
-
-) {
-
-
-
-    if (
-
-        goal ===
-
-        "lose"
-
-    ) {
-
-
-
-        return Math.max(
-
-            tdee - 500,
-
-            1200
-
-        );
-
-
-
-    }
-
-
-
-
-
-    if (
-
-        goal ===
-
-        "gain"
-
-    ) {
-
-
-
-        return tdee + 300;
-
-
-
-    }
-
-
-
-
-
-    return tdee;
-
-
-
-}
-
-
-
-
-
-/** Macros **/
-
-
-
-function calculateMacros(
-
-    calories,
-
-    weight
-
-) {
-
-
-
-    const protein =
-
-        weight * 2;
-
-
-
-    const proteinCalories =
-
-        protein * 4;
-
-
-
-    const fatCalories =
-
-        calories * 0.25;
-
-
-
-    const fat =
-
-        fatCalories / 9;
-
-
-
-    const remaining =
-
-        Math.max(
-
-            calories
-
-            -
-
-            proteinCalories
-
-            -
-
-            fatCalories,
-
-            0
-
-        );
-
-
-
-    const carbs =
-
-        remaining / 4;
-
-
-
-
-
-    return {
-
-        protein:
-
-            Math.round(protein),
-
-
-
-        carbs:
-
-            Math.round(carbs),
-
-
-
-        fat:
-
-            Math.round(fat)
-
-    };
-
-
-
-}
-
-
-
-
-
 /** BMI Status **/
+
+
 
 
 

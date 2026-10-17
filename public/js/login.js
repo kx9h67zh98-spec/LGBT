@@ -126,7 +126,7 @@ function setupLoginEvents() {
         function () {
 
             showLoginMessage(
-                "Password recovery will be connected to the backend later.",
+                "Password recovery is not enabled in this course build.",
                 "info"
             );
 

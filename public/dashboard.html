@@ -33,7 +33,7 @@
     <!-- Main CSS -->
     <link
         rel="stylesheet"
-        href="css/style.css"
+        href="css/style.css?v=10"
     >
 
     <!-- Dashboard CSS -->
@@ -88,6 +88,7 @@
                     <li class="nav-item">
                         <a
                             class="nav-link active"
+                            aria-current="page"
                             href="dashboard.html"
                         >
                             Dashboard
@@ -194,11 +195,11 @@
                             </small>
 
                             <strong id="dashboardAccountLabel">
-                                Frontend Mode
+                                Loading account...
                             </strong>
 
                             <p class="mb-0">
-                                User session will come from the backend.
+                                Session-protected data from the FitHealth backend.
                             </p>
 
                         </div>
@@ -223,6 +224,8 @@
                 id="dashboardMessage"
                 class="alert d-none"
                 role="alert"
+                aria-live="polite"
+                aria-atomic="true"
             ></div>
 
 

@@ -181,6 +181,11 @@ public class ExerciseServlet extends HttpServlet {
             "UTF-8"
         );
 
+        response.setHeader(
+            "Cache-Control",
+            "no-store"
+        );
+
         response
             .getWriter()
             .write(
