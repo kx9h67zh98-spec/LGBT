@@ -455,7 +455,7 @@
                 if (
                     category.includes("vegetable")
                     ||
-                    category.includes("vegetable")
+                    category.includes("veggie")
                 ) {
                     pools.vegetable.push(food);
                 }
