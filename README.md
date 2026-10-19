@@ -19,6 +19,7 @@ The production backend is the Java Servlet application. The Maven/Tomcat applica
 - Health Profile with BMI, BMR, TDEE, calorie target, macro targets, and target weight
 - Nutrition Tracker with food database and daily meal entries
 - Rule-based Smart Nutrition Suggestions
+- 7-day Weekly Meal Planner generated from the user's calorie target and saved through existing meal entries
 - 7-day Nutrition Insight
 - Weight history, trend chart, and Goal Progress
 - Daily Water Intake tracking
