@@ -54,6 +54,7 @@
     ];
 
     let weeklyPlan = [];
+    let availableFoods = [];
     let saving = false;
 
     document.addEventListener(
@@ -86,7 +87,7 @@
                         <p class="text-success fw-bold mb-1">7-DAY MEAL PLANNER</p>
                         <h2 class="fw-bold mb-1">Weekly Food Menu</h2>
                         <p class="text-body-secondary mb-0">
-                            Generate a 7-day menu from your calorie target and FitHealth food database.
+                            Generate a 7-day menu, then edit any suggested food or portion before saving.
                         </p>
                     </div>
                     <div class="weekly-menu-heading-icon" aria-hidden="true">
@@ -151,7 +152,8 @@
 
                 <p class="small text-body-secondary mt-3 mb-0">
                     The generated menu is a planning aid based on the foods currently stored in FitHealth.
-                    It is not medical advice. You can edit or delete saved items later in Food Tracker.
+                    Change a food from the dropdown or adjust its amount and the calories/macros recalculate instantly.
+                    It is not medical advice.
                 </p>
             </section>
             `
@@ -168,6 +170,9 @@
         const startInput =
             document.getElementById("weeklyMenuStart");
 
+        const menuDays =
+            document.getElementById("weeklyMenuDays");
+
         if (generateButton) {
             generateButton.addEventListener(
                 "click",
@@ -179,6 +184,13 @@
             saveButton.addEventListener(
                 "click",
                 saveWeeklyMenu
+            );
+        }
+
+        if (menuDays) {
+            menuDays.addEventListener(
+                "change",
+                handleMenuEdit
             );
         }
 
@@ -245,6 +257,18 @@
                             &&
                             Number(food.calories) > 0
                         );
+                    }
+                );
+
+        availableFoods =
+            foods
+                .slice()
+                .sort(
+                    function (left, right) {
+                        return String(left.name || "")
+                            .localeCompare(
+                                String(right.name || "")
+                            );
                     }
                 );
 
@@ -783,7 +807,12 @@
 
         container.innerHTML =
             weeklyPlan.map(
-                renderDay
+                function (day, dayIndex) {
+                    return renderDay(
+                        day,
+                        dayIndex
+                    );
+                }
             ).join("");
 
         if (saveButton) {
@@ -791,7 +820,10 @@
         }
     }
 
-    function renderDay(day) {
+    function renderDay(
+        day,
+        dayIndex
+    ) {
         const calorieCoverage =
             day.targetCalories > 0
                 ?
@@ -825,13 +857,25 @@
                 </div>
 
                 <div class="weekly-menu-meals">
-                    ${day.meals.map(renderMeal).join("")}
+                    ${day.meals.map(
+                        function (meal, mealIndex) {
+                            return renderMeal(
+                                meal,
+                                dayIndex,
+                                mealIndex
+                            );
+                        }
+                    ).join("")}
                 </div>
             </article>
         `;
     }
 
-    function renderMeal(meal) {
+    function renderMeal(
+        meal,
+        dayIndex,
+        mealIndex
+    ) {
         return `
             <div class="weekly-menu-meal">
                 <div class="weekly-menu-meal-title">
@@ -844,44 +888,392 @@
                 </div>
 
                 <div class="weekly-menu-food-list">
-                    ${meal.items.map(renderFoodItem).join("")}
+                    ${meal.items.map(
+                        function (item, itemIndex) {
+                            return renderFoodItem(
+                                item,
+                                dayIndex,
+                                mealIndex,
+                                itemIndex
+                            );
+                        }
+                    ).join("")}
                 </div>
             </div>
         `;
     }
 
-    function renderFoodItem(item) {
+    function renderFoodItem(
+        item,
+        dayIndex,
+        mealIndex,
+        itemIndex
+    ) {
+        const isServing =
+            String(item.nutritionType).toLowerCase()
+            ===
+            "serving";
+
         const unit =
-            item.nutritionType === "serving"
+            isServing
                 ?
                 item.servingUnit
                 :
                 "g";
 
-        const amountText =
-            item.nutritionType === "serving"
+        const amountStep =
+            isServing
                 ?
-                `${oneDecimal(item.amount)} ${unit}`
+                "0.5"
                 :
-                `${Math.round(item.amount)} ${unit}`;
+                "10";
+
+        const amountMin =
+            isServing
+                ?
+                "0.5"
+                :
+                "1";
 
         return `
-            <div class="weekly-menu-food">
-                <div>
-                    <strong>${escapeHtml(item.foodName)}</strong>
-                    <span>${escapeHtml(amountText)}</span>
+            <div
+                class="weekly-menu-food weekly-menu-food-editable"
+                data-day-index="${dayIndex}"
+                data-meal-index="${mealIndex}"
+                data-item-index="${itemIndex}"
+            >
+                <div class="weekly-menu-food-editor">
+                    <label class="weekly-menu-edit-label">
+                        Food
+                    </label>
+
+                    <select
+                        class="form-select form-select-sm weekly-menu-food-select"
+                        data-weekly-action="food"
+                        data-day-index="${dayIndex}"
+                        data-meal-index="${mealIndex}"
+                        data-item-index="${itemIndex}"
+                        aria-label="Change suggested food"
+                    >
+                        ${foodOptions(item.foodId)}
+                    </select>
+
+                    <div class="weekly-menu-amount-row">
+                        <div class="weekly-menu-amount-input-wrap">
+                            <label class="weekly-menu-edit-label">
+                                Amount
+                            </label>
+
+                            <div class="input-group input-group-sm">
+                                <input
+                                    type="number"
+                                    class="form-control weekly-menu-amount-input"
+                                    data-weekly-action="amount"
+                                    data-day-index="${dayIndex}"
+                                    data-meal-index="${mealIndex}"
+                                    data-item-index="${itemIndex}"
+                                    min="${amountMin}"
+                                    step="${amountStep}"
+                                    value="${escapeHtml(formatAmountInput(item.amount, isServing))}"
+                                    aria-label="Change suggested amount"
+                                >
+                                <span class="input-group-text">
+                                    ${escapeHtml(unit)}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="weekly-menu-food-nutrition">
+                            <strong>
+                                ${Math.round(item.calories)} kcal
+                            </strong>
+                            <small>
+                                ${oneDecimal(item.protein)}P
+                                ·
+                                ${oneDecimal(item.carbs)}C
+                                ·
+                                ${oneDecimal(item.fat)}F
+                            </small>
+                        </div>
+                    </div>
                 </div>
-                <small>
-                    ${Math.round(item.calories)} kcal
-                    ·
-                    ${oneDecimal(item.protein)}P
-                    ·
-                    ${oneDecimal(item.carbs)}C
-                    ·
-                    ${oneDecimal(item.fat)}F
-                </small>
             </div>
         `;
+    }
+
+    function foodOptions(selectedFoodId) {
+        return availableFoods.map(
+            function (food) {
+                const selected =
+                    Number(food.id)
+                    ===
+                    Number(selectedFoodId)
+                        ?
+                        " selected"
+                        :
+                        "";
+
+                const category =
+                    food.category
+                        ?
+                        ` · ${food.category}`
+                        :
+                        "";
+
+                return `
+                    <option value="${Number(food.id)}"${selected}>
+                        ${escapeHtml(food.name)}${escapeHtml(category)}
+                    </option>
+                `;
+            }
+        ).join("");
+    }
+
+    function formatAmountInput(
+        amount,
+        isServing
+    ) {
+        const value =
+            Number(amount) || 0;
+
+        return isServing
+            ?
+            value.toFixed(1)
+            :
+            String(Math.round(value));
+    }
+
+    function handleMenuEdit(event) {
+        const control =
+            event.target;
+
+        if (
+            !control
+            ||
+            !control.dataset
+            ||
+            !control.dataset.weeklyAction
+        ) {
+            return;
+        }
+
+        const dayIndex =
+            Number(control.dataset.dayIndex);
+
+        const mealIndex =
+            Number(control.dataset.mealIndex);
+
+        const itemIndex =
+            Number(control.dataset.itemIndex);
+
+        const item =
+            getPlanItem(
+                dayIndex,
+                mealIndex,
+                itemIndex
+            );
+
+        if (!item) {
+            return;
+        }
+
+        if (
+            control.dataset.weeklyAction
+            ===
+            "food"
+        ) {
+            replaceSuggestedFood(
+                dayIndex,
+                mealIndex,
+                itemIndex,
+                Number(control.value)
+            );
+        } else if (
+            control.dataset.weeklyAction
+            ===
+            "amount"
+        ) {
+            changeSuggestedAmount(
+                dayIndex,
+                mealIndex,
+                itemIndex,
+                Number(control.value)
+            );
+        }
+    }
+
+    function replaceSuggestedFood(
+        dayIndex,
+        mealIndex,
+        itemIndex,
+        foodId
+    ) {
+        const meal =
+            weeklyPlan[dayIndex]
+            &&
+            weeklyPlan[dayIndex]
+                .meals[mealIndex];
+
+        const currentItem =
+            meal
+            &&
+            meal.items[itemIndex];
+
+        const food =
+            availableFoods.find(
+                function (candidate) {
+                    return (
+                        Number(candidate.id)
+                        ===
+                        Number(foodId)
+                    );
+                }
+            );
+
+        if (
+            !meal
+            ||
+            !currentItem
+            ||
+            !food
+        ) {
+            return;
+        }
+
+        const desiredCalories =
+            Math.max(
+                Number(currentItem.calories) || 0,
+                1
+            );
+
+        meal.items[itemIndex] =
+            buildPlannedItem(
+                food,
+                desiredCalories,
+                meal.type
+            );
+
+        recalculateDay(dayIndex);
+        renderPlan();
+
+        showMessage(
+            "Menu updated. Review your changes, then save the week.",
+            "info"
+        );
+    }
+
+    function changeSuggestedAmount(
+        dayIndex,
+        mealIndex,
+        itemIndex,
+        amount
+    ) {
+        if (
+            !Number.isFinite(amount)
+            ||
+            amount <= 0
+        ) {
+            renderPlan();
+
+            showMessage(
+                "Amount must be greater than 0.",
+                "warning"
+            );
+            return;
+        }
+
+        const item =
+            getPlanItem(
+                dayIndex,
+                mealIndex,
+                itemIndex
+            );
+
+        const food =
+            item
+            &&
+            availableFoods.find(
+                function (candidate) {
+                    return (
+                        Number(candidate.id)
+                        ===
+                        Number(item.foodId)
+                    );
+                }
+            );
+
+        if (!item || !food) {
+            return;
+        }
+
+        item.amount =
+            amount;
+
+        const nutrition =
+            calculateNutrition(
+                food,
+                amount
+            );
+
+        item.calories =
+            nutrition.calories;
+
+        item.protein =
+            nutrition.protein;
+
+        item.carbs =
+            nutrition.carbs;
+
+        item.fat =
+            nutrition.fat;
+
+        recalculateDay(dayIndex);
+        renderPlan();
+
+        showMessage(
+            "Portion updated and nutrition totals recalculated.",
+            "info"
+        );
+    }
+
+    function getPlanItem(
+        dayIndex,
+        mealIndex,
+        itemIndex
+    ) {
+        const day =
+            weeklyPlan[dayIndex];
+
+        const meal =
+            day
+            &&
+            day.meals[mealIndex];
+
+        return meal
+            &&
+            meal.items[itemIndex]
+                ?
+                meal.items[itemIndex]
+                :
+                null;
+    }
+
+    function recalculateDay(dayIndex) {
+        const day =
+            weeklyPlan[dayIndex];
+
+        if (!day) {
+            return;
+        }
+
+        day.totals =
+            totalPlanItems(
+                day.meals.flatMap(
+                    function (meal) {
+                        return meal.items;
+                    }
+                )
+            );
     }
 
     async function saveWeeklyMenu() {
