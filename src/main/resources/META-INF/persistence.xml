@@ -56,6 +56,10 @@
             com.fithealth.model.WorkoutExercise
         </class>
 
+        <class>
+            com.fithealth.model.AccountToken
+        </class>
+
 
         <properties>
 
@@ -86,12 +90,40 @@
                 value="validate"/>
 
             <property
+                name="hibernate.connection.provider_class"
+                value="hikaricp"/>
+
+            <property
+                name="hibernate.hikari.maximumPoolSize"
+                value="10"/>
+
+            <property
+                name="hibernate.hikari.minimumIdle"
+                value="2"/>
+
+            <property
+                name="hibernate.hikari.connectionTimeout"
+                value="10000"/>
+
+            <property
+                name="hibernate.hikari.idleTimeout"
+                value="600000"/>
+
+            <property
+                name="hibernate.hikari.maxLifetime"
+                value="1500000"/>
+
+            <property
+                name="hibernate.hikari.keepaliveTime"
+                value="300000"/>
+
+            <property
                 name="hibernate.show_sql"
-                value="true"/>
+                value="false"/>
 
             <property
                 name="hibernate.format_sql"
-                value="true"/>
+                value="false"/>
 
         </properties>
 
