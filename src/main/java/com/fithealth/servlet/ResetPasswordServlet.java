@@ -129,6 +129,12 @@ public class ResetPasswordServlet extends HttpServlet {
                 passwordHash
             );
 
+            if (!user.isEmailVerified()) {
+                userDAO.markEmailVerified(
+                    user.getId()
+                );
+            }
+
             accountTokenDAO.invalidateForUser(
                 user.getId(),
                 AccountToken.PURPOSE_PASSWORD_RESET
