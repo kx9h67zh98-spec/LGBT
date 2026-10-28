@@ -124,12 +124,8 @@ function setupLoginEvents() {
     forgotPasswordButton.addEventListener(
         "click",
         function () {
-
-            showLoginMessage(
-                "Password recovery is not enabled in this course build.",
-                "info"
-            );
-
+            window.location.href =
+                "forgot-password.html";
         }
     );
 
