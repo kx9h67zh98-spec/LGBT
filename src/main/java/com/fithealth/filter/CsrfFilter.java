@@ -94,6 +94,10 @@ public class CsrfFilter implements Filter {
             );
 
         if (
+            requiresSessionToken(
+                httpRequest.getServletPath()
+            )
+            &&
             session != null
             &&
             session.getAttribute(
@@ -132,6 +136,28 @@ public class CsrfFilter implements Filter {
         chain.doFilter(
             request,
             response
+        );
+    }
+
+    private boolean requiresSessionToken(
+        String path
+    ) {
+        if (path == null) {
+            return true;
+        }
+
+        return !(
+            path.equals("/login")
+            ||
+            path.equals("/register")
+            ||
+            path.equals("/api/auth/password/forgot")
+            ||
+            path.equals("/api/auth/password/reset")
+            ||
+            path.equals("/api/auth/email/verify")
+            ||
+            path.equals("/api/auth/email/resend")
         );
     }
 
