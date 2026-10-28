@@ -6,8 +6,63 @@ window.FitHealthCsrfToken = null;
             window
         );
 
+    let csrfRefreshPromise =
+        null;
+
+    async function ensureCsrfToken() {
+        if (
+            window.FitHealthCsrfToken
+        ) {
+            return window.FitHealthCsrfToken;
+        }
+
+        if (!csrfRefreshPromise) {
+            csrfRefreshPromise =
+                nativeFetch(
+                    "api/auth/me",
+                    {
+                        method: "GET",
+                        credentials:
+                            "same-origin",
+                        cache:
+                            "no-store"
+                    }
+                )
+                .then(
+                    async function (response) {
+                        if (!response.ok) {
+                            return null;
+                        }
+
+                        const data =
+                            await response.json();
+
+                        window.FitHealthCsrfToken =
+                            data.csrfToken
+                            ||
+                            null;
+
+                        return window.FitHealthCsrfToken;
+                    }
+                )
+                .catch(
+                    function () {
+                        return null;
+                    }
+                )
+                .finally(
+                    function () {
+                        csrfRefreshPromise =
+                            null;
+                    }
+                );
+        }
+
+        return csrfRefreshPromise;
+    }
+
     window.fetch =
-        function (
+        async function (
             input,
             init
         ) {
@@ -66,29 +121,33 @@ window.FitHealthCsrfToken = null;
                 url.origin
                     ===
                     window.location.origin
-                &&
-                window.FitHealthCsrfToken
             ) {
-                const headers =
-                    new Headers(
-                        options.headers
-                        ||
-                        (
-                            input instanceof Request
-                                ?
-                                input.headers
-                                :
-                                undefined
-                        )
+                await ensureCsrfToken();
+
+                if (
+                    window.FitHealthCsrfToken
+                ) {
+                    const headers =
+                        new Headers(
+                            options.headers
+                            ||
+                            (
+                                input instanceof Request
+                                    ?
+                                    input.headers
+                                    :
+                                    undefined
+                            )
+                        );
+
+                    headers.set(
+                        "X-CSRF-Token",
+                        window.FitHealthCsrfToken
                     );
 
-                headers.set(
-                    "X-CSRF-Token",
-                    window.FitHealthCsrfToken
-                );
-
-                options.headers =
-                    headers;
+                    options.headers =
+                        headers;
+                }
             }
 
             return nativeFetch(
