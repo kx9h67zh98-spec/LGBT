@@ -1,3 +1,104 @@
+window.FitHealthCsrfToken = null;
+
+(function installProtectedFetch() {
+    const nativeFetch =
+        window.fetch.bind(
+            window
+        );
+
+    window.fetch =
+        function (
+            input,
+            init
+        ) {
+            const options =
+                init
+                    ?
+                    { ...init }
+                    :
+                    {};
+
+            const method =
+                String(
+                    options.method
+                    ||
+                    (
+                        input instanceof Request
+                            ?
+                            input.method
+                            :
+                            "GET"
+                    )
+                )
+                .toUpperCase();
+
+            const unsafe =
+                ![
+                    "GET",
+                    "HEAD",
+                    "OPTIONS"
+                ].includes(
+                    method
+                );
+
+            let url;
+
+            try {
+                url =
+                    new URL(
+                        input instanceof Request
+                            ?
+                            input.url
+                            :
+                            input,
+                        window.location.href
+                    );
+            } catch (error) {
+                url =
+                    null;
+            }
+
+            if (
+                unsafe
+                &&
+                url
+                &&
+                url.origin
+                    ===
+                    window.location.origin
+                &&
+                window.FitHealthCsrfToken
+            ) {
+                const headers =
+                    new Headers(
+                        options.headers
+                        ||
+                        (
+                            input instanceof Request
+                                ?
+                                input.headers
+                                :
+                                undefined
+                        )
+                    );
+
+                headers.set(
+                    "X-CSRF-Token",
+                    window.FitHealthCsrfToken
+                );
+
+                options.headers =
+                    headers;
+            }
+
+            return nativeFetch(
+                input,
+                options
+            );
+        };
+})();
+
+
 document.addEventListener(
     "DOMContentLoaded",
     async function () {
@@ -64,6 +165,11 @@ async function checkAuthentication() {
 
         window.FitHealthCurrentUser =
             data.user;
+
+        window.FitHealthCsrfToken =
+            data.csrfToken
+            ||
+            null;
 
 
         document.dispatchEvent(
