@@ -4,6 +4,7 @@ import com.fithealth.dao.AccountTokenDAO;
 import com.fithealth.dao.UserDAO;
 import com.fithealth.model.AccountToken;
 import com.fithealth.model.User;
+import com.fithealth.util.AppConfig;
 import com.fithealth.util.MailService;
 import com.fithealth.util.PasswordPolicy;
 import com.fithealth.util.TokenUtil;
@@ -219,6 +220,9 @@ public class RegisterServlet extends HttpServlet {
                     rawVerificationToken
                 );
 
+            boolean verificationRequired =
+                AppConfig.isEmailVerificationRequired();
+
             JsonObject json =
                 new JsonObject();
 
@@ -229,16 +233,22 @@ public class RegisterServlet extends HttpServlet {
 
             json.addProperty(
                 "message",
-                verificationEmailSent
+                verificationRequired
                     ?
-                    "Account created. Check your email to verify your account."
+                    (
+                        verificationEmailSent
+                            ?
+                            "Account created. Check your email to verify your account."
+                            :
+                            "Account created. Email verification is required, but SMTP is not configured to deliver the verification link."
+                    )
                     :
-                    "Account created. Email verification is pending; SMTP must be configured to deliver the verification link."
+                    "Account created successfully. Email verification is available but not currently required."
             );
 
             json.addProperty(
                 "emailVerificationRequired",
-                true
+                verificationRequired
             );
 
             json.addProperty(
