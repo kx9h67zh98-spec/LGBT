@@ -18,13 +18,13 @@ public final class AppConfig {
             ||
             value.isBlank()
         ) {
-            return true;
+            return false;
         }
 
-        return !value
+        return value
             .trim()
             .equalsIgnoreCase(
-                "false"
+                "true"
             );
     }
 }
