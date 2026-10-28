@@ -125,7 +125,7 @@ public class JPAUtil {
 
             properties.put(
                 "hibernate.connection.provider_class",
-                "hikaricp"
+                "org.hibernate.hikaricp.internal.HikariCPConnectionProvider"
             );
 
             properties.put(
