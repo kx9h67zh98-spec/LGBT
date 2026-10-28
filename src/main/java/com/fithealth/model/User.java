@@ -42,6 +42,17 @@ public class User {
     private String passwordHash;
 
     @Column(
+        name = "email_verified",
+        nullable = false
+    )
+    private boolean emailVerified = false;
+
+    @Column(
+        name = "email_verified_at"
+    )
+    private LocalDateTime emailVerifiedAt;
+
+    @Column(
         name = "created_at",
         insertable = false,
         updatable = false
@@ -109,6 +120,28 @@ public class User {
         String passwordHash
     ) {
         this.passwordHash = passwordHash;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(
+        boolean emailVerified
+    ) {
+        this.emailVerified =
+            emailVerified;
+    }
+
+    public LocalDateTime getEmailVerifiedAt() {
+        return emailVerifiedAt;
+    }
+
+    public void setEmailVerifiedAt(
+        LocalDateTime emailVerifiedAt
+    ) {
+        this.emailVerifiedAt =
+            emailVerifiedAt;
     }
 
     public LocalDateTime getCreatedAt() {

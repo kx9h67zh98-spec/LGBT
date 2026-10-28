@@ -1,7 +1,13 @@
 package com.fithealth.servlet;
 
+import com.fithealth.dao.AccountTokenDAO;
 import com.fithealth.dao.UserDAO;
+import com.fithealth.model.AccountToken;
 import com.fithealth.model.User;
+import com.fithealth.util.AppConfig;
+import com.fithealth.util.MailService;
+import com.fithealth.util.PasswordPolicy;
+import com.fithealth.util.TokenUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -13,13 +19,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
     private final UserDAO userDAO =
         new UserDAO();
+
+    private final AccountTokenDAO accountTokenDAO =
+        new AccountTokenDAO();
+
+    private final MailService mailService =
+        new MailService();
 
     private final Gson gson =
         new Gson();
@@ -138,52 +150,21 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
-            if (password.length() < 8) {
+            String passwordError =
+                PasswordPolicy.validate(
+                    password
+                );
 
+            if (passwordError != null) {
                 sendError(
                     response,
                     HttpServletResponse.SC_BAD_REQUEST,
-                    "Password must contain at least 8 characters."
+                    passwordError
                 );
 
                 return;
             }
 
-            if (
-                password
-                    .getBytes(
-                        StandardCharsets.UTF_8
-                    )
-                    .length > 72
-            ) {
-
-                sendError(
-                    response,
-                    HttpServletResponse.SC_BAD_REQUEST,
-                    "Password must be 72 UTF-8 bytes or fewer."
-                );
-
-                return;
-            }
-
-            if (
-                !password.matches(
-                    ".*[A-Za-z].*"
-                )
-                ||
-                !password.matches(
-                    ".*\\d.*"
-                )
-            ) {
-
-                sendError(
-                    response,
-                    HttpServletResponse.SC_BAD_REQUEST,
-                    "Password must contain at least one letter and one number."
-                );
-
-                return;
-            }
 
             /* Duplicate Email */
             if (
@@ -220,6 +201,28 @@ public class RegisterServlet extends HttpServlet {
             /* Save with JPA */
             userDAO.save(user);
 
+            String rawVerificationToken =
+                TokenUtil.generateToken();
+
+            accountTokenDAO.create(
+                user.getId(),
+                AccountToken.PURPOSE_EMAIL_VERIFY,
+                TokenUtil.sha256(
+                    rawVerificationToken
+                ),
+                LocalDateTime.now()
+                    .plusHours(24)
+            );
+
+            boolean verificationEmailSent =
+                mailService.sendVerificationEmail(
+                    user,
+                    rawVerificationToken
+                );
+
+            boolean verificationRequired =
+                AppConfig.isEmailVerificationRequired();
+
             JsonObject json =
                 new JsonObject();
 
@@ -230,7 +233,27 @@ public class RegisterServlet extends HttpServlet {
 
             json.addProperty(
                 "message",
-                "Account created successfully."
+                verificationRequired
+                    ?
+                    (
+                        verificationEmailSent
+                            ?
+                            "Account created. Check your email to verify your account."
+                            :
+                            "Account created. Email verification is required, but SMTP is not configured to deliver the verification link."
+                    )
+                    :
+                    "Account created successfully. Email verification is available but not currently required."
+            );
+
+            json.addProperty(
+                "emailVerificationRequired",
+                verificationRequired
+            );
+
+            json.addProperty(
+                "verificationEmailSent",
+                verificationEmailSent
             );
 
             json.addProperty(

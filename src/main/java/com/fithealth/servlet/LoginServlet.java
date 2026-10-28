@@ -2,6 +2,8 @@ package com.fithealth.servlet;
 
 import com.fithealth.dao.UserDAO;
 import com.fithealth.model.User;
+import com.fithealth.util.AppConfig;
+import com.fithealth.util.CsrfUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -106,6 +108,44 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
 
+            if (
+                AppConfig.isEmailVerificationRequired()
+                &&
+                !user.isEmailVerified()
+            ) {
+                response.setStatus(
+                    HttpServletResponse.SC_FORBIDDEN
+                );
+
+                JsonObject json =
+                    new JsonObject();
+
+                json.addProperty(
+                    "success",
+                    false
+                );
+
+                json.addProperty(
+                    "code",
+                    "EMAIL_NOT_VERIFIED"
+                );
+
+                json.addProperty(
+                    "message",
+                    "Please verify your email before signing in."
+                );
+
+                response
+                    .getWriter()
+                    .write(
+                        gson.toJson(
+                            json
+                        )
+                    );
+
+                return;
+            }
+
             /* Create Session */
             HttpSession oldSession =
                 request.getSession(false);
@@ -140,6 +180,11 @@ public class LoginServlet extends HttpServlet {
             session.setMaxInactiveInterval(
                 30 * 60
             );
+
+            String csrfToken =
+                CsrfUtil.ensureToken(
+                    session
+                );
 
             /* JSON Response */
             JsonObject userJson =
@@ -176,6 +221,11 @@ public class LoginServlet extends HttpServlet {
             json.addProperty(
                 "message",
                 "Login successful."
+            );
+
+            json.addProperty(
+                "csrfToken",
+                csrfToken
             );
 
             json.add(

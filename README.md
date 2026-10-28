@@ -249,3 +249,42 @@ The current scope does not include password recovery, email verification, CSRF t
 
 - `docs/VIVA_GUIDE.md` — common defense questions and concise answers
 - `docs/FINAL_QA_CHECKLIST.md` — pre-submission and pre-demo test checklist
+
+
+## Production security and account configuration
+
+FitHealth includes email verification, password recovery, CSRF protection, application rate limiting, Flyway database migrations and HikariCP connection pooling.
+
+Recommended Railway variables for the application service:
+
+```text
+APP_BASE_URL=https://lgbt-production.up.railway.app
+EMAIL_VERIFICATION_REQUIRED=true
+
+DB_POOL_MAX=10
+DB_POOL_MIN_IDLE=2
+DB_POOL_CONNECTION_TIMEOUT_MS=10000
+DB_POOL_IDLE_TIMEOUT_MS=600000
+DB_POOL_MAX_LIFETIME_MS=1500000
+DB_POOL_KEEPALIVE_MS=300000
+HIBERNATE_SHOW_SQL=false
+
+SMTP_HOST=<transactional SMTP host>
+SMTP_PORT=587
+SMTP_USERNAME=<SMTP username>
+SMTP_PASSWORD=<SMTP password>
+SMTP_FROM=<verified sender address>
+SMTP_STARTTLS=true
+```
+
+Do not commit SMTP credentials to Git. Store them as Railway service variables/secrets.
+
+Account security behavior:
+- New accounts receive a 24-hour one-time email verification token.
+- Password reset links are one-time tokens valid for 30 minutes.
+- Raw verification/reset tokens are never persisted; only SHA-256 hashes are stored.
+- Authenticated POST/PUT/PATCH/DELETE requests require a session CSRF token.
+- Sensitive authentication endpoints are rate limited.
+- Existing users are preserved as verified during the first Flyway security migration.
+
+Clinical Wellness Recommendations are educational screening/wellness guidance only. They are not diagnosis or treatment and do not replace a qualified healthcare professional.

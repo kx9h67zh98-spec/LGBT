@@ -1,5 +1,6 @@
 package com.fithealth.servlet;
 
+import com.fithealth.util.CsrfUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -105,6 +106,11 @@ public class AuthMeServlet extends HttpServlet {
             )
         );
 
+        String csrfToken =
+            CsrfUtil.ensureToken(
+                session
+            );
+
         JsonObject json =
             new JsonObject();
 
@@ -116,6 +122,11 @@ public class AuthMeServlet extends HttpServlet {
         json.addProperty(
             "authenticated",
             true
+        );
+
+        json.addProperty(
+            "csrfToken",
+            csrfToken
         );
 
         json.add(

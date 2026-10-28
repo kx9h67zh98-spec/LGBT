@@ -74,4 +74,105 @@ public class UserDAO {
             entityManager.close();
         }
     }
+    public User findById(
+        Long userId
+    ) {
+        EntityManager entityManager =
+            JPAUtil.getEntityManager();
+
+        try {
+            return entityManager.find(
+                User.class,
+                userId
+            );
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    public void markEmailVerified(
+        Long userId
+    ) {
+        EntityManager entityManager =
+            JPAUtil.getEntityManager();
+
+        EntityTransaction transaction =
+            entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+
+            User user =
+                entityManager.find(
+                    User.class,
+                    userId
+                );
+
+            if (user != null) {
+                user.setEmailVerified(
+                    true
+                );
+
+                user.setEmailVerifiedAt(
+                    java.time.LocalDateTime.now()
+                );
+            }
+
+            transaction.commit();
+
+        } catch (RuntimeException exception) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+
+            throw exception;
+
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    public void updatePasswordHash(
+        Long userId,
+        String passwordHash
+    ) {
+        EntityManager entityManager =
+            JPAUtil.getEntityManager();
+
+        EntityTransaction transaction =
+            entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+
+            User user =
+                entityManager.find(
+                    User.class,
+                    userId
+                );
+
+            if (user == null) {
+                throw new IllegalArgumentException(
+                    "User not found."
+                );
+            }
+
+            user.setPasswordHash(
+                passwordHash
+            );
+
+            transaction.commit();
+
+        } catch (RuntimeException exception) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+
+            throw exception;
+
+        } finally {
+            entityManager.close();
+        }
+    }
+
 }
