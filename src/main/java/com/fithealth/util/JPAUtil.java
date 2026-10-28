@@ -189,14 +189,6 @@ public class JPAUtil {
             );
 
             properties.put(
-                "hibernate.hikari.keepaliveTime",
-                envOrDefault(
-                    "DB_POOL_KEEPALIVE_MS",
-                    "300000"
-                )
-            );
-
-            properties.put(
                 "hibernate.hikari.poolName",
                 "FitHealthPool"
             );
