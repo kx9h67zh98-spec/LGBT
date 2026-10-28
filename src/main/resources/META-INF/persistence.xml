@@ -114,10 +114,6 @@
                 value="1500000"/>
 
             <property
-                name="hibernate.hikari.keepaliveTime"
-                value="300000"/>
-
-            <property
                 name="hibernate.show_sql"
                 value="false"/>
 
