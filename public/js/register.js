@@ -500,12 +500,21 @@ async function handleRegisterSubmit(
 
         window.setTimeout(
             function () {
-
-                window.location.href =
-                    "login.html";
-
+                if (
+                    data.emailVerificationRequired
+                ) {
+                    window.location.href =
+                        "verify-email.html?email="
+                        +
+                        encodeURIComponent(
+                            emailValue
+                        );
+                } else {
+                    window.location.href =
+                        "login.html";
+                }
             },
-            800
+            1200
         );
 
     } catch (error) {
