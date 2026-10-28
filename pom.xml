@@ -51,6 +51,38 @@
             <version>9.1.0</version>
         </dependency>
 
+        <!-- Production connection pooling through Hibernate -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-hikaricp</artifactId>
+            <version>6.6.4.Final</version>
+        </dependency>
+
+        <!-- Database migrations -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>13.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+            <version>13.11.1</version>
+        </dependency>
+
+        <!-- Transactional email -->
+        <dependency>
+            <groupId>jakarta.mail</groupId>
+            <artifactId>jakarta.mail-api</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.angus</groupId>
+            <artifactId>angus-mail</artifactId>
+            <version>2.0.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- BCrypt Password Hashing -->
         <dependency>
             <groupId>org.mindrot</groupId>
