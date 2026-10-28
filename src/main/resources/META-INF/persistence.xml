@@ -91,7 +91,7 @@
 
             <property
                 name="hibernate.connection.provider_class"
-                value="hikaricp"/>
+                value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
 
             <property
                 name="hibernate.hikari.maximumPoolSize"
