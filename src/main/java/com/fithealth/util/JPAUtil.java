@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import org.flywaydb.core.Flyway;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,9 +25,6 @@ public class JPAUtil {
     private static EntityManagerFactory
         createEntityManagerFactory() {
 
-        /*
-         * Railway MySQL variables
-         */
         String host =
             getFirstNonBlank(
                 System.getenv("MYSQLHOST"),
@@ -56,11 +55,6 @@ public class JPAUtil {
                 System.getenv("DB_PASSWORD")
             );
 
-
-        /*
-         * If cloud/database environment variables exist,
-         * override persistence.xml.
-         */
         if (
             host != null
             &&
@@ -70,18 +64,14 @@ public class JPAUtil {
             &&
             password != null
         ) {
-
             if (
                 port == null
                 ||
                 port.isBlank()
             ) {
-
                 port =
                     "3306";
-
             }
-
 
             String jdbcUrl =
                 "jdbc:mysql://"
@@ -100,12 +90,18 @@ public class JPAUtil {
                 +
                 "&allowPublicKeyRetrieval=true"
                 +
-                "&serverTimezone=UTC";
+                "&serverTimezone=UTC"
+                +
+                "&tcpKeepAlive=true";
 
+            migrateDatabase(
+                jdbcUrl,
+                user,
+                password
+            );
 
             Map<String, Object> properties =
                 new HashMap<>();
-
 
             properties.put(
                 "jakarta.persistence.jdbc.driver",
@@ -127,38 +123,145 @@ public class JPAUtil {
                 password
             );
 
-
-            System.out.println(
-                "FitHealth database mode: environment configuration."
+            properties.put(
+                "hibernate.connection.provider_class",
+                "hikaricp"
             );
 
+            properties.put(
+                "hibernate.hikari.jdbcUrl",
+                jdbcUrl
+            );
+
+            properties.put(
+                "hibernate.hikari.username",
+                user
+            );
+
+            properties.put(
+                "hibernate.hikari.password",
+                password
+            );
+
+            properties.put(
+                "hibernate.hikari.driverClassName",
+                "com.mysql.cj.jdbc.Driver"
+            );
+
+            properties.put(
+                "hibernate.hikari.maximumPoolSize",
+                envOrDefault(
+                    "DB_POOL_MAX",
+                    "10"
+                )
+            );
+
+            properties.put(
+                "hibernate.hikari.minimumIdle",
+                envOrDefault(
+                    "DB_POOL_MIN_IDLE",
+                    "2"
+                )
+            );
+
+            properties.put(
+                "hibernate.hikari.connectionTimeout",
+                envOrDefault(
+                    "DB_POOL_CONNECTION_TIMEOUT_MS",
+                    "10000"
+                )
+            );
+
+            properties.put(
+                "hibernate.hikari.idleTimeout",
+                envOrDefault(
+                    "DB_POOL_IDLE_TIMEOUT_MS",
+                    "600000"
+                )
+            );
+
+            properties.put(
+                "hibernate.hikari.maxLifetime",
+                envOrDefault(
+                    "DB_POOL_MAX_LIFETIME_MS",
+                    "1500000"
+                )
+            );
+
+            properties.put(
+                "hibernate.hikari.keepaliveTime",
+                envOrDefault(
+                    "DB_POOL_KEEPALIVE_MS",
+                    "300000"
+                )
+            );
+
+            properties.put(
+                "hibernate.hikari.poolName",
+                "FitHealthPool"
+            );
+
+            properties.put(
+                "hibernate.show_sql",
+                envOrDefault(
+                    "HIBERNATE_SHOW_SQL",
+                    "false"
+                )
+            );
+
+            properties.put(
+                "hibernate.format_sql",
+                "false"
+            );
+
+            System.out.println(
+                "FitHealth database mode: environment configuration with Flyway + HikariCP."
+            );
 
             return Persistence
                 .createEntityManagerFactory(
                     PERSISTENCE_UNIT,
                     properties
                 );
-
         }
 
-
-        /*
-         * Local fallback.
-         * Uses persistence.xml when cloud variables
-         * are not available.
-         */
         System.out.println(
             "FitHealth database mode: persistence.xml."
         );
-
 
         return Persistence
             .createEntityManagerFactory(
                 PERSISTENCE_UNIT
             );
-
     }
 
+    private static void migrateDatabase(
+        String jdbcUrl,
+        String user,
+        String password
+    ) {
+        Flyway flyway =
+            Flyway
+                .configure()
+                .dataSource(
+                    jdbcUrl,
+                    user,
+                    password
+                )
+                .baselineOnMigrate(
+                    true
+                )
+                .baselineVersion(
+                    "0"
+                )
+                .load();
+
+        flyway.migrate();
+
+        System.out.println(
+            "FitHealth database migrations: up to date."
+        );
+    }
 
     private static String
         getFirstNonBlank(
@@ -168,44 +271,52 @@ public class JPAUtil {
         if (
             values == null
         ) {
-
             return null;
-
         }
-
 
         for (
             String value
             :
             values
         ) {
-
             if (
                 value != null
                 &&
                 !value.isBlank()
             ) {
-
                 return value.trim();
-
             }
-
         }
 
-
         return null;
-
     }
 
+    private static String envOrDefault(
+        String name,
+        String defaultValue
+    ) {
+        String value =
+            System.getenv(
+                name
+            );
+
+        if (
+            value == null
+            ||
+            value.isBlank()
+        ) {
+            return defaultValue;
+        }
+
+        return value.trim();
+    }
 
     public static EntityManager
         getEntityManager() {
 
         return entityManagerFactory
             .createEntityManager();
-
     }
-
 
     public static void shutdown() {
 
@@ -214,11 +325,7 @@ public class JPAUtil {
             &&
             entityManagerFactory.isOpen()
         ) {
-
             entityManagerFactory.close();
-
         }
-
     }
-
 }
