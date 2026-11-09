@@ -73,6 +73,25 @@ public class JPAUtil {
                     "3306";
             }
 
+            // TiDB Cloud and other external providers can require verified TLS.
+            // Keep the old Railway/local behavior unless explicitly configured.
+            String sslMode = getFirstNonBlank(
+                System.getenv("MYSQL_SSL_MODE"),
+                System.getenv("DB_SSL_MODE")
+            );
+            if (sslMode == null) {
+                sslMode = "DISABLED";
+            }
+            sslMode = sslMode.toUpperCase(java.util.Locale.ROOT);
+            if (!java.util.Set.of(
+                    "DISABLED", "PREFERRED", "REQUIRED",
+                    "VERIFY_CA", "VERIFY_IDENTITY"
+                ).contains(sslMode)) {
+                throw new IllegalArgumentException(
+                    "Invalid MYSQL_SSL_MODE. Use DISABLED, PREFERRED, REQUIRED, VERIFY_CA, or VERIFY_IDENTITY."
+                );
+            }
+
             String jdbcUrl =
                 "jdbc:mysql://"
                 +
@@ -86,7 +105,9 @@ public class JPAUtil {
                 +
                 database
                 +
-                "?useSSL=false"
+                "?sslMode="
+                +
+                sslMode
                 +
                 "&allowPublicKeyRetrieval=true"
                 +
