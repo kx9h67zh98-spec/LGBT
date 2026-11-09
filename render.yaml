@@ -1,0 +1,32 @@
+# Render Blueprint for FitHealth (Java 17 + Tomcat 11).
+# The database is external; this file does NOT create or overwrite one.
+services:
+  - type: web
+    name: fithealth
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: JAVA_TOOL_OPTIONS
+        value: "-XX:MaxRAMPercentage=65.0 -XX:InitialRAMPercentage=20.0"
+      - key: MYSQLHOST
+        sync: false
+      - key: MYSQLPORT
+        sync: false
+      - key: MYSQLDATABASE
+        sync: false
+      - key: MYSQLUSER
+        sync: false
+      - key: MYSQLPASSWORD
+        sync: false
+      # TiDB Cloud Starter public endpoints require TLS with hostname verification.
+      - key: MYSQL_SSL_MODE
+        value: "VERIFY_IDENTITY"
+      - key: DB_POOL_MAX
+        value: "4"
+      - key: DB_POOL_MIN_IDLE
+        value: "1"
+      - key: HIBERNATE_SHOW_SQL
+        value: "false"
