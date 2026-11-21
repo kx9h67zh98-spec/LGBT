@@ -287,3 +287,10 @@ Account security behavior:
 - Existing users are preserved as verified during the first Flyway security migration.
 
 Clinical Wellness Recommendations are educational screening/wellness guidance only. They are not diagnosis or treatment and do not replace a qualified healthcare professional.
+
+
+## TiDB Cloud migration
+
+If Railway MySQL is unavailable or the Railway trial has ended, FitHealth can use a MySQL-compatible TiDB Cloud Starter database without rewriting DAO/JPA code.
+
+See `docs/TIDB_MIGRATION.md` for the migration steps. The application accepts `TIDB_HOST`, `TIDB_PORT`, `TIDB_DATABASE`, `TIDB_USER`, and `TIDB_PASSWORD`, and automatically enables TLS for TiDB Cloud.
