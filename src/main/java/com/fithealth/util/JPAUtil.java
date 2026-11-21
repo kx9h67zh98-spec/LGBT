@@ -25,75 +25,95 @@ public class JPAUtil {
     private static EntityManagerFactory
         createEntityManagerFactory() {
 
+        String explicitJdbcUrl =
+            getFirstNonBlank(
+                System.getenv("DB_JDBC_URL"),
+                System.getenv("JDBC_DATABASE_URL")
+            );
+
+        String tidbHost =
+            getFirstNonBlank(
+                System.getenv("TIDB_HOST")
+            );
+
         String host =
             getFirstNonBlank(
-                System.getenv("MYSQLHOST"),
-                System.getenv("DB_HOST")
+                tidbHost,
+                System.getenv("DB_HOST"),
+                System.getenv("MYSQLHOST")
             );
 
         String port =
             getFirstNonBlank(
-                System.getenv("MYSQLPORT"),
-                System.getenv("DB_PORT")
+                System.getenv("TIDB_PORT"),
+                System.getenv("DB_PORT"),
+                System.getenv("MYSQLPORT")
             );
 
         String database =
             getFirstNonBlank(
-                System.getenv("MYSQLDATABASE"),
-                System.getenv("DB_NAME")
+                System.getenv("TIDB_DATABASE"),
+                System.getenv("TIDB_DB_NAME"),
+                System.getenv("DB_NAME"),
+                System.getenv("MYSQLDATABASE")
             );
 
         String user =
             getFirstNonBlank(
-                System.getenv("MYSQLUSER"),
-                System.getenv("DB_USER")
+                System.getenv("TIDB_USER"),
+                System.getenv("DB_USER"),
+                System.getenv("MYSQLUSER")
             );
 
         String password =
             getFirstNonBlank(
-                System.getenv("MYSQLPASSWORD"),
-                System.getenv("DB_PASSWORD")
+                System.getenv("TIDB_PASSWORD"),
+                System.getenv("DB_PASSWORD"),
+                System.getenv("MYSQLPASSWORD")
             );
 
+        String jdbcUrl =
+            explicitJdbcUrl;
+
         if (
+            jdbcUrl == null
+            &&
             host != null
             &&
             database != null
-            &&
-            user != null
-            &&
-            password != null
         ) {
+            boolean tidbMode =
+                tidbHost != null;
+
             if (
                 port == null
                 ||
                 port.isBlank()
             ) {
                 port =
-                    "3306";
+                    tidbMode
+                        ?
+                        "4000"
+                        :
+                        "3306";
             }
 
-            String jdbcUrl =
-                "jdbc:mysql://"
-                +
-                host
-                +
-                ":"
-                +
-                port
-                +
-                "/"
-                +
-                database
-                +
-                "?useSSL=false"
-                +
-                "&allowPublicKeyRetrieval=true"
-                +
-                "&serverTimezone=UTC"
-                +
-                "&tcpKeepAlive=true";
+            jdbcUrl =
+                buildJdbcUrl(
+                    host,
+                    port,
+                    database,
+                    tidbMode
+                );
+        }
 
+        if (
+            jdbcUrl != null
+            &&
+            user != null
+            &&
+            password != null
+        ) {
             migrateDatabase(
                 jdbcUrl,
                 user,
@@ -207,7 +227,7 @@ public class JPAUtil {
             );
 
             System.out.println(
-                "FitHealth database mode: environment configuration with Flyway + HikariCP."
+                "FitHealth database mode: cloud/environment JDBC with Flyway + HikariCP."
             );
 
             return Persistence
@@ -225,6 +245,49 @@ public class JPAUtil {
             .createEntityManagerFactory(
                 PERSISTENCE_UNIT
             );
+    }
+
+    private static String buildJdbcUrl(
+        String host,
+        String port,
+        String database,
+        boolean tidbMode
+    ) {
+        StringBuilder jdbc =
+            new StringBuilder();
+
+        jdbc
+            .append("jdbc:mysql://")
+            .append(host)
+            .append(":")
+            .append(port)
+            .append("/")
+            .append(database)
+            .append("?serverTimezone=UTC")
+            .append("&tcpKeepAlive=true");
+
+        if (tidbMode) {
+            jdbc
+                .append("&sslMode=VERIFY_IDENTITY")
+                .append("&enabledTLSProtocols=TLSv1.2,TLSv1.3");
+        } else {
+            String sslMode =
+                getFirstNonBlank(
+                    System.getenv("DB_SSL_MODE")
+                );
+
+            if (sslMode != null) {
+                jdbc
+                    .append("&sslMode=")
+                    .append(sslMode);
+            } else {
+                jdbc
+                    .append("&useSSL=false")
+                    .append("&allowPublicKeyRetrieval=true");
+            }
+        }
+
+        return jdbc.toString();
     }
 
     private static void migrateDatabase(
